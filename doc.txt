@@ -1,3 +1,9 @@
 PROJET DE POO 2022
 
 rapport LaTeX sur overleaf: https://fr.overleaf.com/project/63564d44602eb105f092da95
+
+classes communes:
+Joueur
+Sac
+Tuile (classe générique)
+Plateau
