@@ -1,15 +1,15 @@
-public class Tuile<E> {
-    
-    private E[] cotes;
+public class Tuile {
+      
     private int orientation;
+    private Cote[] cotes;
 
-    public Tuile(E[] c) {
+    public Tuile(Cote[] c) {
         cotes = c;
         orientation = 0;
     }
     
     // GETTERS
-    public E getCote(int i) {
+    public Cote getCote(int i) {
         return cotes[(i + orientation) % cotes.length];
     }
     
@@ -23,6 +23,6 @@ public class Tuile<E> {
     }
 
     public boolean estCompatible(int i, Tuile t) {
-        return getCote(i).equals(t.getCote((i-cotes.length)% 4));
+        return getCote(i).estCompatible(t.getCote((i-cotes.length)% 4));
     }
 }
