@@ -1,5 +1,5 @@
 public abstract class Cote {
     
-    public boolean abstract estCompatible(Cote c);
+    public abstract boolean estCompatible(Cote c);
 
 }
