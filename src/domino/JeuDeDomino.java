@@ -3,6 +3,7 @@ import java.util.LinkedList;
 public class JeuDeDomino {
     
     private Sac sac;
+    private Plateau plat;
     private Joueur joueur1;
     private Joueur joueur2;
 
@@ -22,10 +23,24 @@ public class JeuDeDomino {
         return s;
     }
 
+    public JeuDeDomino() {
+        joueur1 = new Joueur();
+        joueur2 = new Joueur();
+
+        sac = new Sac(constructionSac());
+        plat = new Plateau(10,10);
+    }
+
     public JeuDeDomino(Joueur j1, Joueur j2) {
         joueur1 = j1;
         joueur2 = j2;
 
         sac = new Sac(constructionSac());
+        plat = new Plateau(10,10);
     }
+
+    public Plateau getPlateau() {
+        return plat;
+    }
+
 }

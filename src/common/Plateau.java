@@ -10,8 +10,12 @@ public class Plateau {
         plat = new Tuile[ha+2][la+2];
     }
 
-    public boolean horsLimite(int x, int y) {
-        return (x > hauteur || x < 1 || y < 1 || y > largeur);
+    public int getHauteur() {
+        return hauteur;
+    }
+
+    public int getLargeur() {
+        return largeur;
     }
 
     public Tuile getTuile(int x, int y) {
@@ -24,4 +28,10 @@ public class Plateau {
         if (!horsLimite(x, y))
             plat[x][y] = t;
     }
+
+    public boolean horsLimite(int x, int y) {
+        return (x > hauteur || x < 1 || y < 1 || y > largeur);
+    }
+
+
 }
