@@ -15,8 +15,15 @@ public class App {
 
 class Frame extends JFrame {
     
+    private Partie partie;
+
     public Frame() {
-        add(new VuePlateau());
-        pack();
-    }
+        partie = new PartieDeDomino();
+                
+        JPanel plateau = new VuePlateau(800, 800, partie.getPlateau());
+        plateau.setBounds(20, 20, 800, 800);
+
+        setLayout(null);
+        add(plateau);
+   }
 }

@@ -12,6 +12,10 @@ public class Tuile {
     public Cote getCote(int i) {
         return cotes[(i + orientation) % cotes.length];
     }
+
+    public Cote[] getCotes() {
+        return cotes;
+    }
     
     // SETTERS
     public void tournerGauche() {

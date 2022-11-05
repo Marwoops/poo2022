@@ -1,13 +1,8 @@
 import java.util.LinkedList;
 
-public class JeuDeDomino {
+public class PartieDeDomino extends Partie {
     
-    private Sac sac;
-    private Plateau plat;
-    private Joueur joueur1;
-    private Joueur joueur2;
-
-    private LinkedList<Tuile> constructionSac() {
+    private static LinkedList<Tuile> constructionSac() {
         LinkedList<Tuile> s = new LinkedList<Tuile>();
 
         for (int i = 0; i < 28; i++) {
@@ -23,24 +18,22 @@ public class JeuDeDomino {
         return s;
     }
 
-    public JeuDeDomino() {
-        joueur1 = new Joueur();
-        joueur2 = new Joueur();
-
-        sac = new Sac(constructionSac());
-        plat = new Plateau(10,10);
+    public PartieDeDomino() {
+        super(new Joueur(), new Joueur(), new Sac(constructionSac()), new Plateau(10,10));
     }
-
+    
+    /*
     public JeuDeDomino(Joueur j1, Joueur j2) {
         joueur1 = j1;
         joueur2 = j2;
 
         sac = new Sac(constructionSac());
         plat = new Plateau(10,10);
-    }
 
-    public Plateau getPlateau() {
-        return plat;
+        // TEST
+        
+        plat.setTuile(1, 1, sac.pioche());
     }
+    */
 
 }
