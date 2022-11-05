@@ -18,7 +18,7 @@ class Frame extends JFrame {
     private Partie partie;
 
     public Frame() {
-        partie = new PartieDeDomino();
+        partie = new PartieDeCarcassonne();
                 
         JPanel plateau = new VuePlateau(800, 800, partie.getPlateau());
         plateau.setBounds(20, 20, 800, 800);

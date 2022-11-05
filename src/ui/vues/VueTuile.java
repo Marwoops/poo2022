@@ -9,13 +9,9 @@ public class VueTuile extends JLabel {
     public VueTuile(Tuile t) {
         tuile = t;
         if (t != null) {
-            setText(((Domino) tuile).toString());
+            setText(((Parcelle) tuile).getId() + "");
         } else {
-            setText("1\n1\n1");
+            setText("0");
         }
-    }
-
-    public String afficherDomino() {
-        return "";
     }
 }
