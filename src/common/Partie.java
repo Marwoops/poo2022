@@ -20,5 +20,13 @@ public class Partie {
     public Plateau getPlateau() {
         return plateau;
     }
+
+    public Joueur getJoueur1() {
+        return joueur1;
+    }
+
+    public Joueur getJoueur2() {
+        return joueur2;
+    }
 }
 

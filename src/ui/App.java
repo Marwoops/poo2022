@@ -19,11 +19,14 @@ class Frame extends JFrame {
 
     public Frame() {
         partie = new PartieDeCarcassonne();
-                
+        setLayout(null);
+              
         JPanel plateau = new VuePlateau(800, 800, partie.getPlateau());
         plateau.setBounds(20, 20, 800, 800);
-
-        setLayout(null);
         add(plateau);
+        
+        JPanel main1 = new VueMain(partie.getJoueur1());
+        main1.setBounds(20, 850, 800, 80);
+        add(main1);
    }
 }

@@ -27,6 +27,7 @@ public class VueTuile extends JLabel {
 
     public VueTuile(Tuile t) {
         tuile = t;
+        
         if (t != null) {
             try {
                 BufferedImage img = ImageIO.read(new File("../src/ui/icons/1.png"));
@@ -42,5 +43,7 @@ public class VueTuile extends JLabel {
     public void paintComponent(Graphics g) {
         if (icone != null)
             g.drawImage(icone, 0, 0, 80, 80, null); // 80 correspond à la taille du côté (en px) de la tuile dans le plateau
+        else
+            g.drawString("0", 40, 40);
     }
 }

@@ -9,4 +9,12 @@ public class Joueur {
         score = 0;
         main = new LinkedList<Tuile>();
     }
+    
+    public LinkedList<Tuile> getMain() {
+        return main;
+    }
+
+    public void pioche(Tuile t) {
+        main.offer(t);
+    }
 }
