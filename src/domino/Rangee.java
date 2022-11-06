@@ -8,6 +8,14 @@ public class Rangee extends Cote {
 
     // constructeur rangee aleatoire ?
     
+    public int getPoint(int i) {
+        return points[i];
+    }
+
+    public int taille() {
+        return points.length;
+    }
+
     public boolean estCompatible(Cote c) {
         Rangee r = (Rangee) c;
         if (r.points.length != points.length)
