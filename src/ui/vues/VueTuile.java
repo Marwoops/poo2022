@@ -8,6 +8,8 @@ import javax.imageio.ImageIO;
 
 public class VueTuile extends JLabel {
     
+    private static String cheminIcone = "../src/ui/icons/";
+
     private Tuile tuile;
     private BufferedImage icone;
     
@@ -30,7 +32,7 @@ public class VueTuile extends JLabel {
         
         if (t != null) {
             try {
-                BufferedImage img = ImageIO.read(new File("../src/ui/icons/1.png"));
+                BufferedImage img = ImageIO.read(new File(cheminIcone + ((Parcelle) tuile).getId() + ".png"));
                 icone = genererIcone(img, tuile.getOrientation());
             } catch(IOException e) {
 
