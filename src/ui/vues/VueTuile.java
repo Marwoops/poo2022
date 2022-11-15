@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import javax.swing.border.Border;
 import java.awt.geom.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -10,6 +11,7 @@ import javax.imageio.ImageIO;
 public class VueTuile extends JLabel {
     
     private static String cheminIcone = "../src/ui/icons/";
+    private static Border border = BorderFactory.createLineBorder(Color.YELLOW,5);
 
     private Tuile tuile;
     private BufferedImage icone;
@@ -47,11 +49,17 @@ public class VueTuile extends JLabel {
 
 	public void setTuile(Tuile t) {
 		tuile = t;
-		setImg();	
+		setImg();
+        repaint();
 	}
 
 	public void setBrillance(boolean b) {
 		brillance = b;
+        if (brillance)
+            setBorder(border);
+        else
+            setBorder(null);
+        repaint();
 	}
 	
 	private void setImg() {
@@ -66,8 +74,9 @@ public class VueTuile extends JLabel {
 			icone = null;
         }
 	}
+
     public void paintComponent(Graphics g) {
-        if (icone != null && !brillance)
+        if (icone != null)
             g.drawImage(icone, 0, 0, 80, 80, null); // 80 correspond à la taille du côté (en px) de la tuile dans le plateau
         else
             g.drawString("0", 40, 40);

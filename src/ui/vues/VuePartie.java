@@ -30,25 +30,27 @@ public class VuePartie extends JComponent {
 		public void mouseClicked(MouseEvent e) {
 			VueTuile vue = (VueTuile)e.getSource();
 
-			if (courrant == null && vue.getMouvable()) {
+			if (courrant == null) {
+                if (!vue.getMouvable()) return;
 				courrant = vue.getTuile();
 				precedent = vue;
 			} else {
 				precedent.setTuile(null);
 				vue.setTuile(courrant);
-				precedent.repaint();
-				vue.repaint();	
 				courrant = null;
+                precedent = null;
 			}
 			
 		}
 		@Override
 		public void mouseEntered(MouseEvent e) {
-
+			VueTuile vue = (VueTuile)e.getSource();
+            vue.setBrillance(true);
 		}
 		@Override
 		public void mouseExited(MouseEvent e) {
-
+            VueTuile vue = (VueTuile)e.getSource();
+            vue.setBrillance(false);
 		}
 		@Override
 		public void mouseReleased(MouseEvent e) {
