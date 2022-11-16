@@ -11,11 +11,13 @@ import javax.imageio.ImageIO;
 public class VueTuile extends JLabel {
     
     private static String cheminIcone = "../src/ui/icons/";
-    private static Border border = BorderFactory.createLineBorder(Color.YELLOW,5);
+    private static Border bordureSelection = BorderFactory.createLineBorder(Color.YELLOW,5);
+    private static Border bordureBrillance = BorderFactory.createLineBorder(Color.BLACK,3);
 
     private Tuile tuile;
     private BufferedImage icone;
 	private boolean brillance;
+	private boolean selectionnee;
 	private boolean mouvable;
     
     public static BufferedImage genererIcone(BufferedImage img, int i) {
@@ -35,6 +37,7 @@ public class VueTuile extends JLabel {
     public VueTuile(Tuile t, boolean m, MouseListener ml) {
         setTuile(t);
 		brillance = false;
+		selectionnee = false;
 		mouvable = m;
 		addMouseListener(ml);
     }
@@ -54,12 +57,24 @@ public class VueTuile extends JLabel {
 	}
 
 	public void setBrillance(boolean b) {
+		if (selectionnee)
+			return;
+
 		brillance = b;
         if (brillance)
-            setBorder(border);
+            setBorder(bordureBrillance);
         else
             setBorder(null);
         repaint();
+	}
+
+	public void setSelectionnee(boolean s) {
+		selectionnee = s;
+		if (s)
+			setBorder(bordureSelection);
+		else
+			setBorder(null);
+		repaint();
 	}
 	
 	private void setImg() {
