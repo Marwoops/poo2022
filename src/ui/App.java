@@ -7,6 +7,7 @@ public class App {
         EventQueue.invokeLater(() -> {
             var frame = new Frame();
             frame.setTitle("POO 2022");
+			frame.setSize(1000, 1000);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(true);
         });
