@@ -36,8 +36,8 @@ public class VuePartie extends JComponent {
 				courrant = vue.getTuile();
 				precedent = vue;
 			} else {
+				if (!vue.setTuile(courrant)) return;
 				precedent.setTuile(null);
-				vue.setTuile(courrant);
 				courrant = null;
                 precedent = null;
 			}
