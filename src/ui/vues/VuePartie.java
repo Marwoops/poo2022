@@ -31,13 +31,12 @@ public class VuePartie extends JComponent {
 			VueTuile vue = (VueTuile)e.getSource();
 
 			if (courrant == null) {
-                if (!vue.getMouvable()) return;
+				if (!vue.setSelectionnee(true)) return;
+
 				courrant = vue.getTuile();
 				precedent = vue;
-				vue.setSelectionnee(true);
 			} else {
 				precedent.setTuile(null);
-				precedent.setSelectionnee(false);
 				vue.setTuile(courrant);
 				courrant = null;
                 precedent = null;

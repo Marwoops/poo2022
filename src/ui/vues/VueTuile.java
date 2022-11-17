@@ -51,30 +51,43 @@ public class VueTuile extends JLabel {
 	}
 
 	public void setTuile(Tuile t) {
+		if (t == null) {
+			selectionnee = false;
+			setBorder(null);
+		}
+
 		tuile = t;
 		setImg();
         repaint();
 	}
 
-	public void setBrillance(boolean b) {
+	public boolean setBrillance(boolean b) {
 		if (selectionnee)
-			return;
+			return false;
 
 		brillance = b;
+
         if (brillance)
             setBorder(bordureBrillance);
         else
             setBorder(null);
+
         repaint();
+		return true;
 	}
 
-	public void setSelectionnee(boolean s) {
+	public boolean setSelectionnee(boolean s) {
+		if (!mouvable || tuile == null)
+			return false;
+
 		selectionnee = s;
 		if (s)
 			setBorder(bordureSelection);
 		else
 			setBorder(null);
 		repaint();
+
+		return true;
 	}
 	
 	private void setImg() {
