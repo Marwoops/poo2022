@@ -18,7 +18,7 @@ public class VuePartie extends JComponent {
         plateau.setBounds(20, 20, 800, 800);
         add(plateau);
         
-        JPanel main1 = new VueMain(partie.getJoueur1(), ml);
+        JPanel main1 = new VueMain(partie.getJoueur(0), ml);
         main1.setBounds(20, 850, 800, 80);
         add(main1);
 	}
