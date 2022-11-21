@@ -1,16 +1,18 @@
 public class Partie {
     
-    private Joueur joueur1;
-    private Joueur joueur2;
+    private Joueur[] joueurs;
+	private Joueur joueurCourant;
+	private int indiceJoueur;
     
     private Sac sac;
     private Plateau plateau;
 
-    public Partie(Joueur j1, Joueur j2, Sac s, Plateau p) {
-        joueur1 = j1;
-        joueur2 = j2;
+    public Partie(Sac s, Plateau p, Joueur[] j) {
         sac = s;
         plateau = p;
+		joueurs = j;
+		indiceJoueur = 0;
+		joueurCourant = j[0];
     }
 
     public Sac getSac() {
@@ -21,12 +23,17 @@ public class Partie {
         return plateau;
     }
 
-    public Joueur getJoueur1() {
-        return joueur1;
-    }
+	public Joueur getJoueur(int i) {
+		return joueurs[i];
+	}
 
-    public Joueur getJoueur2() {
-        return joueur2;
-    }
+	public Joueur getJoueurCourant() {
+		return joueurCourant;
+	}
+
+	public void prochainTour() {
+		indiceJoueur = (indiceJoueur+1) % joueurs.length;
+		joueurCourant = joueurs[indiceJoueur];
+	}
 }
 
