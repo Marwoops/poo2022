@@ -2,6 +2,7 @@ public class Tuile {
       
     private int orientation;
     private Cote[] cotes;
+	private Joueur joueur;
 
     public Tuile(Cote[] c) {
         cotes = c;
@@ -20,8 +21,16 @@ public class Tuile {
     public int getOrientation() {
         return orientation;
     }
+
+	public Joueur getJoueur() {
+		return joueur;
+	}
     
     // SETTERS
+	public void setJoueur(Joueur j) {
+		joueur = j;
+	}
+
     public void tournerGauche() {
         orientation = (orientation + 1) % cotes.length;
     }

@@ -31,17 +31,15 @@ public class VuePartie extends JComponent {
 			VueTuile vue = (VueTuile)e.getSource();
 
 			if (courant == null) {
-				if (!vue.setSelectionnee(true)) return;
+				if (!vue.setSelectionnee(true, partie.getJoueurCourant())) return;
 
 				courant = vue.getTuile();
 				precedent = vue;
-			} else {
-				if (!vue.setTuile(courant)) return;
+			} else if (vue.setTuile(courant)) {
 				precedent.setTuile(null);
 				courant = null;
                 precedent = null;
 			}
-			
 		}
 		@Override
 		public void mouseEntered(MouseEvent e) {

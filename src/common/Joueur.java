@@ -16,5 +16,6 @@ public class Joueur {
 
     public void pioche(Tuile t) {
         main.offer(t);
+		t.setJoueur(this);
     }
 }
