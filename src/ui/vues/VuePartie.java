@@ -4,41 +4,41 @@ import javax.swing.*;
 
 public class VuePartie extends JComponent {
 	private Partie partie;
-	private Tuile courrant;
+	private Tuile courant;
 	
 	public VuePartie(Partie p) {
 		setLayout(null);
 		
 		partie = p;
-		courrant = null;
+		courant = null;
 
-		MouseListener ml = new ML();
+		MouseListener controleurSouris = new ControleurSouris();
 
-        JPanel plateau = new VuePlateau(800, 800, partie.getPlateau(), ml);
+        JPanel plateau = new VuePlateau(800, 800, partie.getPlateau(), controleurSouris);
         plateau.setBounds(20, 20, 800, 800);
         add(plateau);
         
-        JPanel main1 = new VueMain(partie.getJoueur(0), ml);
+        JPanel main1 = new VueMain(partie.getJoueur(0), controleurSouris);
         main1.setBounds(20, 850, 800, 80);
         add(main1);
 	}
 
-	private class ML implements MouseListener {
+	private class ControleurSouris implements MouseListener {
 		private VueTuile precedent;
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			VueTuile vue = (VueTuile)e.getSource();
 
-			if (courrant == null) {
+			if (courant == null) {
 				if (!vue.setSelectionnee(true)) return;
 
-				courrant = vue.getTuile();
+				courant = vue.getTuile();
 				precedent = vue;
 			} else {
-				if (!vue.setTuile(courrant)) return;
+				if (!vue.setTuile(courant)) return;
 				precedent.setTuile(null);
-				courrant = null;
+				courant = null;
                 precedent = null;
 			}
 			

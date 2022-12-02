@@ -34,12 +34,12 @@ public class VueTuile extends JLabel {
         return nouvelleIcone;
     }
 
-    public VueTuile(Tuile t, boolean m, MouseListener ml) {
+    public VueTuile(Tuile t, boolean m, MouseListener controleur) {
         setTuile(t);
 		brillance = false;
 		selectionnee = false;
 		mouvable = m;
-		addMouseListener(ml);
+		addMouseListener(controleur);
     }
 
 	public Tuile getTuile() {

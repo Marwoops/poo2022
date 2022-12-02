@@ -10,7 +10,7 @@ public class VuePlateau extends JPanel {
     private int largeur;
 	private VueTuile[][] vues;
 
-    public VuePlateau(int ha, int la, Plateau p, MouseListener ml) {
+    public VuePlateau(int ha, int la, Plateau p, MouseListener controleur) {
         hauteur = ha;
         largeur = la;
 		vues = new VueTuile[ha][la];
@@ -20,7 +20,7 @@ public class VuePlateau extends JPanel {
 
         for (int i = 0; i < p.getHauteur(); i++) {
             for (int j = 0; j < p.getLargeur(); j++) {
-                vues[i][j] = new VueTuile(p.getTuile(i+1, j+1), false, ml);
+                vues[i][j] = new VueTuile(p.getTuile(i+1, j+1), false, controleur);
                 vues[i][j].setBounds(i*80, j*80, 80, 80);
                 add(vues[i][j]);
             }
