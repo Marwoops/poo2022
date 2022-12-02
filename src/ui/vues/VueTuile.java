@@ -80,18 +80,17 @@ public class VueTuile extends JLabel {
 		return true;
 	}
 
-	public boolean setSelectionnee(boolean s, Joueur courant) {
-		if (!mouvable || tuile == null || tuile.getJoueur() != courant)
-			return false;
+	public boolean estSelectionnable(Joueur courant) {
+		return (mouvable && tuile != null && tuile.getJoueur() == courant);
+	}
 
+	public void setSelectionnee(boolean s) {
 		selectionnee = s;
 		if (s)
 			setBorder(bordureSelection);
 		else
 			setBorder(null);
 		repaint();
-
-		return true;
 	}
 	
 	private void setImg() {

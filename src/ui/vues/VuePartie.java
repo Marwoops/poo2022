@@ -31,11 +31,13 @@ public class VuePartie extends JComponent {
 			VueTuile vue = (VueTuile)e.getSource();
 
 			if (courant == null) {
-				if (!vue.setSelectionnee(true, partie.getJoueurCourant())) return;
-
+				// selection de la tuile
+				if (!vue.estSelectionnable(partie.getJoueurCourant())) return;
+				vue.setSelectionnee(true);
 				courant = vue.getTuile();
 				precedent = vue;
 			} else if (vue.setTuile(courant)) {
+				// pose de la tuile
 				precedent.setTuile(null);
 				courant = null;
                 precedent = null;
