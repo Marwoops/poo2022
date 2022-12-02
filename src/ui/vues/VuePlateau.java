@@ -13,16 +13,14 @@ public class VuePlateau extends JPanel {
     public VuePlateau(int ha, int la, Plateau p, MouseListener controleur) {
         hauteur = ha;
         largeur = la;
-		vues = new VueTuile[ha][la];
         plateau = p;
         
-        setLayout(null);
+        setLayout(new GridLayout(p.getHauteur(), p.getLargeur()));
 
         for (int i = 0; i < p.getHauteur(); i++) {
             for (int j = 0; j < p.getLargeur(); j++) {
-                vues[i][j] = new VueTuile(p.getTuile(i+1, j+1), false, controleur);
-                vues[i][j].setBounds(i*80, j*80, 80, 80);
-                add(vues[i][j]);
+                VueTuile vue = new VueTuile(p.getTuile(i+1, j+1), false, controleur);
+                add(vue);
             }
         }
     }
