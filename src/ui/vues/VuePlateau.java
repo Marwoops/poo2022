@@ -19,7 +19,7 @@ public class VuePlateau extends JPanel {
 
         for (int i = 0; i < p.getHauteur(); i++) {
             for (int j = 0; j < p.getLargeur(); j++) {
-                VueTuile vue = new VueTuile(p.getTuile(i+1, j+1), false, controleur);
+                VueTuile vue = new VueTuile(p.getTuile(i+1, j+1), i+1, j+1, false, controleur);
                 add(vue);
             }
         }

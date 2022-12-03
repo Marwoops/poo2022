@@ -39,8 +39,9 @@ public class VuePartie extends JComponent {
 				vue.setSelectionnee(true);
 				courant = vue.getTuile();
 				precedent = vue;
-			} else if (vue.setTuile(courant)) {
+			} else if (partie.estPosable(vue.getPosX(), vue.getPosY(), precedent.getTuile()) && vue.setTuile(courant)) {
 				// pose de la tuile
+				partie.poserTuile(vue.getPosX(), vue.getPosY(), precedent.getTuile());
 				precedent.setTuile(null);
 				courant = null;
                 precedent = null;
