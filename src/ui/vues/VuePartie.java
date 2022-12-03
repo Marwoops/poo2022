@@ -19,8 +19,11 @@ public class VuePartie extends JComponent {
         add(plateau);
         
         JPanel main1 = new VueMain(partie.getJoueur(0), controleurSouris);
-        main1.setBounds(20, 850, 800, 80);
+        main1.setBounds(20, 820, 800, 86);
         add(main1);
+        JPanel main2 = new VueMain(partie.getJoueur(1), controleurSouris);
+        main2.setBounds(20, 900, 800, 86);
+        add(main2);
 	}
 
 	private class ControleurSouris implements MouseListener {

@@ -9,17 +9,11 @@ public class VueMain extends JPanel {
 
     public VueMain(Joueur j, MouseListener controleur) {
         joueur = j;
-        
-        setLayout(null);
-
         LinkedList<Tuile> main = j.getMain();
 
         for (int i = 0; i < main.size(); i++) {
             JLabel t = new VueTuile(main.get(i), true, controleur);
-            t.setBounds(0, 0, 80, 80);
             add(t);
         }
- 
     }
-
 }

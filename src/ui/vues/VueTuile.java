@@ -35,6 +35,7 @@ public class VueTuile extends JLabel {
     }
 
     public VueTuile(Tuile t, boolean m, MouseListener controleur) {
+		setPreferredSize(getPreferredSize());
         setTuile(t);
 		brillance = false;
 		selectionnee = false;
@@ -112,4 +113,8 @@ public class VueTuile extends JLabel {
         else
             g.drawString("0", 40, 40);
     }
+
+	public Dimension getPreferredSize() {
+		return new Dimension(80,80);
+	}
 }
