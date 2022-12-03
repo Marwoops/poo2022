@@ -12,7 +12,7 @@ public class VueMain extends JPanel {
         LinkedList<Tuile> main = j.getMain();
 
         for (int i = 0; i < main.size(); i++) {
-            JLabel t = new VueTuile(main.get(i), true, controleur);
+            JLabel t = new VueTuile(main.get(i), -1, -1, true, controleur);
             add(t);
         }
     }

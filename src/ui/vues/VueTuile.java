@@ -15,6 +15,8 @@ public class VueTuile extends JLabel {
     private static Border bordureBrillance = BorderFactory.createLineBorder(Color.BLACK,3);
 
     private Tuile tuile;
+	private int posX;
+	private int posY;
     private BufferedImage icone;
 	private boolean brillance;
 	private boolean selectionnee;
@@ -28,15 +30,17 @@ public class VueTuile extends JLabel {
  
         Graphics2D g2 = nouvelleIcone.createGraphics();
  
-        g2.rotate(Math.toRadians(90*i), largeur / 2, hauteur / 2);
+        g2.rotate(Math.toRadians(-90*i), largeur / 2, hauteur / 2);
         g2.drawImage(img, null, 0, 0);
  
         return nouvelleIcone;
     }
 
-    public VueTuile(Tuile t, boolean m, MouseListener controleur) {
+    public VueTuile(Tuile t, int x, int y, boolean m, MouseListener controleur) {
 		setPreferredSize(getPreferredSize());
         setTuile(t);
+		posX = x;
+		posY = y;
 		brillance = false;
 		selectionnee = false;
 		mouvable = m;
@@ -45,6 +49,14 @@ public class VueTuile extends JLabel {
 
 	public Tuile getTuile() {
 		return tuile;
+	}
+
+	public int getPosX() {
+		return posX;
+	}
+
+	public int getPosY() {
+		return posY;
 	}
 
 	public boolean getMouvable() {

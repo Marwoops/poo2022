@@ -40,6 +40,6 @@ public class Tuile {
     }
 
     public boolean estCompatible(int i, Tuile t) {
-        return getCote(i).estCompatible(t.getCote((i-cotes.length)% 4));
+        return t == null || getCote(i).estCompatible(t.getCote(i+2));
     }
 }

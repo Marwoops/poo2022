@@ -35,5 +35,13 @@ public class Partie {
 		indiceJoueur = (indiceJoueur+1) % joueurs.length;
 		joueurCourant = joueurs[indiceJoueur];
 	}
+
+	public boolean estPosable(int x, int y, Tuile t) {
+		return plateau.estPosable(x, y, t);
+	}
+
+	public void poserTuile(int x, int y, Tuile t) {
+		plateau.setTuile(x, y, t);
+	}
 }
 
