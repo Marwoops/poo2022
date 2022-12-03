@@ -25,8 +25,14 @@ public class Plateau {
     }
 
 	public boolean estPosable(int x, int y, Tuile t) {
-		return !horsLimite(x, y) && t.estCompatible(0, getTuile(x-1, y)) && t.estCompatible(1, getTuile(x, y+1))
-			&& t.estCompatible(2, getTuile(x+1, y)) && t.estCompatible(3, getTuile(x, y-1));
+		if (horsLimite(x,y)) return false;
+		Tuile haut = getTuile(x-1, y);
+		Tuile droite = getTuile(x, y+1);
+		Tuile bas = getTuile(x+1, y);
+		Tuile gauche = getTuile(x, y-1);
+
+		return (haut != null || droite != null || bas != null || gauche != null) && t.estCompatible(0, haut) && t.estCompatible(1, droite)
+			&& t.estCompatible(2, bas) && t.estCompatible(3, gauche);
 	}
 
     public void setTuile(int x, int y, Tuile t) {
