@@ -202,7 +202,7 @@ public class SacDeParcelle extends Sac{
             sac.offer(t16());
         }
 
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 3; i++) {
             sac.offer(t17());
         }
 
