@@ -25,7 +25,7 @@ public class Plateau {
     }
 
 	public boolean estPosable(int x, int y, Tuile t) {
-		if (horsLimite(x,y)) return false;
+		if (horsLimite(x,y) || getTuile(x,y) != null) return false;
 		Tuile haut = getTuile(x-1, y);
 		Tuile droite = getTuile(x, y+1);
 		Tuile bas = getTuile(x+1, y);

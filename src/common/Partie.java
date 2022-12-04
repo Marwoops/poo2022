@@ -43,5 +43,13 @@ public class Partie {
 	public void poserTuile(int x, int y, Tuile t) {
 		plateau.setTuile(x, y, t);
 	}
+
+	public boolean jouerTour(int x, int y, Tuile t) {
+		if (!estPosable(x, y, t) || !(joueurCourant.getMain().contains(t))) return false;
+		poserTuile(x, y, t);
+		joueurCourant.getMain().remove(t);
+		prochainTour();
+		return true;
+	}
 }
 
