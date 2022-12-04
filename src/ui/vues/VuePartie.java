@@ -1,10 +1,13 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.util.LinkedList;
 
 public class VuePartie extends JComponent {
 	private Partie partie;
 	private Tuile courant;
+	private VuePlateau vuePlateau;
+	private LinkedList<VueMain> vueMains;
 	
 	public VuePartie(Partie p) {
 		setLayout(null);
@@ -14,16 +17,20 @@ public class VuePartie extends JComponent {
 
 		MouseListener controleurSouris = new ControleurSouris();
 
-        JPanel plateau = new VuePlateau(800, 800, partie.getPlateau(), controleurSouris);
-        plateau.setBounds(20, 20, 800, 800);
-        add(plateau);
+        vuePlateau = new VuePlateau(800, 800, partie.getPlateau(), controleurSouris);
+        vuePlateau.setBounds(20, 20, 800, 800);
+        add(vuePlateau);
         
-        JPanel main1 = new VueMain(partie.getJoueur(0), controleurSouris);
+		vueMains = new LinkedList<VueMain>();
+        VueMain main1 = new VueMain(partie.getJoueur(0), controleurSouris);
         main1.setBounds(20, 820, 800, 86);
         add(main1);
-        JPanel main2 = new VueMain(partie.getJoueur(1), controleurSouris);
+		vueMains.add(main1);
+
+        VueMain main2 = new VueMain(partie.getJoueur(1), controleurSouris);
         main2.setBounds(20, 900, 800, 86);
         add(main2);
+		vueMains.add(main2);
 	}
 
 	private class ControleurSouris implements MouseListener {
@@ -44,6 +51,8 @@ public class VuePartie extends JComponent {
 				precedent.setTuile(null);
 				courant = null;
                 precedent = null;
+				for (VueMain vm : vueMains)
+					vm.update();
 			}
 		}
 		@Override
