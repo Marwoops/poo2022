@@ -10,9 +10,11 @@ public class VuePartie extends JComponent {
 		setLayout(null);
 		
 		partie = p;
-		courant = null;
+		courant = null;	
 
 		MouseListener controleurSouris = new ControleurSouris();
+
+		addKeyListener(new ControleurKey());
 
         JPanel plateau = new VuePlateau(800, 800, partie.getPlateau(), controleurSouris);
         plateau.setBounds(20, 20, 800, 800);
@@ -25,6 +27,39 @@ public class VuePartie extends JComponent {
         main2.setBounds(20, 900, 800, 86);
         add(main2);
 	}
+
+	private class ControleurKey implements KeyListener{
+		
+
+		public void keyPressed(KeyEvent e){
+
+			System.out.println("bonjour");	
+
+			//VueTuile vue = (VueTuile)e.getSource();
+
+			//if(!vue.getSelectionnee()){return;}
+
+			if(e.getKeyCode()==e.VK_KP_LEFT){
+				courant.tournerGauche();
+			}
+			if(e.getKeyCode()==e.VK_KP_RIGHT){
+				courant.tournerDroite();
+			}
+			//générer nouvelle tuile ?
+			//vue.repaint();
+
+		}
+
+		public void keyReleased(KeyEvent e){
+			System.out.println("bonjour");	
+		}
+
+		public void keyTyped(KeyEvent e){
+			System.out.println("bonjour");	
+		}
+	
+	}
+
 
 	private class ControleurSouris implements MouseListener {
 		private VueTuile precedent;
