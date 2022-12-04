@@ -18,4 +18,14 @@ public class Joueur {
         main.offer(t);
 		t.setJoueur(this);
     }
+
+	public String toString() {
+		String r = ""; 
+		r += ("Score : " + score + "\n");
+		for (int i = 0; i < main.size(); i++) {
+			r += ("Tuile : " + i + "\n");
+			r += main.get(i);
+		}
+		return r;
+	}
 }
