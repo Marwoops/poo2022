@@ -20,24 +20,11 @@ public class PartieDeDomino extends Partie {
 
     public PartieDeDomino() {
         super(new Sac(constructionSac()), new Plateau(10,10), deuxJoueurs());
+		super.pioche(super.getJoueur(0));
     }
 
 	private static Joueur[] deuxJoueurs() {
 		Joueur[] j = {new Joueur(), new Joueur()};
 		return j;
 	}
-    /*
-    public JeuDeDomino(Joueur j1, Joueur j2) {
-        joueur1 = j1;
-        joueur2 = j2;
-
-        sac = new Sac(constructionSac());
-        plat = new Plateau(10,10);
-
-        // TEST
-        
-        plat.setTuile(1, 1, sac.pioche());
-    }
-    */
-
 }
