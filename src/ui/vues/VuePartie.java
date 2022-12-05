@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.util.LinkedList;
 
 public class VuePartie extends JComponent {
 	private Partie partie;
@@ -9,6 +10,9 @@ public class VuePartie extends JComponent {
 	private JButton tourner_droite;
 
 
+	private VuePlateau vuePlateau;
+	private LinkedList<VueMain> vueMains;
+	
 	public VuePartie(Partie p) {
 		setLayout(null);
 		
@@ -43,12 +47,16 @@ public class VuePartie extends JComponent {
 				repaint();
 		});
         
-        JPanel main1 = new VueMain(partie.getJoueur(0), controleurSouris);
+		vueMains = new LinkedList<VueMain>();
+        VueMain main1 = new VueMain(partie.getJoueur(0), controleurSouris);
         main1.setBounds(20, 820, 800, 86);
         add(main1);
-        JPanel main2 = new VueMain(partie.getJoueur(1), controleurSouris);
+		vueMains.add(main1);
+
+        VueMain main2 = new VueMain(partie.getJoueur(1), controleurSouris);
         main2.setBounds(20, 900, 800, 86);
         add(main2);
+		vueMains.add(main2);
 	}
 
 
@@ -69,14 +77,15 @@ public class VuePartie extends JComponent {
 				tourner_gauche.setEnabled(true);
 				tourner_droite.setEnabled(true);
 				precedent = vue;
-			} else if (partie.estPosable(vue.getPosX(), vue.getPosY(), precedent.getTuile()) && vue.setTuile(courant)) {
-				// pose de la tuile
-				partie.poserTuile(vue.getPosX(), vue.getPosY(), precedent.getTuile());
+			} else if (partie.jouerTour(vue.getPosX(), vue.getPosY(), precedent.getTuile())) {
+				vue.setTuile(courant);
 				precedent.setTuile(null);
 				courant = null;
 				tourner_gauche.setEnabled(false);
 				tourner_droite.setEnabled(false);
                 precedent = null;
+				for (VueMain vm : vueMains)
+					vm.update();
 			}
 		}
 		@Override
