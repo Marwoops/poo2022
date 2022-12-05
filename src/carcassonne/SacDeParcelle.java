@@ -48,7 +48,7 @@ public class SacDeParcelle extends Sac{
     }
 
 	public static Parcelle t8() {
-        Terrain[] t = {route, champs, champs, route};
+        Terrain[] t = {route, champs, route, champs};
         return new Parcelle(t, 8);
     }
 
