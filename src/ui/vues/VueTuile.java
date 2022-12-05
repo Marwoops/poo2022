@@ -18,6 +18,7 @@ public class VueTuile extends JLabel {
 	private int posX;
 	private int posY;
     private BufferedImage icone;
+	private int orientation;
 	private boolean brillance;
 	private boolean selectionnee;
 	private boolean mouvable;
@@ -71,7 +72,9 @@ public class VueTuile extends JLabel {
 			selectionnee = false;
 			setBorder(null);
 		}
-
+		else{
+			orientation = t.getOrientation();
+		}
 		tuile = t;
 		setImg();
         repaint();
@@ -111,6 +114,7 @@ public class VueTuile extends JLabel {
             try {
                 BufferedImage img = ImageIO.read(new File(cheminIcone + ((Parcelle) tuile).getId() + ".png"));
                 icone = genererIcone(img, tuile.getOrientation());
+				orientation = tuile.getOrientation();
             } catch(IOException e) {
 
             }
@@ -120,6 +124,9 @@ public class VueTuile extends JLabel {
 	}
 
     public void paintComponent(Graphics g) {
+		if(tuile != null && orientation != tuile.getOrientation()){
+			setImg();
+		}
         if (icone != null)
             g.drawImage(icone, 0, 0, 80, 80, null); // 80 correspond à la taille du côté (en px) de la tuile dans le plateau
         else
