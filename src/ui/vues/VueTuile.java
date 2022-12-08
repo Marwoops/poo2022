@@ -63,6 +63,10 @@ public class VueTuile extends JLabel {
 		return mouvable;
 	}
 
+	public boolean estVide() {
+		return tuile == null;
+	}
+
 	public boolean setTuile(Tuile t) {
 		if (tuile != null && t != null)
 			return false;
