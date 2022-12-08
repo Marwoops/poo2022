@@ -15,6 +15,9 @@ public class PartieDeCarcassonne extends Partie {
         super.getJoueur(0).pioche(super.getSac().pioche());
         super.getJoueur(0).pioche(super.getSac().pioche());
         //super.getJoueur(1).pioche(super.getSac().pioche());
-
+        super.getJoueur(1).pioche(super.getSac().pioche());
+        super.getJoueur(1).pioche(super.getSac().pioche());
+        super.getJoueur(1).pioche(super.getSac().pioche());
+        super.getJoueur(1).pioche(super.getSac().pioche());
     }
 }
