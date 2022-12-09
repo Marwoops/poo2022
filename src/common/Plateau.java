@@ -24,6 +24,10 @@ public class Plateau {
         return plat[x][y];
     }
 
+	public Tuile[][] getPlat() {
+		return plat;
+	}
+
 	public boolean estPosable(int x, int y, Tuile t) {
 		if (horsLimite(x,y) || getTuile(x,y) != null) return false;
 		Tuile haut = getTuile(x-1, y);

@@ -12,6 +12,7 @@ public class DominoTextuel {
 
 	public static void main(String[] args) {
 		DominoTextuel jeu = new DominoTextuel(new PartieDeDomino());
-		jeu.afficherMain();
+		//jeu.afficherMain();
+		jeu.partie.afficher(jeu.partie.getJoueurCourant().getMain());
 	}
 }

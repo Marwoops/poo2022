@@ -27,4 +27,6 @@ public class Domino extends Tuile {
         return haut + centre + bas;
         
     }
+
+
 }
