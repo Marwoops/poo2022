@@ -20,10 +20,9 @@ public class PartieDeDomino extends Partie {
 
     public PartieDeDomino() {
         super(new Sac(constructionSac()), new Plateau(10,10), deuxJoueurs());
-		super.pioche(super.getJoueur(0));
-		super.pioche(super.getJoueur(0));
-		super.pioche(super.getJoueur(0));
-		super.pioche(super.getJoueur(0));
+		getJoueur(0).pioche();
+		getJoueur(0).pioche();
+		getJoueur(0).pioche();
 		super.poserTuile(9, 9, constructionSac().get(5));
     }
 

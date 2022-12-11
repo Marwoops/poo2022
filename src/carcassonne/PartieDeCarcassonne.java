@@ -10,14 +10,13 @@ public class PartieDeCarcassonne extends Partie {
         super(new SacDeParcelle(), new Plateau(10,10), deuxJoueurs());
         super.getPlateau().setTuile(5, 5, (new SacDeParcelle()).t17());
         //super.getPlateau().getTuile(1,1).tournerGauche();
-        super.getJoueur(0).pioche(super.getSac().pioche());
-        super.getJoueur(0).pioche(super.getSac().pioche());
-        super.getJoueur(0).pioche(super.getSac().pioche());
-        super.getJoueur(0).pioche(super.getSac().pioche());
-        //super.getJoueur(1).pioche(super.getSac().pioche());
-        super.getJoueur(1).pioche(super.getSac().pioche());
-        super.getJoueur(1).pioche(super.getSac().pioche());
-        super.getJoueur(1).pioche(super.getSac().pioche());
-        super.getJoueur(1).pioche(super.getSac().pioche());
+        super.getJoueur(0).pioche();
+        super.getJoueur(0).pioche();
+        super.getJoueur(0).pioche();
+        super.getJoueur(0).pioche();
+        super.getJoueur(1).pioche();
+        super.getJoueur(1).pioche();
+        super.getJoueur(1).pioche();
+        super.getJoueur(1).pioche();
     }
 }
