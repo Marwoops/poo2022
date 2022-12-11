@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.util.Scanner;
 
 public class DominoTextuel extends PartieDeDomino {
 
@@ -42,7 +43,8 @@ public class DominoTextuel extends PartieDeDomino {
 		System.out.println(haut + centre + bas);
 	}
 
-	public static void afficherMain(LinkedList<Tuile> t) {
+	public static void afficherMain(Joueur joueur) {
+		LinkedList<Tuile> t = joueur.getMain();
 		System.out.println(constructionHaut(3, t.size()));
 		afficherLigne(t.toArray(new Domino[0]), 3, -1);
 		System.out.println();
@@ -63,8 +65,42 @@ public class DominoTextuel extends PartieDeDomino {
 		return r;
 	}
 
+	public void selectionTuile() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Sélectionnez une tuile: ");
+		while(true) {
+			try {
+				getJoueurCourant().setCourante(sc.next().charAt(0)- 'A');
+				break;
+			} catch(Exception e) {
+				System.out.println("impossible");
+			}
+		}
+		System.out.println("youhou");
+	}
+
+	public void demanderAction() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("(p) poser la tuile");
+		System.out.println("(d) tourner à doite");
+		System.out.println("(g) tourner à gauche");
+		String s = sc.next();
+		switch(s) {
+			case "p" : placerTuile(); break;
+			case "d" : getJoueurCourant().tournerDroite(); break;
+			case "g" : getJoueurCourant().tournerGauche(); break;
+		}
+	}
+
+	public void placerTuile() {
+
+	}
+
 	public static void main(String[] args) {
 		DominoTextuel jeu = new DominoTextuel();
-		jeu.afficherPlateau();
+		//jeu.afficherPlateau();
+		jeu.afficherMain(jeu.getJoueurCourant());
+		jeu.selectionTuile();
+		jeu.demanderAction();
 	}
 }
