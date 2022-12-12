@@ -19,11 +19,11 @@ public class PartieDeDomino extends Partie {
     }
 
     public PartieDeDomino() {
-        super(new Sac(constructionSac()), new Plateau(10,10), deuxJoueurs());
+        super(new Sac(constructionSac()), new Plateau(10,10), deuxJoueurs(null));
     }
 
-	private static Joueur[] deuxJoueurs() {
-		Joueur[] j = {new Joueur(), new Joueur()};
+	private static Joueur[] deuxJoueurs(Partie p) {
+		Joueur[] j = {new Joueur(p), new Joueur(p)};
 		return j;
 	}
     /*

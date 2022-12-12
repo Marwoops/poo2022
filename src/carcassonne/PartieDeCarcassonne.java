@@ -1,13 +1,17 @@
 import java.util.LinkedList;
 
 public class PartieDeCarcassonne extends Partie {
-	private static Joueur[] deuxJoueurs() {
-		Joueur[] j = {new Joueur(), new Joueur()};
+
+	private static Joueur[] deuxJoueurs(Partie p) {
+		Joueur[] j = {new Joueur(p), new Joueur(p)};
 		return j;
 	}
 
     public PartieDeCarcassonne() {
-        super(new SacDeParcelle(), new Plateau(10,10), deuxJoueurs());
+        super(new SacDeParcelle(), new Plateau(10,10), deuxJoueurs(null));
+		for(Joueur joueur : super.getJoueurs()){
+			joueur.setPartie(this);
+		}
         super.getPlateau().setTuile(5, 5, (new SacDeParcelle()).t17());
         //super.getPlateau().getTuile(1,1).tournerGauche();
         super.getJoueur(0).pioche(super.getSac().pioche());

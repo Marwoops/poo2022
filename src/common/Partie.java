@@ -23,6 +23,10 @@ public class Partie {
         return plateau;
     }
 
+	public Joueur[] getJoueurs() {
+		return joueurs;
+	}
+
 	public Joueur getJoueur(int i) {
 		return joueurs[i];
 	}
@@ -40,13 +44,9 @@ public class Partie {
 		return plateau.estPosable(x, y, t);
 	}
 
-	public void poserTuile(int x, int y, Tuile t) {
-		plateau.setTuile(x, y, t);
-	}
-
 	public boolean jouerTour(int x, int y, Tuile t) {
 		if (!estPosable(x, y, t) || !(joueurCourant.getMain().contains(t))) return false;
-		poserTuile(x, y, t);
+		joueurCourant.poserTuile(x, y, t);
 		joueurCourant.getMain().remove(t);
 		prochainTour();
 		return true;
