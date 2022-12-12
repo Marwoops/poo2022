@@ -6,18 +6,12 @@ public class Joueur {
 	private Tuile courante;
     private int score;
     private LinkedList<Tuile> main;
-	private Tuile courante;
-	private Partie partie;
 
     public Joueur() {
 		courante = null;
         score = 0;
         main = new LinkedList<Tuile>();
     }
-
-	public void setPartie(Partie p){
-		partie = p;
-	}
 
 	public LinkedList<Tuile> getMain() {
         return main;
@@ -47,15 +41,7 @@ public class Joueur {
 		return false;
 	}
 
-	public boolean poserTuile(int x, int y) {
-		if (partie.estPosable(x, y, courante)) {
-			partie.poserTuile(x, y, courante);
-			main.remove(courante);
-			courante = null;
-			return true;
-		}
-		return false;
-	}
+
 
 	public void tournerDroite() {
 		if (courante !=  null)
@@ -75,5 +61,15 @@ public class Joueur {
 			r += main.get(i);
 		}
 		return r;
+	}
+
+	public boolean poserTuile(int x, int y) {
+		if (partie.estPosable(x, y, courante)) {
+			partie.jouerTour(x, y, courante);
+			main.remove(courante);
+			courante = null;
+			return true;
+		}
+		return false;
 	}
 }

@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 public class VuePartie extends JComponent {
 	private Partie partie;
-	private Tuile courant;
+	private VueTuile courant;
     private JButton tourner_gauche;
 	private JButton tourner_droite;
 
@@ -37,13 +37,13 @@ public class VuePartie extends JComponent {
 
 		tourner_gauche.addActionListener(
 			(ActionEvent e) -> {
-				courant.tournerGauche();
+				partie.getJoueurCourant().tournerGauche();
 				repaint();
 		});
 
 		tourner_droite.addActionListener(
 			(ActionEvent e) -> {
-				courant.tournerDroite();
+				partie.getJoueurCourant().tournerDroite();
 				repaint();
 		});
         
@@ -68,18 +68,21 @@ public class VuePartie extends JComponent {
 		public void mouseClicked(MouseEvent e) {
 			VueTuile vue = (VueTuile)e.getSource();
 
-			if (courant == null) {
+			if (courant == null || courant.getTuile() == null) {
 				// selection de la tuile
 				
 				if (!vue.estSelectionnable(partie.getJoueurCourant())) return;
 				vue.setSelectionnee(true);
-				courant = vue.getTuile();
+				courant = vue;
+				partie.getJoueurCourant().setCourante(courant.getTuile());
 				tourner_gauche.setEnabled(true);
 				tourner_droite.setEnabled(true);
 				precedent = vue;
-			} else if (partie.jouerTour(vue.getPosX(), vue.getPosY(), precedent.getTuile())) {
-				vue.setTuile(courant);
+			} else if(partie.estPosable(vue.getPosX(),vue.getPosY(),courant.getTuile())) {
+				partie.getJoueurCourant().poserTuile(vue.getPosX(),vue.getPosY());
+				vue.setTuile(courant.getTuile());
 				precedent.setTuile(null);
+				courant.setTuile(null);
 				courant = null;
 				tourner_gauche.setEnabled(false);
 				tourner_droite.setEnabled(false);
