@@ -12,7 +12,7 @@ public class PartieDeCarcassonne extends Partie {
 		for(Joueur joueur : super.getJoueurs()){
 			joueur.setPartie(this);
 		}
-        super.getPlateau().setTuile(5, 5, (new SacDeParcelle()).t17());
+        super.getPlateau().setTuile(1, 1, (new SacDeParcelle()).t17());
         //super.getPlateau().getTuile(1,1).tournerGauche();
         super.getJoueur(0).pioche(super.getSac().pioche());
         super.getJoueur(0).pioche(super.getSac().pioche());
