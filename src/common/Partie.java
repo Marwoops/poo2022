@@ -35,6 +35,10 @@ public class Partie {
 		return joueurCourant;
 	}
 
+	public Tuile pioche() {
+		return sac.pioche();
+	}
+
 	public void prochainTour() {
 		indiceJoueur = (indiceJoueur+1) % joueurs.length;
 		joueurCourant = joueurs[indiceJoueur];
