@@ -34,4 +34,12 @@ public class PartieDeDomino extends Partie {
 		return j;
 	}
 
+	public boolean estFinie() {
+		for (Joueur j : super.getJoueurs()) {
+			if (j.getMain().size() == 0)
+				return true;
+		}
+		return false;
+	}
+
 }
