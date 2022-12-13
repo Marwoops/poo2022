@@ -27,6 +27,8 @@ public class PartieDeDomino extends Partie {
 		getJoueur(0).pioche();
 		getJoueur(0).pioche();
 		getJoueur(0).pioche();
+		getJoueur(1).pioche();
+		getPlateau().setTuile(5, 5, (constructionSac().get(0)));
     }
 
 	private static Joueur[] deuxJoueurs() {
