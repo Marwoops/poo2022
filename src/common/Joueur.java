@@ -41,7 +41,9 @@ public class Joueur {
 		return false;
 	}
 
-
+	public Tuile getCourante() {
+		return courante;
+	}
 
 	public void tournerDroite() {
 		if (courante !=  null)
