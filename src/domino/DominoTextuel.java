@@ -76,10 +76,10 @@ public class DominoTextuel extends PartieDeDomino {
 				System.out.println("impossible");
 			}
 		}
-		System.out.println("youhou");
 	}
 
 	public void demanderAction() {
+		System.out.println(getJoueurCourant().getCourante());
 		Scanner sc = new Scanner(System.in);
 		System.out.println("(p) poser la tuile");
 		System.out.println("(d) tourner à doite");
@@ -87,13 +87,13 @@ public class DominoTextuel extends PartieDeDomino {
 		String s = sc.next();
 		switch(s) {
 			case "p" : placerTuile(); break;
-			case "d" : getJoueurCourant().tournerDroite(); break;
-			case "g" : getJoueurCourant().tournerGauche(); break;
+			case "d" : getJoueurCourant().tournerDroite(); demanderAction(); break;
+			case "g" : getJoueurCourant().tournerGauche(); demanderAction(); break;
 		}
 	}
 
 	public void placerTuile() {
-
+		
 	}
 
 	public static void main(String[] args) {
