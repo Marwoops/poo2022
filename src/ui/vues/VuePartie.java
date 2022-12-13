@@ -64,22 +64,7 @@ public class VuePartie extends JComponent {
 	private class ControleurSouris implements MouseListener {
 		private VueTuile precedent;
 
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			VueTuile vue = (VueTuile)e.getSource();
-
-			if (courant == null || courant.getTuile() == null) {
-				// selection de la tuile
-				
-				if (!vue.estSelectionnable(partie.getJoueurCourant())) return;
-				vue.setSelectionnee(true);
-				courant = vue;
-				partie.getJoueurCourant().setCourante(courant.getTuile());
-				tourner_gauche.setEnabled(true);
-				tourner_droite.setEnabled(true);
-				precedent = vue;
-			} else if(partie.estPosable(vue.getPosX(),vue.getPosY(),courant.getTuile())) {
-				partie.getJoueurCourant().poserTuile(vue.getPosX(),vue.getPosY());
+		public void jouerTuile(VueTuile vue) {
 				vue.setTuile(courant.getTuile());
 				precedent.setTuile(null);
 				courant.setTuile(null);
@@ -89,6 +74,26 @@ public class VuePartie extends JComponent {
                 precedent = null;
 				for (VueMain vm : vueMains)
 					vm.update();
+		}
+
+		public void selectionnerTuile(VueTuile vue) {
+			vue.setSelectionnee(true);
+			courant = vue;
+			tourner_gauche.setEnabled(true);
+			tourner_droite.setEnabled(true);
+			precedent = vue;
+		}
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			VueTuile vue = (VueTuile)e.getSource();
+			if (courant == null || courant.getTuile() == null) {
+				if (!vue.estSelectionnable(partie.getJoueurCourant())) return;
+				selectionnerTuile(vue);
+				partie.getJoueurCourant().setCourante(courant.getTuile());
+			} else if(partie.estPosable(vue.getPosX(),vue.getPosY(),courant.getTuile())) {
+				partie.getJoueurCourant().poserTuile(vue.getPosX(),vue.getPosY());
+				jouerTuile(vue);
 			}
 		}
 		@Override
