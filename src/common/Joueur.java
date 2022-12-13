@@ -24,6 +24,7 @@ public class Joueur {
 	public void pioche() {
 		Tuile t = partie.pioche();
 		main.offer(t);
+		courante = t;
 		t.setJoueur(this);
 	}
 
