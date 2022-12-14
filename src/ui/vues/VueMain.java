@@ -35,4 +35,8 @@ public class VueMain extends JPanel {
 		}
 		repaint();
 	}
+
+	public Joueur getJoueur(){
+		return joueur;
+	}
 }

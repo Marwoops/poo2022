@@ -17,6 +17,10 @@ public class Joueur {
         return main;
     }
 
+	public Tuile getCourante(){
+		return courante;
+	}
+
 	public void setPartie(Partie p) {
 		partie = p;
 	}
@@ -41,6 +45,13 @@ public class Joueur {
 		return false;
 	}
 
+	public void defausser(){
+		Tuile t = partie.pioche();
+		int index = main.indexOf(courante);
+		main.set(index, t);
+		courante = t;
+		t.setJoueur(this);
+	}
 
 
 	public void tournerDroite() {
@@ -51,7 +62,7 @@ public class Joueur {
 	public void tournerGauche() {
 		if (courante !=  null)
 			courante.tournerGauche();
-	}
+	}	
 
 	public String toString() {
 		String r = ""; 
