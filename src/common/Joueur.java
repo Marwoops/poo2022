@@ -47,15 +47,8 @@ public class Joueur {
 	}
 
 	public void defausser(){
-		Tuile t = partie.pioche();
-		int index = main.indexOf(courante);
-		main.set(index, t);
-		courante = t;
-		t.setJoueur(this);
-	}
-
-	public Tuile getCourante() {
-		return courante;
+		main.remove(courante);
+		courante = null;
 	}
 
 	public void tournerDroite() {

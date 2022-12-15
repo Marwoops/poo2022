@@ -20,7 +20,7 @@ public class VuePartie extends JComponent {
 		partie = p;
 		courant = null;	
 
-		MouseListener controleurSouris = new ControleurSouris();
+		ControleurSouris controleurSouris = new ControleurSouris();
 
 		tourner_gauche = new JButton("⟲");
 		tourner_droite = new JButton("⟳");
@@ -67,12 +67,17 @@ public class VuePartie extends JComponent {
 		defausse.addActionListener(
 			(ActionEvent e) -> {
 				partie.getJoueurCourant().defausser();
-				courant.setTuile(partie.getJoueurCourant().getCourante());
+				courant.setTuile(null);
+				courant = null;
 				for(VueMain vm : vueMains){
+					vm.update_suppr();
+				}
+				partie.getJoueurCourant().pioche();
+				for(VueMain vm : vueMains){
+					vm.update_ajout();
 					if(vm.getJoueur() == partie.getJoueurCourant()){
-						int index = vueMains.indexOf(vm);
-						System.out.println(index);
-						vueMains.set(index, new VueMain(partie.getJoueurCourant(),controleurSouris));
+						courant = vm.getVues().get(vm.getVues().size()-1);
+						controleurSouris.selectionnerTuile(courant);
 					}
 				}
 			});
@@ -94,7 +99,7 @@ public class VuePartie extends JComponent {
 			defausse.setEnabled(false);
             precedent = null;
 			for (VueMain vm : vueMains)
-				vm.update();
+				vm.update_suppr();
 		}
 
 		public void selectionnerTuile(VueTuile vue) {
