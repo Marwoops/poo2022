@@ -27,11 +27,21 @@ public class PartieDeDomino extends Partie {
 		getJoueur(0).pioche();
 		getJoueur(0).pioche();
 		getJoueur(0).pioche();
+		getJoueur(1).pioche();
+		getPlateau().setTuile(5, 5, (constructionSac().get(0)));
     }
 
 	private static Joueur[] deuxJoueurs() {
 		Joueur[] j = {new Joueur(), new Joueur()};
 		return j;
+	}
+
+	public boolean estFinie() {
+		for (Joueur j : super.getJoueurs()) {
+			if (j.getMain().size() == 0)
+				return true;
+		}
+		return false;
 	}
 
 }

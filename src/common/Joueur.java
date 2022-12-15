@@ -28,6 +28,7 @@ public class Joueur {
 	public void pioche() {
 		Tuile t = partie.pioche();
 		main.offer(t);
+		courante = t;
 		t.setJoueur(this);
 	}
 
@@ -53,6 +54,9 @@ public class Joueur {
 		t.setJoueur(this);
 	}
 
+	public Tuile getCourante() {
+		return courante;
+	}
 
 	public void tournerDroite() {
 		if (courante !=  null)
