@@ -161,11 +161,13 @@ public class VuePartie extends JComponent {
 		public void mouseEntered(MouseEvent e) {
 			VueTuile vue = (VueTuile)e.getSource();
             vue.setBrillance(true);
+			vue.repaint();
 		}
 		@Override
 		public void mouseExited(MouseEvent e) {
             VueTuile vue = (VueTuile)e.getSource();
             vue.setBrillance(false);
+			vue.repaint();
 		}
 		@Override
 		public void mouseReleased(MouseEvent e) { }
