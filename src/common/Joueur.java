@@ -17,6 +17,10 @@ public class Joueur {
         return main;
     }
 
+	public Tuile getCourante(){
+		return courante;
+	}
+
 	public void setPartie(Partie p) {
 		partie = p;
 	}
@@ -42,8 +46,9 @@ public class Joueur {
 		return false;
 	}
 
-	public Tuile getCourante() {
-		return courante;
+	public void defausser(){
+		main.remove(courante);
+		courante = null;
 	}
 
 	public void tournerDroite() {
@@ -54,7 +59,7 @@ public class Joueur {
 	public void tournerGauche() {
 		if (courante !=  null)
 			courante.tournerGauche();
-	}
+	}	
 
 	public String toString() {
 		String r = ""; 
@@ -70,7 +75,7 @@ public class Joueur {
 		if (partie.estPosable(x, y, courante)) {
 			partie.jouerTour(x, y, courante);
 			main.remove(courante);
-			courante = null;
+			pioche();
 			return true;
 		}
 		return false;

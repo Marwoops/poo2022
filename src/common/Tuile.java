@@ -39,7 +39,7 @@ public class Tuile {
         orientation = (orientation + cotes.length - 1) % cotes.length;
     }
 
-    public boolean estCompatible(int i, Tuile t) {
+	public boolean estCompatible(int i, Tuile t) {
         return t == null || getCote(i).estCompatible(t.getCote(i+2));
     }
 }

@@ -1,4 +1,4 @@
-public class Partie {
+public abstract class Partie {
     
     private Joueur[] joueurs;
 	private Joueur joueurCourant;
@@ -6,14 +6,21 @@ public class Partie {
     
     private Sac sac;
     private Plateau plateau;
-
-    public Partie(Sac s, Plateau p, Joueur[] j) {
+    
+	public Partie(Sac s, Plateau p, Joueur[] j) {
         sac = s;
         plateau = p;
 		joueurs = j;
 		indiceJoueur = 0;
 		joueurCourant = j[0];
     }
+
+
+	public abstract boolean estFinie();
+
+	public int getjc(){
+		return indiceJoueur;
+	}
 
     public Sac getSac() {
         return sac;
