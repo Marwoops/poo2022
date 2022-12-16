@@ -7,7 +7,7 @@ public class Plateau {
     public Plateau(int ha, int la) {
         hauteur = ha;
         largeur = la;
-        plat = new Tuile[ha+2][la+2];
+        plat = new Tuile[ha][la];
     }
 
     public int getHauteur() {
@@ -45,7 +45,7 @@ public class Plateau {
     }
 
     public boolean horsLimite(int x, int y) {
-        return (x > hauteur || x < 1 || y < 1 || y > largeur);
+        return (x >= hauteur || x < 0 || y < 0 || y >= largeur);
     }
 
 
