@@ -9,6 +9,7 @@ public class VuePartie extends JComponent {
     private JButton tourner_gauche;
 	private JButton tourner_droite;
 	private JButton defausse;
+	private ControleurSouris controleurSouris;
 
 
 	private VuePlateau vuePlateau;
@@ -64,6 +65,8 @@ public class VuePartie extends JComponent {
         add(main2);
 		vueMains.add(main2);
 
+		
+
 		defausse.addActionListener(
 			(ActionEvent e) -> {
 				partie.getJoueurCourant().defausser();
@@ -73,14 +76,8 @@ public class VuePartie extends JComponent {
 					vm.update_suppr();
 				}
 				partie.getJoueurCourant().pioche();
-				for(VueMain vm : vueMains){
-					vm.update_ajout();
-					if(vm.getJoueur() == partie.getJoueurCourant()){
-						courant = vm.getVues().get(vm.getVues().size()-1);
-						controleurSouris.selectionnerTuile(courant);
-					}
-				}
-			});
+				controleurSouris.pioche();
+		});
 
 	}
 
@@ -100,6 +97,18 @@ public class VuePartie extends JComponent {
             precedent = null;
 			for (VueMain vm : vueMains)
 				vm.update_suppr();
+			pioche();
+
+		}
+
+		public void pioche(){
+			for(VueMain vm : vueMains){
+				vm.update_ajout();
+				if(vm.getJoueur() == partie.getJoueurCourant()){
+					courant = vm.getVues().get(vm.getVues().size()-1);
+					selectionnerTuile(courant);
+				}
+			}
 		}
 
 		public void selectionnerTuile(VueTuile vue) {
@@ -113,6 +122,10 @@ public class VuePartie extends JComponent {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
+			if(partie.estFinie()){
+				System.out.println("partie terminée");
+				return;
+			}
 			VueTuile vue = (VueTuile)e.getSource();
 			if (courant == null || courant.getTuile() == null) {
 				if (!vue.estSelectionnable(partie.getJoueurCourant())) return;
