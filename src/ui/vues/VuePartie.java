@@ -147,12 +147,8 @@ public class VuePartie extends JComponent {
             vue.setBrillance(false);
 		}
 		@Override
-		public void mouseReleased(MouseEvent e) {
-
-		}
+		public void mouseReleased(MouseEvent e) { }
 		@Override
-		public void mousePressed(MouseEvent e) {
-
-		}
+		public void mousePressed(MouseEvent e) { }
 	};
 }
