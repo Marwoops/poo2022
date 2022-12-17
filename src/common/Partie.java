@@ -18,10 +18,6 @@ public abstract class Partie {
 
 	public abstract boolean estFinie();
 
-	public int getjc(){
-		return indiceJoueur;
-	}
-
     public Sac getSac() {
         return sac;
     }
@@ -38,11 +34,19 @@ public abstract class Partie {
 		return joueurs;
 	}
 
+	public boolean mainJoueursVides(){
+		for(int i = 0; i < joueurs.length - 1; i++){
+			if(joueurs[i].getMain().size()>0){return false;}
+		}
+		return true;
+	}
+
 	public Joueur getJoueurCourant() {
 		return joueurCourant;
 	}
 
 	public Tuile pioche() {
+		if(sac.estVide()){return null;}
 		return sac.pioche();
 	}
 
@@ -58,6 +62,17 @@ public abstract class Partie {
 	public void jouerTour(int x, int y, Tuile t) {
 		plateau.setTuile(x, y, t);
 		prochainTour();
+	}
+
+	public boolean estDefaussable(Tuile t){
+		for(int x = 0; x < plateau.getLargeur(); x++){
+			for(int y = 0;y < plateau.getHauteur(); y++){
+				if(estPosable(x,y,t)){
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 

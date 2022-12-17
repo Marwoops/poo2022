@@ -29,7 +29,7 @@ public class Joueur {
 		Tuile t = partie.pioche();
 		main.offer(t);
 		courante = t;
-		t.setJoueur(this);
+		if(t!=null)t.setJoueur(this);
 	}
 
 	// très unsafe et bourrin
@@ -46,9 +46,13 @@ public class Joueur {
 		return false;
 	}
 
-	public void defausser(){
-		main.remove(courante);
-		courante = null;
+	public boolean defausser(){
+		if(partie.estDefaussable(courante)){
+			main.remove(courante);
+			courante = null;
+			return true;
+		}
+		return false;
 	}
 
 	public void tournerDroite() {
@@ -75,7 +79,6 @@ public class Joueur {
 		if (partie.estPosable(x, y, courante)) {
 			partie.jouerTour(x, y, courante);
 			main.remove(courante);
-			pioche();
 			return true;
 		}
 		return false;

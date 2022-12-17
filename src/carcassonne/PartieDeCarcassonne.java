@@ -8,7 +8,7 @@ public class PartieDeCarcassonne extends Partie {
 	}
 
 	public boolean estFinie(){
-		return super.getSac().estVide();
+		return (super.getSac().estVide() && super.mainJoueursVides());
 	}
 
     public PartieDeCarcassonne() {
@@ -16,8 +16,7 @@ public class PartieDeCarcassonne extends Partie {
 		for(Joueur joueur : super.getJoueurs()){
 			joueur.setPartie(this);
 		}
-        super.getPlateau().setTuile(1, 1, (new SacDeParcelle()).t17());
+        super.getPlateau().setTuile(5, 5, (new SacDeParcelle()).t17());
         super.getJoueur(0).pioche();
-        super.getJoueur(1).pioche();
     }
 }

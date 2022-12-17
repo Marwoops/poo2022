@@ -136,8 +136,8 @@ public class SacDeParcelle extends Sac{
 
 	public static LinkedList<Tuile> constructionSac() {
         LinkedList<Tuile> sac = new LinkedList<Tuile>();
-        
-        // 9 tuiles T1
+
+		// 9 tuiles T1
         for (int i = 0; i < 9; i++) {
             sac.offer(t1());
         }

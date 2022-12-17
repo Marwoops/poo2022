@@ -71,13 +71,14 @@ public class VuePartie extends JComponent {
 
 		defausse.addActionListener(
 			(ActionEvent e) -> {
-				partie.getJoueurCourant().defausser();
-				courant.setTuile(null);
-				courant = null;
-				for(VueMain vm : vueMains){
-					vm.update_suppr();
+				if(partie.getJoueurCourant().defausser()){
+					courant.setTuile(null);
+					courant = null;
+					for(VueMain vm : vueMains){
+						vm.update_suppr();
+					}
+					controleurSouris.postPose();
 				}
-				controleurSouris.postDefausse();
 		});
 
 	}
@@ -89,6 +90,7 @@ public class VuePartie extends JComponent {
 		}
 
 		public void postPose() {
+			partie.getJoueurCourant().pioche();
 			pioche();
 		}
 	}
@@ -102,7 +104,8 @@ public class VuePartie extends JComponent {
 			defausse.setEnabled(false);
 		}
 
-		public void postPose() { }
+		public void postPose() { 
+		}
 	}
 
 	private abstract class ControleurSouris implements MouseListener {
@@ -119,6 +122,10 @@ public class VuePartie extends JComponent {
             precedent = null;
 			for (VueMain vm : vueMains)
 				vm.update_suppr();
+			if(partie.estFinie()){
+				System.out.println("partie terminée");
+				return;
+			}
 			postPose();
 		}
 
@@ -143,10 +150,6 @@ public class VuePartie extends JComponent {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			if(partie.estFinie()){
-				System.out.println("partie terminée");
-				return;
-			}
 			VueTuile vue = (VueTuile)e.getSource();
 			if (courant == null || courant.getTuile() == null) {
 				if (!vue.estSelectionnable(partie.getJoueurCourant())) return;
