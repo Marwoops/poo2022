@@ -71,13 +71,14 @@ public class VuePartie extends JComponent {
 
 		defausse.addActionListener(
 			(ActionEvent e) -> {
-				partie.getJoueurCourant().defausser();
-				courant.setTuile(null);
-				courant = null;
-				for(VueMain vm : vueMains){
-					vm.update_suppr();
+				if(partie.getJoueurCourant().defausser()){
+					courant.setTuile(null);
+					courant = null;
+					for(VueMain vm : vueMains){
+						vm.update_suppr();
+					}
+					controleurSouris.postDefausse();
 				}
-				controleurSouris.postDefausse();
 		});
 
 	}

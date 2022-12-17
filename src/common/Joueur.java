@@ -46,9 +46,13 @@ public class Joueur {
 		return false;
 	}
 
-	public void defausser(){
-		main.remove(courante);
-		courante = null;
+	public boolean defausser(){
+		if(partie.estDefaussable(courante)){
+			main.remove(courante);
+			courante = null;
+			return true;
+		}
+		return false;
 	}
 
 	public void tournerDroite() {
