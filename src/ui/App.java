@@ -20,6 +20,7 @@ class Frame extends JFrame {
     public Frame() {
         
 		VuePartie partie = new VuePartie(new PartieDeCarcassonne());
+		//VuePartie partie = new VuePartie(new PartieDeDomino());
 		partie.setBounds(0,0, 1920,1080);
 		add(partie);
 		setLayout(null);
