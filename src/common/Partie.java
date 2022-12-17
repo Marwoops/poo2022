@@ -1,4 +1,4 @@
-public abstract class Partie {
+public class Partie {
     
     private Joueur[] joueurs;
 	private Joueur joueurCourant;
@@ -16,7 +16,9 @@ public abstract class Partie {
     }
 
 
-	public abstract boolean estFinie();
+	public boolean estFinie() {
+		return sac.estVide();
+	}
 
     public Sac getSac() {
         return sac;
@@ -30,15 +32,12 @@ public abstract class Partie {
 		return joueurs[i];
 	}
 
-	public Joueur[] getJoueurs() {
-		return joueurs;
+	public int getIndiceJoueur() {
+		return indiceJoueur;
 	}
 
-	public boolean mainJoueursVides(){
-		for(int i = 0; i < joueurs.length - 1; i++){
-			if(joueurs[i].getMain().size()>0){return false;}
-		}
-		return true;
+	public Joueur[] getJoueurs() {
+		return joueurs;
 	}
 
 	public Joueur getJoueurCourant() {
@@ -53,6 +52,7 @@ public abstract class Partie {
 	public void prochainTour() {
 		indiceJoueur = (indiceJoueur+1) % joueurs.length;
 		joueurCourant = joueurs[indiceJoueur];
+		joueurCourant.pioche();
 	}
 
 	public boolean estPosable(int x, int y, Tuile t) {
@@ -74,8 +74,5 @@ public abstract class Partie {
 		}
 		return true;
 	}
-
-
-
 }
 

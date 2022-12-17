@@ -7,18 +7,12 @@ public class PartieDeCarcassonne extends Partie {
 		return j;
 	}
 
-	public boolean estFinie(){
-		return (super.getSac().estVide() && super.mainJoueursVides());
-	}
-
     public PartieDeCarcassonne() {
 		super(new SacDeParcelle(), new Plateau(10,10), deuxJoueurs());
 		for(Joueur joueur : super.getJoueurs()){
 			joueur.setPartie(this);
 		}
         super.getPlateau().setTuile(5, 5, (new SacDeParcelle()).t17());
-        //super.getPlateau().getTuile(1,1).tournerGauche();
         super.getJoueur(0).pioche();
-        //super.getJoueur(1).pioche();
     }
 }

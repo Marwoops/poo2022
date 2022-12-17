@@ -13,7 +13,7 @@ public class VuePartie extends JComponent {
 
 
 	private VuePlateau vuePlateau;
-	private LinkedList<VueMain> vueMains;
+	private LinkedList<VueTuile> vueMains;
 	
 	public VuePartie(Partie p) {
 		setLayout(null);
@@ -56,28 +56,25 @@ public class VuePartie extends JComponent {
 		});
 
 
-		vueMains = new LinkedList<VueMain>();
-        VueMain main1 = new VueMain(partie.getJoueur(0), controleurSouris, estCarcassonne);
-        main1.setBounds(20, 820, 800, 86);
+		vueMains = new LinkedList<VueTuile>();
+        VueTuile main1 = (estCarcassonne) ? new VueParcelle(partie.getJoueur(0).getCourante(), -1, -1, true, controleurSouris) :new VueDomino(partie.getJoueur(0).getCourante(), -1, -1, true, controleurSouris);
+		courant = main1;
+		controleurSouris.selectionnerTuile(courant);
+        main1.setBounds(200, 820, 80, 86);
         add(main1);
 		vueMains.add(main1);
 
-        VueMain main2 = new VueMain(partie.getJoueur(1), controleurSouris, estCarcassonne);
-        main2.setBounds(20, 900, 800, 86);
+        VueTuile main2 = (estCarcassonne) ? new VueParcelle(partie.getJoueur(1).getCourante(), -1, -1, true, controleurSouris) :new VueDomino(partie.getJoueur(1).getCourante(), -1, -1, true, controleurSouris);
+        main2.setBounds(600, 820, 80, 86);
         add(main2);
 		vueMains.add(main2);
-
-		
 
 		defausse.addActionListener(
 			(ActionEvent e) -> {
 				if(partie.getJoueurCourant().defausser()){
 					courant.setTuile(null);
 					courant = null;
-					for(VueMain vm : vueMains){
-						vm.update_suppr();
-					}
-					controleurSouris.postPose();
+					controleurSouris.postDefausse();
 				}
 		});
 
@@ -88,23 +85,12 @@ public class VuePartie extends JComponent {
 				partie.getJoueurCourant().pioche();
 				pioche();
 		}
-
-		public void postPose() {
-			partie.getJoueurCourant().pioche();
-			pioche();
-		}
 	}
 
 	private class ControleurSourisDomino extends ControleurSouris {
 		public void postDefausse() {
-			courant = null;
 			partie.prochainTour();
-			tourner_gauche.setEnabled(false);
-			tourner_droite.setEnabled(false);
-			defausse.setEnabled(false);
-		}
-
-		public void postPose() { 
+			super.postPose();
 		}
 	}
 
@@ -120,23 +106,12 @@ public class VuePartie extends JComponent {
 			tourner_droite.setEnabled(false);
 			defausse.setEnabled(false);
             precedent = null;
-			for (VueMain vm : vueMains)
-				vm.update_suppr();
-			if(partie.estFinie()){
-				System.out.println("partie terminée");
-				return;
-			}
 			postPose();
 		}
 
 		public void pioche(){
-			for(VueMain vm : vueMains){
-				vm.update_ajout();
-				if(vm.getJoueur() == partie.getJoueurCourant()){
-					courant = vm.getVues().get(vm.getVues().size()-1);
-					selectionnerTuile(courant);
-				}
-			}
+			selectionnerTuile(vueMains.get(partie.getIndiceJoueur()));
+			courant.setTuile(partie.getJoueurCourant().getCourante());
 		}
 
 		public void selectionnerTuile(VueTuile vue) {
@@ -154,15 +129,22 @@ public class VuePartie extends JComponent {
 			if (courant == null || courant.getTuile() == null) {
 				if (!vue.estSelectionnable(partie.getJoueurCourant())) return;
 				selectionnerTuile(vue);
-				partie.getJoueurCourant().setCourante(courant.getTuile());
 			} else if(partie.estPosable(vue.getPosX(),vue.getPosY(),courant.getTuile())) {
 				partie.getJoueurCourant().poserTuile(vue.getPosX(),vue.getPosY());
 				jouerTuile(vue);
 			}
 		}
 
+		public void postPose() {
+			if(partie.estFinie()){
+				System.out.println("partie terminée");
+				return;
+			}
+			selectionnerTuile(vueMains.get(partie.getIndiceJoueur()));
+			courant.setTuile(partie.getJoueurCourant().getCourante());
+		}
+
 		public abstract void postDefausse();
-		public abstract void postPose();
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
