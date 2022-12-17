@@ -136,7 +136,7 @@ public class SacDeParcelle extends Sac{
 
 	public static LinkedList<Tuile> constructionSac() {
         LinkedList<Tuile> sac = new LinkedList<Tuile>();
-        
+/*
 		// 9 tuiles T1
         for (int i = 0; i < 9; i++) {
             sac.offer(t1());
@@ -229,7 +229,7 @@ public class SacDeParcelle extends Sac{
 		for (int i = 0; i < 2; i++) {
             sac.offer(t23());
         }
-
+*/
 		for (int i = 0; i < 3; i++) {
             sac.offer(t24());
         }
