@@ -19,12 +19,30 @@ class Frame extends JFrame {
     
     public Frame() {
         
-		VuePartie partie = new VuePartie(new PartieDeCarcassonne());
-		//VuePartie partie = new VuePartie(new PartieDeDomino());
-		partie.setBounds(0,0, 1920,1080);
-		add(partie);
-		setLayout(null);
-              
+		JPanel container = new JPanel(new GridLayout(2,0));
+		JPanel menu = new JPanel();
+		menu.setLayout(new BoxLayout(menu, BoxLayout.Y_AXIS));
+		JButton carca = new JButton("Carcassonne");
+		JButton domino = new JButton("Domino");
+
+		carca.addActionListener((ActionEvent e) -> {
+			getContentPane().removeAll();
+			add(new VuePartie(new PartieDeCarcassonne()));
+			validate();
+		});
+
+		domino.addActionListener((ActionEvent e) -> {
+			getContentPane().removeAll();
+			add(new VuePartie(new PartieDeDomino()));
+			validate();
+		});
+
+		menu.add(carca);
+		menu.add(domino);
+		container.add(new JPanel());
+		container.add(menu);
+		add(container);
+		pack();
    }
 
 
