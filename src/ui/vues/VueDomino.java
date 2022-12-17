@@ -28,7 +28,15 @@ public class VueDomino extends VueTuile {
 
 	public void updateVue() {
 		Domino d = (Domino) getTuile();
-		if (d == null) return;
+		if (d == null) {
+			for (int i = 0; i < 5; i++) {
+				for (int j = 0; j < 5; j++) {
+					grille[i][j].setValeur(-1);
+					grille[i][j].updateBackground();
+				}
+			}
+			return;
+		}
 
 		Rangee rH = (Rangee) d.getCote(0);
 		Rangee rD = (Rangee) d.getCote(1);

@@ -44,10 +44,7 @@ public class DominoTextuel extends PartieDeDomino {
 	}
 
 	public static void afficherMain(Joueur joueur) {
-		LinkedList<Tuile> t = joueur.getMain();
-		System.out.println(constructionHaut(3, t.size()));
-		afficherLigne(t.toArray(new Domino[0]), 3, -1);
-		System.out.println();
+		System.out.println(joueur.getCourante());
 	}
 
 	public void afficherPlateau() {
@@ -65,50 +62,23 @@ public class DominoTextuel extends PartieDeDomino {
 		return r;
 	}
 
-	public void demanderActionJoueur() {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("(s) sélectioner une tuile");
-		System.out.println("(p) piocher");
-		String s = sc.next();
-		switch(s) {
-			case "s" : selectionTuile(); break;
-			case "p" :
-						getJoueurCourant().pioche();
-						System.out.println(getJoueurCourant().getCourante());
-						demanderActionTuile();
-						break;
-			default: demanderActionJoueur();
-		}
-	}
-	public void selectionTuile() {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Sélectionnez une tuile: ");
-		while(true) {
-			try {
-				getJoueurCourant().setCourante(sc.next().charAt(0)- 'A');
-				break;
-			} catch(Exception e) {
-				System.out.println("impossible");
-			}
-		}
-		demanderActionTuile();
-	}
-
-	public void demanderActionTuile() {
+	public void demanderAction() {
 		System.out.println(getJoueurCourant().getCourante());
 		Scanner sc = new Scanner(System.in);
-		System.out.println("(p) poser la tuile");
+		System.out.println("(z) poser la tuile");
 		System.out.println("(d) tourner à doite");
-		System.out.println("(g) tourner à gauche");
+		System.out.println("(q) tourner à gauche");
 		System.out.println("(c) afficher le plateau");
+		System.out.println("(x) défausser");
 
 		String s = sc.next();
 		switch(s) {
-			case "p" : placerTuile(); break;
-			case "d" : getJoueurCourant().tournerDroite(); demanderActionTuile(); break;
-			case "g" : getJoueurCourant().tournerGauche(); demanderActionTuile(); break;
-			case "c" : afficherPlateau(); demanderActionTuile(); break;
-			default: demanderActionTuile();
+			case "z" : placerTuile(); break;
+			case "d" : getJoueurCourant().tournerDroite(); demanderAction(); break;
+			case "q" : getJoueurCourant().tournerGauche(); demanderAction(); break;
+			case "c" : afficherPlateau(); demanderAction(); break;
+			case "x" : getJoueurCourant().defausser(); prochainTour(); demanderAction(); break;
+			default: demanderAction();
 		}
 	}
 
@@ -138,7 +108,7 @@ public class DominoTextuel extends PartieDeDomino {
 		jeu.afficherPlateau();
 		while (!jeu.estFinie()) {
 			jeu.afficherMain(jeu.getJoueurCourant());
-			jeu.demanderActionJoueur();
+			jeu.demanderAction();
 		}
 		System.out.println("c'est FINI BRAVO");
 	}

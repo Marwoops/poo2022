@@ -7,10 +7,6 @@ public class PartieDeCarcassonne extends Partie {
 		return j;
 	}
 
-	public boolean estFinie(){
-		return (super.getSac().estVide() && super.mainJoueursVides());
-	}
-
     public PartieDeCarcassonne() {
 		super(new SacDeParcelle(), new Plateau(10,10), deuxJoueurs());
 		for(Joueur joueur : super.getJoueurs()){

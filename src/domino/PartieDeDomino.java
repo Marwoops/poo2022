@@ -25,9 +25,6 @@ public class PartieDeDomino extends Partie {
 			joueur.setPartie(this);
 		}
 		getJoueur(0).pioche();
-		getJoueur(0).pioche();
-		getJoueur(0).pioche();
-		getJoueur(1).pioche();
 		getPlateau().setTuile(5, 5, (constructionSac().get(0)));
     }
 
@@ -35,9 +32,4 @@ public class PartieDeDomino extends Partie {
 		Joueur[] j = {new Joueur(), new Joueur()};
 		return j;
 	}
-
-	public boolean estFinie() {
-		return getJoueurCourant().getMain().size() == 0;
-	}
-
 }
