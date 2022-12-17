@@ -77,7 +77,7 @@ public class VuePartie extends JComponent {
 					for(VueMain vm : vueMains){
 						vm.update_suppr();
 					}
-					controleurSouris.postDefausse();
+					controleurSouris.postPose();
 				}
 		});
 
@@ -103,7 +103,8 @@ public class VuePartie extends JComponent {
 			defausse.setEnabled(false);
 		}
 
-		public void postPose() { }
+		public void postPose() { 
+		}
 	}
 
 	private abstract class ControleurSouris implements MouseListener {

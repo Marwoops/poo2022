@@ -79,7 +79,6 @@ public class Joueur {
 		if (partie.estPosable(x, y, courante)) {
 			partie.jouerTour(x, y, courante);
 			main.remove(courante);
-			pioche();
 			return true;
 		}
 		return false;
