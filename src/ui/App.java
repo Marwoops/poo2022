@@ -23,7 +23,7 @@ class Frame extends JFrame {
 		JPanel menu = new JPanel();
 		menu.setLayout(new BoxLayout(menu, BoxLayout.Y_AXIS));
 		JButton carca = new JButton("Carcassonne");
-		JButton domino = new JButton("Domino");
+		JButton domino = new JButton("Domino carré");
 
 		carca.addActionListener((ActionEvent e) -> {
 			getContentPane().removeAll();
@@ -38,6 +38,7 @@ class Frame extends JFrame {
 		});
 
 		menu.add(carca);
+		menu.add(Box.createVerticalStrut(50));
 		menu.add(domino);
 		container.add(menu);
 		add(container);
