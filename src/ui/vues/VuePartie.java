@@ -90,6 +90,7 @@ public class VuePartie extends JComponent {
 		}
 
 		public void postPose() {
+			partie.getJoueurCourant().pioche();
 			pioche();
 		}
 	}

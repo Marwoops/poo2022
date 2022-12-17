@@ -57,7 +57,6 @@ public abstract class Partie {
 	public void prochainTour() {
 		indiceJoueur = (indiceJoueur+1) % joueurs.length;
 		joueurCourant = joueurs[indiceJoueur];
-		joueurCourant.pioche();
 	}
 
 	public boolean estPosable(int x, int y, Tuile t) {
