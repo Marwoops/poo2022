@@ -37,11 +37,7 @@ public class PartieDeDomino extends Partie {
 	}
 
 	public boolean estFinie() {
-		for (Joueur j : super.getJoueurs()) {
-			if (j.getMain().size() == 0)
-				return true;
-		}
-		return false;
+		return getJoueurCourant().getMain().size() == 0;
 	}
 
 }
