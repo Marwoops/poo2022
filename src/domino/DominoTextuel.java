@@ -118,10 +118,10 @@ public class DominoTextuel extends PartieDeDomino {
 		int y;
 		while(true) {
 			try {
-				System.out.print("ligne: ");
-				x = sc.next().charAt(0) - 'A';
-				System.out.print("colonne: ");
-				y = sc.nextInt();
+				System.out.print("colonne : ");
+				y = sc.next().charAt(0) - 'A';
+				System.out.print("ligne : ");
+				x = sc.nextInt();
 				if (estPosable(x, y, getJoueurCourant().getCourante()))
 					break;
 			} catch (Exception e) {
