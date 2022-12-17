@@ -19,7 +19,7 @@ class Frame extends JFrame {
     
     public Frame() {
         
-		JPanel container = new JPanel(new GridLayout(2,0));
+		JPanel container = new JPanel(new GridBagLayout());
 		JPanel menu = new JPanel();
 		menu.setLayout(new BoxLayout(menu, BoxLayout.Y_AXIS));
 		JButton carca = new JButton("Carcassonne");
@@ -39,7 +39,6 @@ class Frame extends JFrame {
 
 		menu.add(carca);
 		menu.add(domino);
-		container.add(new JPanel());
 		container.add(menu);
 		add(container);
 		pack();
