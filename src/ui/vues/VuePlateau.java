@@ -10,7 +10,7 @@ public class VuePlateau extends JPanel {
     private int largeur;
 	private VueTuile[][] vues;
 
-    public VuePlateau(int ha, int la, Plateau p, MouseListener controleur) {
+    public VuePlateau(int ha, int la, Plateau p, MouseListener controleur, boolean estCarcassonne) {
         hauteur = ha;
         largeur = la;
         plateau = p;
@@ -19,14 +19,7 @@ public class VuePlateau extends JPanel {
 
         for (int i = 0; i < p.getHauteur(); i++) {
             for (int j = 0; j < p.getLargeur(); j++) {
-				VueTuile vue;
-				/*
-				if (controleur.estCarcassonne())
-					vue = new VueParcelle(p.getTuile(i, j), i, j, false, controleur);
-				else
-					vue = null;
-					*/
-				vue = new VueParcelle(p.getTuile(i, j), i, j, false, controleur);
+				VueTuile vue = (estCarcassonne) ? new VueParcelle(p.getTuile(i, j), i, j, false, controleur) : new VueDomino(p.getTuile(i,j), i, j, false, controleur);
                 add(vue);
             }
         }

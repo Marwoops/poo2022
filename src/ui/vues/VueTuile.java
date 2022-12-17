@@ -1,12 +1,8 @@
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import javax.swing.border.Border;
 import java.awt.geom.*;
 import java.awt.event.*;
 import javax.swing.*;
-import java.io.File;
-import javax.imageio.ImageIO;
 
 public class VueTuile extends JPanel {
     
