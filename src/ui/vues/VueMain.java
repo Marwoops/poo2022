@@ -12,6 +12,7 @@ public class VueMain extends JPanel {
 
     public VueMain(Joueur j, MouseListener controleur, boolean estCarcassonne) {
 		this.controleur = controleur;
+		this.estCarcassonne = estCarcassonne;
         joueur = j;
         LinkedList<Tuile> main = j.getMain();
 		vues = new LinkedList<VueTuile>();
