@@ -4,6 +4,8 @@ import java.awt.event.*;
 
 public class VueDomino extends VueTuile {
 
+	private static Color couleur_arriere = new Color(145, 230, 180);
+	private static Color couleur_avant = new Color(213, 242, 225);
 	private VueCase[][] grille;
 
 	public VueDomino(Tuile t, int x, int y, boolean m, MouseListener controleur) {
@@ -21,10 +23,10 @@ public class VueDomino extends VueTuile {
 				add(vue);
 			}
 		}
-		update();
+		//updateVue();
 	}
 
-	public void update() {
+	public void updateVue() {
 		Domino d = (Domino) getTuile();
 		if (d == null) return;
 
@@ -39,11 +41,12 @@ public class VueDomino extends VueTuile {
 			grille[4][1+i].setValeur(rB.getPoint(2-i));
 			grille[1+i][4].setValeur(rD.getPoint(i));
 		}
-	}
 
-	public void paintComponent(Graphics g) {
-		update();
-		super.paintComponent(g);
+		for (int i = 0; i < 5; i++) {
+			for (int j = 0; j < 5; j++) {
+				grille[i][j].updateBackground();
+			}
+		}
 	}
 
 	private class VueCase extends JLabel {
@@ -61,6 +64,19 @@ public class VueDomino extends VueTuile {
 
 		public void updateText() {
 			setText((valeur == -1) ? "" : valeur + "");
+		}
+
+		public void updateBackground() {
+			if (estVide()) {
+				setOpaque(false);
+				return;
+			}
+
+			setOpaque(true);
+			if (valeur == -1)
+				setBackground(couleur_arriere);
+			else
+				setBackground(couleur_avant);
 		}
 	}
 }

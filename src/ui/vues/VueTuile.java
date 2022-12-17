@@ -20,7 +20,8 @@ public class VueTuile extends JPanel {
 
     public VueTuile(Tuile t, int x, int y, boolean m, MouseListener controleur) {
 		setPreferredSize(getPreferredSize());
-        setTuile(t);
+		tuile = t;
+		orientation = -1;
 		posX = x;
 		posY = y;
 		brillance = false;
@@ -99,11 +100,15 @@ public class VueTuile extends JPanel {
 			setBorder(null);
 	}
 
+	public boolean doitUpdate() {
+		return tuile != null && orientation != tuile.getOrientation();
+	}
+
 	public void updateVue() { }
 
     public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		if(tuile != null && orientation != tuile.getOrientation()){
+		if(doitUpdate()){
 			updateVue();
 		}
     }

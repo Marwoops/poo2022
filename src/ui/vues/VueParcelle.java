@@ -49,8 +49,6 @@ public class VueParcelle extends VueTuile {
 		super.paintComponent(g);
         if (icone != null)
             g.drawImage(icone, 0, 0, 80, 80, null); // 80 correspond à la taille du côté (en px) de la tuile dans le plateau
-        else
-            g.drawString("0", 40, 40);
 	}
 
 }
