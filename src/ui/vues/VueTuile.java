@@ -10,32 +10,17 @@ import javax.imageio.ImageIO;
 
 public class VueTuile extends JPanel {
     
-    private static String cheminIcone = "../src/ui/icons/";
     private static Border bordureSelection = BorderFactory.createLineBorder(Color.YELLOW,5);
     private static Border bordureBrillance = BorderFactory.createLineBorder(Color.BLACK,3);
 
     private Tuile tuile;
 	private int posX;
 	private int posY;
-    private BufferedImage icone;
 	private int orientation;
 	private boolean brillance;
 	private boolean selectionnee;
 	private boolean mouvable;
-    
-    public static BufferedImage genererIcone(BufferedImage img, int i) {
-        int largeur = img.getWidth();
-        int hauteur = img.getHeight();
 
-        BufferedImage nouvelleIcone = new BufferedImage(largeur, hauteur, img.getType());
- 
-        Graphics2D g2 = nouvelleIcone.createGraphics();
- 
-        g2.rotate(Math.toRadians(-90*i), largeur / 2, hauteur / 2);
-        g2.drawImage(img, null, 0, 0);
- 
-        return nouvelleIcone;
-    }
 
     public VueTuile(Tuile t, int x, int y, boolean m, MouseListener controleur) {
 		setPreferredSize(getPreferredSize());
@@ -60,6 +45,10 @@ public class VueTuile extends JPanel {
 		return posY;
 	}
 
+	public int getOrientation() {
+		return orientation;
+	}
+
 	public boolean getMouvable() {
 		return mouvable;
 	}
@@ -80,9 +69,13 @@ public class VueTuile extends JPanel {
 			orientation = t.getOrientation();
 		}
 		tuile = t;
-		setImg();
+		updateVue();
         repaint();
 		return true;
+	}
+
+	public void setOrientation(int i) {
+		orientation = i;
 	}
 
 	public boolean setBrillance(boolean b) {
@@ -109,30 +102,14 @@ public class VueTuile extends JPanel {
 		else
 			setBorder(null);
 	}
-	
-	private void setImg() {
-		if (tuile != null) {
-            try {
-                BufferedImage img = ImageIO.read(new File(cheminIcone + ((Parcelle) tuile).getId() + ".png"));
-                icone = genererIcone(img, tuile.getOrientation());
-				orientation = tuile.getOrientation();
-            } catch(IOException e) {
 
-            }
-        } else {
-			icone = null;
-        }
-	}
+	public void updateVue() { }
 
     public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		if(tuile != null && orientation != tuile.getOrientation()){
-			setImg();
+			updateVue();
 		}
-        if (icone != null)
-            g.drawImage(icone, 0, 0, 80, 80, null); // 80 correspond à la taille du côté (en px) de la tuile dans le plateau
-        else
-            g.drawString("0", 40, 40);
     }
 
 	public Dimension getPreferredSize() {

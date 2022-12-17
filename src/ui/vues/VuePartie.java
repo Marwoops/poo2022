@@ -81,6 +81,10 @@ public class VuePartie extends JComponent {
 	}
 
 	private class ControleurSourisCarcassonne extends ControleurSouris {
+		public boolean estCarcassonne() {
+			return true;
+		}
+
 		public void postDefausse() {
 				partie.getJoueurCourant().pioche();
 				pioche();
@@ -92,18 +96,19 @@ public class VuePartie extends JComponent {
 	}
 
 	private class ControleurSourisDomino extends ControleurSouris {
-		public void postDefausse() {
-
+		public boolean estCarcassonne() {
+			return false;
 		}
 
-		public void postPose() {
+		public void postDefausse() { }
 
-		}
+		public void postPose() { }
 	}
 
 	private abstract class ControleurSouris implements MouseListener {
 		private VueTuile precedent;
 
+		public abstract boolean estCarcassonne();
 		public void jouerTuile(VueTuile vue) {
 			vue.setTuile(courant.getTuile());
 			precedent.setTuile(null);

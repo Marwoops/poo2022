@@ -16,7 +16,7 @@ public class VueMain extends JPanel {
 		vues = new LinkedList<VueTuile>();
 
         for (int i = 0; i < main.size(); i++) {
-            VueTuile t = new VueTuile(main.get(i), -1, -1, true, controleur);
+            VueTuile t = new VueParcelle(main.get(i), -1, -1, true, controleur);
 			vues.add(t);
             add(t);
         }
@@ -41,7 +41,7 @@ public class VueMain extends JPanel {
 	public void update_ajout(){
 		LinkedList<VueTuile> a_ajouter = new LinkedList<VueTuile>();
 		for(int i = vues.size();i<joueur.getMain().size();i++){
-			a_ajouter.add(new VueTuile(joueur.getMain().get(i), -1, -1, true, controleur));
+			a_ajouter.add(new VueParcelle(joueur.getMain().get(i), -1, -1, true, controleur));
 		}
 		for(VueTuile v : a_ajouter){
 			vues.add(v);
