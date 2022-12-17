@@ -85,23 +85,12 @@ public class VuePartie extends JComponent {
 				partie.getJoueurCourant().pioche();
 				pioche();
 		}
-
-		public void postPose() {
-			if (partie.estFinie()) return;
-			selectionnerTuile(vueMains.get(partie.getIndiceJoueur()));
-			courant.setTuile(partie.getJoueurCourant().getCourante());
-		}
 	}
 
 	private class ControleurSourisDomino extends ControleurSouris {
 		public void postDefausse() {
-			if (partie.estFinie()) return;
-			selectionnerTuile(courant);
-			courant.setTuile(partie.getJoueurCourant().getCourante());
-		}
-
-		public void postPose() {
-			postDefausse();
+			partie.prochainTour();
+			super.postPose();
 		}
 	}
 
@@ -117,16 +106,12 @@ public class VuePartie extends JComponent {
 			tourner_droite.setEnabled(false);
 			defausse.setEnabled(false);
             precedent = null;
-			if(partie.estFinie()){
-				System.out.println("partie terminée");
-				return;
-			}
 			postPose();
 		}
 
 		public void pioche(){
 			selectionnerTuile(vueMains.get(partie.getIndiceJoueur()));
-			vueMains.get(partie.getIndiceJoueur()).setTuile(courant.getTuile());
+			courant.setTuile(partie.getJoueurCourant().getCourante());
 		}
 
 		public void selectionnerTuile(VueTuile vue) {
@@ -150,8 +135,16 @@ public class VuePartie extends JComponent {
 			}
 		}
 
+		public void postPose() {
+			if(partie.estFinie()){
+				System.out.println("partie terminée");
+				return;
+			}
+			selectionnerTuile(vueMains.get(partie.getIndiceJoueur()));
+			courant.setTuile(partie.getJoueurCourant().getCourante());
+		}
+
 		public abstract void postDefausse();
-		public abstract void postPose();
 
 		@Override
 		public void mouseEntered(MouseEvent e) {

@@ -63,6 +63,7 @@ public class DominoTextuel extends PartieDeDomino {
 	}
 
 	public void demanderAction() {
+		System.out.println();
 		System.out.println(getJoueurCourant().getCourante());
 		Scanner sc = new Scanner(System.in);
 		System.out.println("(z) poser la tuile");
