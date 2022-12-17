@@ -11,6 +11,12 @@ public class VuePartie extends JComponent {
 	private JButton defausse;
 	private ControleurSouris controleurSouris;
 
+	private JButton pion_haut;
+	private JButton pion_droite;
+	private JButton pion_bas;
+	private JButton pion_gauche;
+	private JButton pion_centre;
+
 
 	private VuePlateau vuePlateau;
 	private LinkedList<VueMain> vueMains;
@@ -28,12 +34,35 @@ public class VuePartie extends JComponent {
 		tourner_gauche = new JButton("⟲");
 		tourner_droite = new JButton("⟳");
 		defausse = new JButton("❌");
-		tourner_gauche.setBounds(850,20,50,50);
-		tourner_droite.setBounds(850,80,50,50);
-		defausse.setBounds(850,140,50,50);
+		tourner_gauche.setBounds(900,50,50,50);
+		tourner_droite.setBounds(900,110,50,50);
+		defausse.setBounds(900,170,50,50);
 		tourner_gauche.setEnabled(false);
 		tourner_droite.setEnabled(false);
 		defausse.setEnabled(false);
+
+
+		pion_haut = new JButton("↑");
+		pion_droite = new JButton("→");
+		pion_centre = new JButton("▪");
+		pion_gauche = new JButton("←");
+		pion_bas = new JButton("↓");
+		
+		if(estCarcassonne){
+			pion_haut.setBounds(900,400,50,50);
+			pion_droite.setBounds(950,450,50,50);
+			pion_bas.setBounds(900,500,50,50);
+			pion_gauche.setBounds(850,450,50,50);
+			pion_centre.setBounds(900,450,50,50);
+			
+			setPionButtonEnabled(false);
+			
+			add(pion_haut);
+			add(pion_droite);
+			add(pion_bas);
+			add(pion_gauche);
+			add(pion_centre);
+		}
 
         JPanel plateau = new VuePlateau(800, 800, partie.getPlateau(), controleurSouris, estCarcassonne);
         plateau.setBounds(20, 20, 800, 800);
@@ -80,6 +109,52 @@ public class VuePartie extends JComponent {
 					controleurSouris.postPose();
 				}
 		});
+
+		pion_haut.addActionListener(
+			(ActionEvent e) ->{
+				setPionButtonEnabled(false);
+				//courant.putPionHaut(partie.getJoueurCourant());
+				repaint();
+			});
+		
+		pion_droite.addActionListener(
+			(ActionEvent e) ->{			
+				setPionButtonEnabled(false);
+				//courant.putPionDroit(parie.getJoueurCourant());
+				repaint();
+			});
+
+		pion_bas.addActionListener(
+			(ActionEvent e) ->{			
+				setPionButtonEnabled(false);
+				//courant.putPionBas(parie.getJoueurCourant());
+				repaint();
+			});
+
+		pion_gauche.addActionListener(
+			(ActionEvent e) ->{			
+				setPionButtonEnabled(false);
+				//courant.putPionGauche(parie.getJoueurCourant());
+				repaint();
+			});
+
+		pion_centre.addActionListener(
+			(ActionEvent e) ->{
+				//vérifier si id est 13 ou 14
+				setPionButtonEnabled(false);
+				//courant.putPionCentre(parie.getJoueurCourant());
+				repaint();
+			});
+
+
+	}
+
+	private void setPionButtonEnabled(boolean b){
+			pion_haut.setEnabled(b);
+			pion_droite.setEnabled(b);
+			pion_bas.setEnabled(b);
+			pion_gauche.setEnabled(b);
+			pion_centre.setEnabled(b);
 
 	}
 
@@ -146,6 +221,7 @@ public class VuePartie extends JComponent {
 			tourner_droite.setEnabled(true);
 			defausse.setEnabled(true);
 			precedent = vue;
+			setPionButtonEnabled(true);
 		}
 
 		@Override
