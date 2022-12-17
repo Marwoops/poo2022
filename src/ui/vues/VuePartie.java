@@ -21,7 +21,7 @@ public class VuePartie extends JComponent {
 		partie = p;
 		courant = null;	
 
-		ControleurSouris controleurSouris = new ControleurSouris();
+		ControleurSouris controleurSouris = new ControleurSourisCarcassonne();
 
 		tourner_gauche = new JButton("⟲");
 		tourner_droite = new JButton("⟳");
@@ -75,15 +75,33 @@ public class VuePartie extends JComponent {
 				for(VueMain vm : vueMains){
 					vm.update_suppr();
 				}
-				partie.getJoueurCourant().pioche();
-				controleurSouris.pioche();
+				controleurSouris.postDefausse();
 		});
 
 	}
 
+	private class ControleurSourisCarcassonne extends ControleurSouris {
+		public void postDefausse() {
+				partie.getJoueurCourant().pioche();
+				pioche();
+		}
 
+		public void postPose() {
+			pioche();
+		}
+	}
 
-	private class ControleurSouris implements MouseListener {
+	private class ControleurSourisDomino extends ControleurSouris {
+		public void postDefausse() {
+
+		}
+
+		public void postPose() {
+
+		}
+	}
+
+	private abstract class ControleurSouris implements MouseListener {
 		private VueTuile precedent;
 
 		public void jouerTuile(VueTuile vue) {
@@ -97,8 +115,7 @@ public class VuePartie extends JComponent {
             precedent = null;
 			for (VueMain vm : vueMains)
 				vm.update_suppr();
-			pioche();
-
+			postPose();
 		}
 
 		public void pioche(){
@@ -136,23 +153,25 @@ public class VuePartie extends JComponent {
 				jouerTuile(vue);
 			}
 		}
+
+		public abstract void postDefausse();
+		public abstract void postPose();
+
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			VueTuile vue = (VueTuile)e.getSource();
             vue.setBrillance(true);
+			vue.repaint();
 		}
 		@Override
 		public void mouseExited(MouseEvent e) {
             VueTuile vue = (VueTuile)e.getSource();
             vue.setBrillance(false);
+			vue.repaint();
 		}
 		@Override
-		public void mouseReleased(MouseEvent e) {
-
-		}
+		public void mouseReleased(MouseEvent e) { }
 		@Override
-		public void mousePressed(MouseEvent e) {
-
-		}
+		public void mousePressed(MouseEvent e) { }
 	};
 }

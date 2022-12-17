@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.io.File;
 import javax.imageio.ImageIO;
 
-public class VueTuile extends JLabel {
+public class VueTuile extends JPanel {
     
     private static String cheminIcone = "../src/ui/icons/";
     private static Border bordureSelection = BorderFactory.createLineBorder(Color.YELLOW,5);
@@ -95,8 +95,6 @@ public class VueTuile extends JLabel {
             setBorder(bordureBrillance);
         else
             setBorder(null);
-
-        repaint();
 		return true;
 	}
 
@@ -110,7 +108,6 @@ public class VueTuile extends JLabel {
 			setBorder(bordureSelection);
 		else
 			setBorder(null);
-		repaint();
 	}
 	
 	private void setImg() {
@@ -128,6 +125,7 @@ public class VueTuile extends JLabel {
 	}
 
     public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		if(tuile != null && orientation != tuile.getOrientation()){
 			setImg();
 		}
