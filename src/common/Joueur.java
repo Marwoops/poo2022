@@ -29,7 +29,7 @@ public class Joueur {
 		Tuile t = partie.pioche();
 		main.offer(t);
 		courante = t;
-		t.setJoueur(this);
+		if(t!=null)t.setJoueur(this);
 	}
 
 	// très unsafe et bourrin

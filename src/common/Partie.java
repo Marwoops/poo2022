@@ -38,11 +38,19 @@ public abstract class Partie {
 		return joueurs;
 	}
 
+	public boolean mainJoueursVides(){
+		for(int i = 0; i < joueurs.length - 1; i++){
+			if(joueurs[i].getMain().size()>0){return false;}
+		}
+		return true;
+	}
+
 	public Joueur getJoueurCourant() {
 		return joueurCourant;
 	}
 
 	public Tuile pioche() {
+		if(sac.estVide()){return null;}
 		return sac.pioche();
 	}
 

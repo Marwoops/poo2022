@@ -145,10 +145,6 @@ public class VuePartie extends JComponent {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			if(partie.estFinie()){
-				System.out.println("partie terminée");
-				return;
-			}
 			VueTuile vue = (VueTuile)e.getSource();
 			if (courant == null || courant.getTuile() == null) {
 				if (!vue.estSelectionnable(partie.getJoueurCourant())) return;
@@ -157,6 +153,10 @@ public class VuePartie extends JComponent {
 			} else if(partie.estPosable(vue.getPosX(),vue.getPosY(),courant.getTuile())) {
 				partie.getJoueurCourant().poserTuile(vue.getPosX(),vue.getPosY());
 				jouerTuile(vue);
+			}
+			if(partie.estFinie()){
+				System.out.println("partie terminée");
+				return;
 			}
 		}
 

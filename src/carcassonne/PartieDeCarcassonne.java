@@ -8,7 +8,7 @@ public class PartieDeCarcassonne extends Partie {
 	}
 
 	public boolean estFinie(){
-		return super.getSac().estVide();
+		return (super.getSac().estVide() && super.mainJoueursVides());
 	}
 
     public PartieDeCarcassonne() {
