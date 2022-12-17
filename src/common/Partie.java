@@ -18,10 +18,6 @@ public abstract class Partie {
 
 	public abstract boolean estFinie();
 
-	public int getjc(){
-		return indiceJoueur;
-	}
-
     public Sac getSac() {
         return sac;
     }

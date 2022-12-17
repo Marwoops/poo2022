@@ -122,6 +122,10 @@ public class VuePartie extends JComponent {
             precedent = null;
 			for (VueMain vm : vueMains)
 				vm.update_suppr();
+			if(partie.estFinie()){
+				System.out.println("partie terminée");
+				return;
+			}
 			postPose();
 		}
 
@@ -154,10 +158,6 @@ public class VuePartie extends JComponent {
 			} else if(partie.estPosable(vue.getPosX(),vue.getPosY(),courant.getTuile())) {
 				partie.getJoueurCourant().poserTuile(vue.getPosX(),vue.getPosY());
 				jouerTuile(vue);
-			}
-			if(partie.estFinie()){
-				System.out.println("partie terminée");
-				return;
 			}
 		}
 
