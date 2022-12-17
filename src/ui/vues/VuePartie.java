@@ -94,7 +94,13 @@ public class VuePartie extends JComponent {
 	}
 
 	private class ControleurSourisDomino extends ControleurSouris {
-		public void postDefausse() { }
+		public void postDefausse() {
+			courant = null;
+			partie.prochainTour();
+			tourner_gauche.setEnabled(false);
+			tourner_droite.setEnabled(false);
+			defausse.setEnabled(false);
+		}
 
 		public void postPose() { }
 	}
