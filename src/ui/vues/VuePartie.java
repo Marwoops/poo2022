@@ -107,39 +107,39 @@ public class VuePartie extends JComponent {
 				}
 		});
 
+		Color couleur = Color.BLUE;
+
 		pion_haut.addActionListener(
 			(ActionEvent e) ->{
 				setPionButtonEnabled(false);
-				//courant.putPionHaut(partie.getJoueurCourant());
-				repaint();
+				((VueParcelle)courant).ajouterPion(0, false, couleur);
 			});
 		
 		pion_droite.addActionListener(
 			(ActionEvent e) ->{			
 				setPionButtonEnabled(false);
-				//courant.putPionDroit(parie.getJoueurCourant());
+				((VueParcelle)courant).ajouterPion(3, false, couleur);
 				repaint();
 			});
 
 		pion_bas.addActionListener(
 			(ActionEvent e) ->{			
 				setPionButtonEnabled(false);
-				//courant.putPionBas(parie.getJoueurCourant());
+				((VueParcelle)courant).ajouterPion(2, false, couleur);
 				repaint();
 			});
 
 		pion_gauche.addActionListener(
 			(ActionEvent e) ->{			
 				setPionButtonEnabled(false);
-				//courant.putPionGauche(parie.getJoueurCourant());
+				((VueParcelle)courant).ajouterPion(1, false, couleur);
 				repaint();
 			});
 
 		pion_centre.addActionListener(
 			(ActionEvent e) ->{
-				//vérifier si id est 13 ou 14
 				setPionButtonEnabled(false);
-				//courant.putPionCentre(parie.getJoueurCourant());
+				((VueParcelle)courant).ajouterPion(4, true, couleur);
 				repaint();
 			});
 
@@ -160,6 +160,10 @@ public class VuePartie extends JComponent {
 				partie.getJoueurCourant().pioche();
 				pioche();
 		}
+
+		public void prePose(VueTuile v){
+			((VueParcelle)courant).deplacerPion(v);	
+		}
 	}
 
 	private class ControleurSourisDomino extends ControleurSouris {
@@ -167,6 +171,8 @@ public class VuePartie extends JComponent {
 			partie.prochainTour();
 			super.postPose();
 		}
+
+		public void prePose(VueTuile v){}
 	}
 
 	private abstract class ControleurSouris implements MouseListener {
@@ -174,6 +180,7 @@ public class VuePartie extends JComponent {
 
 		public void jouerTuile(VueTuile vue) {
 			vue.setTuile(courant.getTuile());
+			prePose(vue);
 			precedent.setTuile(null);
 			courant.setTuile(null);
 			courant = null;
@@ -219,6 +226,8 @@ public class VuePartie extends JComponent {
 			selectionnerTuile(vueMains.get(partie.getIndiceJoueur()));
 			courant.setTuile(partie.getJoueurCourant().getCourante());
 		}
+
+		public abstract void prePose(VueTuile v);
 
 		public abstract void postDefausse();
 
