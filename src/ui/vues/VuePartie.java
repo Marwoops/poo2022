@@ -57,14 +57,20 @@ public class VuePartie extends JComponent {
 
 
 		vueMains = new LinkedList<VueTuile>();
-        VueTuile main1 = (estCarcassonne) ? new VueParcelle(partie.getJoueur(0).getCourante(), -1, -1, true, controleurSouris) :new VueDomino(partie.getJoueur(0).getCourante(), -1, -1, true, controleurSouris);
+        VueTuile main1 = (estCarcassonne) ? 
+			new VueParcelle(partie.getJoueur(0).getCourante(), -1, -1, true, controleurSouris) 
+			: new VueDomino(partie.getJoueur(0).getCourante(), -1, -1, true, controleurSouris);
+
 		courant = main1;
 		controleurSouris.selectionnerTuile(courant);
         main1.setBounds(200, 820, 80, 86);
         add(main1);
 		vueMains.add(main1);
 
-        VueTuile main2 = (estCarcassonne) ? new VueParcelle(partie.getJoueur(1).getCourante(), -1, -1, true, controleurSouris) :new VueDomino(partie.getJoueur(1).getCourante(), -1, -1, true, controleurSouris);
+        VueTuile main2 = (estCarcassonne) ?
+			new VueParcelle(partie.getJoueur(1).getCourante(), -1, -1, true, controleurSouris) 
+			: new VueDomino(partie.getJoueur(1).getCourante(), -1, -1, true, controleurSouris);
+
         main2.setBounds(600, 820, 80, 86);
         add(main2);
 		vueMains.add(main2);
@@ -95,17 +101,14 @@ public class VuePartie extends JComponent {
 	}
 
 	private abstract class ControleurSouris implements MouseListener {
-		private VueTuile precedent;
 
 		public void jouerTuile(VueTuile vue) {
 			vue.setTuile(courant.getTuile());
-			precedent.setTuile(null);
 			courant.setTuile(null);
 			courant = null;
 			tourner_gauche.setEnabled(false);
 			tourner_droite.setEnabled(false);
 			defausse.setEnabled(false);
-            precedent = null;
 			postPose();
 		}
 
@@ -120,16 +123,13 @@ public class VuePartie extends JComponent {
 			tourner_gauche.setEnabled(true);
 			tourner_droite.setEnabled(true);
 			defausse.setEnabled(true);
-			precedent = vue;
 		}
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			VueTuile vue = (VueTuile)e.getSource();
-			if (courant == null || courant.getTuile() == null) {
-				if (!vue.estSelectionnable(partie.getJoueurCourant())) return;
-				selectionnerTuile(vue);
-			} else if(partie.estPosable(vue.getPosX(),vue.getPosY(),courant.getTuile())) {
+			VueTuile vue = (VueTuile) e.getSource();
+
+			if(partie.estPosable(vue.getPosX(),vue.getPosY(),courant.getTuile())) {
 				partie.getJoueurCourant().poserTuile(vue.getPosX(),vue.getPosY());
 				jouerTuile(vue);
 			}

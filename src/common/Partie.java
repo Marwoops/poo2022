@@ -15,14 +15,9 @@ public class Partie {
 		joueurCourant = j[0];
     }
 
-
 	public boolean estFinie() {
 		return sac.estVide();
 	}
-
-    public Sac getSac() {
-        return sac;
-    }
 
     public Plateau getPlateau() {
         return plateau;

@@ -39,17 +39,14 @@ public class Joueur {
 		if (courante !=  null)
 			courante.tournerGauche();
 	}	
-/*
+
 	public String toString() {
 		String r = ""; 
 		r += ("Score : " + score + "\n");
-		for (int i = 0; i < main.size(); i++) {
-			r += ("Tuile : " + i + "\n");
-			r += main.get(i);
-		}
+		r += courante.toString();
 		return r;
 	}
-*/
+
 	public boolean poserTuile(int x, int y) {
 		if (partie.estPosable(x, y, courante)) {
 			partie.jouerTour(x, y, courante);
