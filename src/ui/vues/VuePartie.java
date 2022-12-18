@@ -57,14 +57,20 @@ public class VuePartie extends JComponent {
 
 
 		vueMains = new LinkedList<VueTuile>();
-        VueTuile main1 = (estCarcassonne) ? new VueParcelle(partie.getJoueur(0).getCourante(), -1, -1, true, controleurSouris) :new VueDomino(partie.getJoueur(0).getCourante(), -1, -1, true, controleurSouris);
+        VueTuile main1 = (estCarcassonne) ? 
+			new VueParcelle(partie.getJoueur(0).getCourante(), -1, -1, true, controleurSouris) 
+			: new VueDomino(partie.getJoueur(0).getCourante(), -1, -1, true, controleurSouris);
+
 		courant = main1;
 		controleurSouris.selectionnerTuile(courant);
         main1.setBounds(200, 820, 80, 86);
         add(main1);
 		vueMains.add(main1);
 
-        VueTuile main2 = (estCarcassonne) ? new VueParcelle(partie.getJoueur(1).getCourante(), -1, -1, true, controleurSouris) :new VueDomino(partie.getJoueur(1).getCourante(), -1, -1, true, controleurSouris);
+        VueTuile main2 = (estCarcassonne) ?
+			new VueParcelle(partie.getJoueur(1).getCourante(), -1, -1, true, controleurSouris) 
+			: new VueDomino(partie.getJoueur(1).getCourante(), -1, -1, true, controleurSouris);
+
         main2.setBounds(600, 820, 80, 86);
         add(main2);
 		vueMains.add(main2);
