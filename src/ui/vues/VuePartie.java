@@ -20,6 +20,9 @@ public class VuePartie extends JComponent {
 
 	private VuePlateau vuePlateau;
 	private LinkedList<VueTuile> vueMains;
+
+	private LinkedList<Color> couleurs;
+	private LinkedList<Integer> pions_restant;
 	
 	public VuePartie(Partie p) {
 		setLayout(null);
@@ -49,6 +52,19 @@ public class VuePartie extends JComponent {
 		pion_bas = new JButton("↓");
 		
 		if(estCarcassonne){
+			couleurs = new LinkedList<Color>();
+			couleurs.add(Color.BLUE);
+			couleurs.add(Color.RED);
+			couleurs.add(Color.GREEN);
+			couleurs.add(Color.YELLOW);
+
+			pions_restant = new LinkedList<Integer>();
+			pions_restant.add(8);
+			pions_restant.add(8);
+			pions_restant.add(8);
+			pions_restant.add(8);
+			
+
 			pion_haut.setBounds(900,400,50,50);
 			pion_droite.setBounds(950,450,50,50);
 			pion_bas.setBounds(900,500,50,50);
@@ -107,41 +123,51 @@ public class VuePartie extends JComponent {
 				}
 		});
 
-		Color couleur = Color.BLUE;
 
 		pion_haut.addActionListener(
 			(ActionEvent e) ->{
 				setPionButtonEnabled(false);
-				((VueParcelle)courant).ajouterPion(0, false, couleur);
+				if(pions_restant.get(partie.getIndiceJoueur())>=1){
+				pions_restant.set(partie.getIndiceJoueur(),pions_restant.get(partie.getIndiceJoueur())-1);
+				((VueParcelle)courant).ajouterPion(0, false, couleurs.get(partie.getIndiceJoueur()));
+				}
 			});
 		
 		pion_droite.addActionListener(
 			(ActionEvent e) ->{			
 				setPionButtonEnabled(false);
-				((VueParcelle)courant).ajouterPion(3, false, couleur);
+				if(pions_restant.get(partie.getIndiceJoueur())>=1){
+				pions_restant.set(partie.getIndiceJoueur(),pions_restant.get(partie.getIndiceJoueur())-1);
+				((VueParcelle)courant).ajouterPion(3, false, couleurs.get(partie.getIndiceJoueur()));
 				repaint();
-			});
+				}});
 
 		pion_bas.addActionListener(
 			(ActionEvent e) ->{			
 				setPionButtonEnabled(false);
-				((VueParcelle)courant).ajouterPion(2, false, couleur);
+				if(pions_restant.get(partie.getIndiceJoueur())>=1){
+				pions_restant.set(partie.getIndiceJoueur(),pions_restant.get(partie.getIndiceJoueur())-1);
+				((VueParcelle)courant).ajouterPion(2, false, couleurs.get(partie.getIndiceJoueur()));
 				repaint();
-			});
+				}});
 
 		pion_gauche.addActionListener(
 			(ActionEvent e) ->{			
 				setPionButtonEnabled(false);
-				((VueParcelle)courant).ajouterPion(1, false, couleur);
+				if(pions_restant.get(partie.getIndiceJoueur())>=1){
+				pions_restant.set(partie.getIndiceJoueur(),pions_restant.get(partie.getIndiceJoueur())-1);
+				((VueParcelle)courant).ajouterPion(1, false, couleurs.get(partie.getIndiceJoueur()));
 				repaint();
-			});
+				}});
 
 		pion_centre.addActionListener(
 			(ActionEvent e) ->{
 				setPionButtonEnabled(false);
-				((VueParcelle)courant).ajouterPion(4, true, couleur);
+				if(pions_restant.get(partie.getIndiceJoueur())>=1){
+				pions_restant.set(partie.getIndiceJoueur(),pions_restant.get(partie.getIndiceJoueur())-1);
+				((VueParcelle)courant).ajouterPion(4, true, couleurs.get(partie.getIndiceJoueur()));
 				repaint();
-			});
+				}});
 
 
 	}
