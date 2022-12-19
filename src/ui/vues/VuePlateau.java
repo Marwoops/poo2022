@@ -14,14 +14,20 @@ public class VuePlateau extends JPanel {
         hauteur = ha;
         largeur = la;
         plateau = p;
-        
+		vues = new VueTuile[ha][la];
+
         setLayout(new GridLayout(p.getHauteur(), p.getLargeur()));
 
         for (int i = 0; i < p.getHauteur(); i++) {
             for (int j = 0; j < p.getLargeur(); j++) {
 				VueTuile vue = (estCarcassonne) ? new VueParcelle(p.getTuile(i, j), i, j, false, controleur) : new VueDomino(p.getTuile(i,j), i, j, false, controleur);
+				vues[i][j] = vue;
                 add(vue);
             }
         }
     }
+
+	public void setTuile(int x, int y, Tuile t) {
+		vues[x][y].setTuile(t);
+	}
 }
