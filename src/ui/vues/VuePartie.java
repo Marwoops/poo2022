@@ -195,19 +195,7 @@ public class VuePartie extends JComponent {
 			}
 			VuePion = v;
 			setPionButtonEnabled(true);
-	
-
-			ActionListener taskPerformer = new ActionListener() {
-      			public void actionPerformed(ActionEvent evt) {
-          			System.out.println("finito");
-     			}
-  			};
 			
-			Timer t = new Timer(3000, taskPerformer);
-
-			t.setRepeats(false);
-			t.start();
-		
 			selectionnerTuile(vueMains.get(partie.getIndiceJoueur()));
 			courant.setTuile(partie.getJoueurCourant().getCourante());
 		}
