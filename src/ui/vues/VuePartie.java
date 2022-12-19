@@ -137,17 +137,15 @@ public class VuePartie extends JComponent {
 			pioche();
 
 			if (!partie.getJoueurCourant().estIA()) return;
-			System.out.println("ia joue");
+
 			int[] pos = partie.getJoueurCourant().peutJouer();
 			if (pos[0] == -1) {
 				partie.getJoueurCourant().defausser();
-				System.out.println("ia defausse");
 				postDefausse();
 			} else {
 				vuePlateau.setTuile(pos[0], pos[1], partie.getJoueurCourant().getCourante());
 				partie.getJoueurCourant().poserTuile(pos[0], pos[1]);
 				jouerTuile();
-				System.out.println("ia place en " + pos[0] + " " + pos[1]);
 			}
 		}
 
