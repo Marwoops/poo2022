@@ -14,6 +14,10 @@ public class Joueur {
         score = 0;
     }
 
+	public boolean estIA() {
+		return estIA;
+	}
+
 	public Tuile getCourante(){
 		return courante;
 	}
@@ -52,5 +56,25 @@ public class Joueur {
 			return true;
 		}
 		return false;
+	}
+
+	public int[] peutJouer() {
+		int[] pos = {-1,-1};
+		int hauteur = partie.getHauteur();
+		int largeur = partie.getLargeur();
+
+		for (int i = 0; i < hauteur; i++) {
+			for (int j = 0; j < largeur; j++) {
+				for (int k = 0; k < 4; k++) {
+					if (partie.estPosable(i, j, courante)) {
+						pos[0] = i;
+						pos[1] = j;
+						return pos;
+					}
+				}
+				tournerDroite();
+			}
+		}
+		return pos;
 	}
 }
