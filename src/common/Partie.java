@@ -76,8 +76,8 @@ public class Partie {
 	}
 
 	public boolean estDefaussable(Tuile t){
-		for(int x = 0; x < plateau.getLargeur(); x++){
-			for(int y = 0;y < plateau.getHauteur(); y++){
+		for(int x = 0; x < getLargeur(); x++){
+			for(int y = 0;y < getHauteur(); y++){
 				if(estPosable(x,y,t)){
 					return false;
 				}
