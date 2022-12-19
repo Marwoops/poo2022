@@ -38,6 +38,7 @@ public class VueDomino extends VueTuile {
 			return;
 		}
 
+		setOrientation(d.getOrientation());
 		Rangee rH = (Rangee) d.getCote(0);
 		Rangee rD = (Rangee) d.getCote(1);
 		Rangee rB = (Rangee) d.getCote(2);
