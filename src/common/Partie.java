@@ -15,7 +15,7 @@ public class Partie {
 		for (int i = 0; i < nbJoueurs - nbIA; i++) {
 			joueurs[i] = new Joueur(this, false);
 		}
-		for (int i = nbIA; i < nbJoueurs; i++) {
+		for (int i = nbJoueurs - nbIA; i < nbJoueurs; i++) {
 			joueurs[i] = new Joueur(this, true);
 		}
 
