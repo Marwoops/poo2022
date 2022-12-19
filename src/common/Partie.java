@@ -31,6 +31,14 @@ public class Partie {
         return plateau;
     }
 
+	public int getLargeur() {
+		return plateau.getLargeur();
+	}
+
+	public int getHauteur() {
+		return plateau.getHauteur();
+	}
+
 	public Joueur getJoueur(int i) {
 		return joueurs[i];
 	}
