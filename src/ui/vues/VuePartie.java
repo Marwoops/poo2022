@@ -57,21 +57,38 @@ public class VuePartie extends JComponent {
 
 
 		vueMains = new LinkedList<VueTuile>();
-        VueTuile main1 = (estCarcassonne) ? 
-			new VueParcelle(partie.getJoueur(0).getCourante(), -1, -1, true, controleurSouris) 
-			: new VueDomino(partie.getJoueur(0).getCourante(), -1, -1, true, controleurSouris);
 
-        main1.setBounds(200, 820, 80, 86);
+		VueTuile main1 = (estCarcassonne) ?
+			new VueParcelle(partie.getJoueur(0).getCourante(), -1, -1, true, controleurSouris)
+			: new VueDomino(partie.getJoueur(0).getCourante(), -1, -1, true, controleurSouris);
+        main1.setBounds(20, 820, 80, 86);
         add(main1);
 		vueMains.add(main1);
 
         VueTuile main2 = (estCarcassonne) ?
-			new VueParcelle(partie.getJoueur(1).getCourante(), -1, -1, true, controleurSouris) 
+			new VueParcelle(partie.getJoueur(1).getCourante(), -1, -1, true, controleurSouris)
 			: new VueDomino(partie.getJoueur(1).getCourante(), -1, -1, true, controleurSouris);
-
-        main2.setBounds(600, 820, 80, 86);
+        main2.setBounds(260, 820, 80, 86);
         add(main2);
 		vueMains.add(main2);
+
+		if (partie.getNbJoueurs() > 2) {
+			VueTuile main3 = (estCarcassonne) ?
+				new VueParcelle(partie.getJoueur(2).getCourante(), -1, -1, true, controleurSouris)
+				: new VueDomino(partie.getJoueur(2).getCourante(), -1, -1, true, controleurSouris);
+			main3.setBounds(500, 820, 80, 86);
+			add(main3);
+			vueMains.add(main3);
+		}
+
+		if (partie.getNbJoueurs() > 3) {
+			VueTuile main4 = (estCarcassonne) ?
+				new VueParcelle(partie.getJoueur(3).getCourante(), -1, -1, true, controleurSouris)
+				: new VueDomino(partie.getJoueur(3).getCourante(), -1, -1, true, controleurSouris);
+			main4.setBounds(740, 820, 80, 86);
+			add(main4);
+			vueMains.add(main4);
+		}
 
 		defausse.addActionListener(
 			(ActionEvent e) -> {

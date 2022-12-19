@@ -47,12 +47,12 @@ public class Partie {
 		return indiceJoueur;
 	}
 
-	public Joueur[] getJoueurs() {
-		return joueurs;
-	}
-
 	public Joueur getJoueurCourant() {
 		return joueurCourant;
+	}
+
+	public int getNbJoueurs() {
+		return joueurs.length;
 	}
 
 	public Tuile pioche() {
