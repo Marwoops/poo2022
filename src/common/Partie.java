@@ -7,12 +7,20 @@ public class Partie {
     private Sac sac;
     private Plateau plateau;
     
-	public Partie(Sac s, Plateau p, Joueur[] j) {
+	public Partie(Sac s, Plateau p, int nbJoueurs, int nbIA) {
         sac = s;
         plateau = p;
-		joueurs = j;
+
+		joueurs = new Joueur[nbJoueurs];
+		for (int i = 0; i < nbJoueurs - nbIA; i++) {
+			joueurs[i] = new Joueur(this, false);
+		}
+		for (int i = nbJoueurs - nbIA; i < nbJoueurs; i++) {
+			joueurs[i] = new Joueur(this, true);
+		}
+
 		indiceJoueur = 0;
-		joueurCourant = j[0];
+		joueurCourant = joueurs[0];
     }
 
 	public boolean estFinie() {
@@ -22,6 +30,14 @@ public class Partie {
     public Plateau getPlateau() {
         return plateau;
     }
+
+	public int getLargeur() {
+		return plateau.getLargeur();
+	}
+
+	public int getHauteur() {
+		return plateau.getHauteur();
+	}
 
 	public Joueur getJoueur(int i) {
 		return joueurs[i];
@@ -60,8 +76,8 @@ public class Partie {
 	}
 
 	public boolean estDefaussable(Tuile t){
-		for(int x = 0; x < plateau.getLargeur(); x++){
-			for(int y = 0;y < plateau.getHauteur(); y++){
+		for(int x = 0; x < getLargeur(); x++){
+			for(int y = 0;y < getHauteur(); y++){
 				if(estPosable(x,y,t)){
 					return false;
 				}
