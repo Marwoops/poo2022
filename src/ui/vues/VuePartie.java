@@ -127,7 +127,6 @@ public class VuePartie extends JComponent {
 
 		pion_haut.addActionListener(
 			(ActionEvent e) ->{
-				setPionButtonEnabled(false);
 				if(pions_restant.get(partie.getIndiceJoueur())>=1){
 				pions_restant.set(partie.getIndiceJoueur(),pions_restant.get(partie.getIndiceJoueur())-1);
 				((VueParcelle)VuePion).ajouterPion(0, couleurs.get(partie.getIndiceJoueur()));
@@ -136,7 +135,6 @@ public class VuePartie extends JComponent {
 		
 		pion_droite.addActionListener(
 			(ActionEvent e) ->{			
-				setPionButtonEnabled(false);
 				if(pions_restant.get(partie.getIndiceJoueur())>=1){
 				pions_restant.set(partie.getIndiceJoueur(),pions_restant.get(partie.getIndiceJoueur())-1);
 				((VueParcelle)VuePion).ajouterPion(3, couleurs.get(partie.getIndiceJoueur()));
@@ -145,7 +143,6 @@ public class VuePartie extends JComponent {
 
 		pion_bas.addActionListener(
 			(ActionEvent e) ->{			
-				setPionButtonEnabled(false);
 				if(pions_restant.get(partie.getIndiceJoueur())>=1){
 				pions_restant.set(partie.getIndiceJoueur(),pions_restant.get(partie.getIndiceJoueur())-1);
 				((VueParcelle)VuePion).ajouterPion(2, couleurs.get(partie.getIndiceJoueur()));
@@ -154,7 +151,6 @@ public class VuePartie extends JComponent {
 
 		pion_gauche.addActionListener(
 			(ActionEvent e) ->{			
-				setPionButtonEnabled(false);
 				if(pions_restant.get(partie.getIndiceJoueur())>=1){
 				pions_restant.set(partie.getIndiceJoueur(),pions_restant.get(partie.getIndiceJoueur())-1);
 				((VueParcelle)VuePion).ajouterPion(1, couleurs.get(partie.getIndiceJoueur()));
@@ -163,7 +159,6 @@ public class VuePartie extends JComponent {
 
 		pion_centre.addActionListener(
 			(ActionEvent e) ->{
-				setPionButtonEnabled(false);
 				if(pions_restant.get(partie.getIndiceJoueur())>=1){
 				pions_restant.set(partie.getIndiceJoueur(),pions_restant.get(partie.getIndiceJoueur())-1);
 				((VueParcelle)VuePion).ajouterPion(4, couleurs.get(partie.getIndiceJoueur()));
