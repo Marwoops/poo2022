@@ -27,13 +27,13 @@ class Frame extends JFrame {
 
 		carca.addActionListener((ActionEvent e) -> {
 			getContentPane().removeAll();
-			add(new VuePartie(new PartieDeCarcassonne(2, 0)));
+			add(new VuePartie(new PartieDeCarcassonne(2, 1)));
 			validate();
 		});
 
 		domino.addActionListener((ActionEvent e) -> {
 			getContentPane().removeAll();
-			add(new VuePartie(new PartieDeDomino(2, 0)));
+			add(new VuePartie(new PartieDeDomino(2, 1)));
 			validate();
 		});
 
