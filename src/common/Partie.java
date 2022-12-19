@@ -7,12 +7,20 @@ public class Partie {
     private Sac sac;
     private Plateau plateau;
     
-	public Partie(Sac s, Plateau p, Joueur[] j) {
+	public Partie(Sac s, Plateau p, int nbJoueurs, int nbIA) {
         sac = s;
         plateau = p;
-		joueurs = j;
+
+		joueurs = new Joueur[nbJoueurs];
+		for (int i = 0; i < nbJoueurs - nbIA; i++) {
+			joueurs[i] = new Joueur(this, false);
+		}
+		for (int i = nbIA; i < nbJoueurs; i++) {
+			joueurs[i] = new Joueur(this, true);
+		}
+
 		indiceJoueur = 0;
-		joueurCourant = j[0];
+		joueurCourant = joueurs[0];
     }
 
 	public boolean estFinie() {

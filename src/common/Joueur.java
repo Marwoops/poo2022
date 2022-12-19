@@ -5,18 +5,17 @@ public class Joueur {
 	private Partie partie;
 	private Tuile courante;
     private int score;
+	private boolean estIA;
 
-    public Joueur() {
+    public Joueur(Partie p, boolean estIA) {
+		partie = p;
+		this.estIA = estIA;
 		courante = null;
         score = 0;
     }
 
 	public Tuile getCourante(){
 		return courante;
-	}
-
-	public void setPartie(Partie p) {
-		partie = p;
 	}
 
 	public void pioche() {
