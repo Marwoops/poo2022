@@ -168,7 +168,16 @@ public class VuePartie extends JComponent {
 
 		public void postPose() {
 			if(partie.estFinie()){
-				System.out.println("partie terminée");
+				removeAll();
+				setLayout(new GridBagLayout());
+				JButton ok = new JButton("ok");
+				ok.addActionListener((ActionEvent e) -> {
+					System.exit(0);
+				});
+				add(new JLabel("La partie est terminée  "));
+				add(ok);
+				validate();
+				repaint();
 				return;
 			}
 			preTour();
