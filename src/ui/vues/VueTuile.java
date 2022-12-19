@@ -6,7 +6,7 @@ import javax.swing.*;
 
 public class VueTuile extends JPanel {
     
-    private static Border bordureSelection = BorderFactory.createLineBorder(Color.YELLOW,5);
+    private static Border bordureSelection = BorderFactory.createLineBorder(new Color(51, 255, 95),5);
     private static Border bordureBrillance = BorderFactory.createLineBorder(Color.BLACK,3);
 
     private Tuile tuile;
