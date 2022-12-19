@@ -62,6 +62,10 @@ public class DominoTextuel extends PartieDeDomino {
 		return r;
 	}
 
+	public DominoTextuel(int nbJoueurs, int nbIA) {
+		super(nbJoueurs, nbIA);
+	}
+
 	public void demanderAction() {
 		System.out.println();
 		System.out.println(getJoueurCourant().getCourante());
@@ -105,7 +109,7 @@ public class DominoTextuel extends PartieDeDomino {
 	}
 
 	public static void main(String[] args) {
-		DominoTextuel jeu = new DominoTextuel();
+		DominoTextuel jeu = new DominoTextuel(2, 0);
 		jeu.afficherPlateau();
 		while (!jeu.estFinie()) {
 			jeu.afficherMain(jeu.getJoueurCourant());
