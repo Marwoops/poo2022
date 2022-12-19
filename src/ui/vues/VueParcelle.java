@@ -14,7 +14,7 @@ public class VueParcelle extends VueTuile {
 	private static int [][] positions_pion = {{40,10},{10,40},{40,70},{70,40},{40,40}};
     private BufferedImage icone;
 
-	private int decalage = 13;
+	private boolean pion = false;
 	private int pos; 
 	private Color c;
     
@@ -54,33 +54,20 @@ public class VueParcelle extends VueTuile {
 		super.paintComponent(g);
         if (icone != null)
             g.drawImage(icone, 0, 0, 80, 80, null); // 80 correspond à la taille du côté (en px) de la tuile dans le plateau
-		if(decalage<13){
+		if(pion){
 			g.setColor(c);
-			g.fillOval(positions_pion[(super.getOrientation()+decalage)%4][0],positions_pion[(super.getOrientation()+decalage)%4][1],10,10);
+			g.fillOval(positions_pion[pos][0],positions_pion[pos][1],10,10);
 		}
-		if(decalage == 14){
-			g.setColor(c);
-			g.fillOval(positions_pion[4][0],positions_pion[4][1],10,10);
-		}	
 	}
 
-	public void ajouterPion(int pos,boolean centre,Color c){
+	public void ajouterPion(int pos,Color c){
+		pion = true;
 		this.pos = pos;
-		Graphics g = getGraphics();
-		g.setColor(c);
 		this.c = c;
-		if(centre){
-			decalage = 14;
-			g.fillOval(positions_pion[4][0],positions_pion[4][1],10,10);
-			return;
-		}
-		decalage = pos;
-		g.fillOval(positions_pion[(super.getOrientation()+decalage)%4][0],positions_pion[(super.getOrientation()+decalage)%4][1],10,10);
 	}
 
 	public void deplacerPion(VueTuile nouvelle_tuile){
-		((VueParcelle)nouvelle_tuile).ajouterPion(pos,decalage==14,c);
-		decalage = 13;
+		((VueParcelle)nouvelle_tuile).ajouterPion(pos,c);
 	}
 
 

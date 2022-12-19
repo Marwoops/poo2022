@@ -17,6 +17,7 @@ public class VuePartie extends JComponent {
 	private JButton pion_gauche;
 	private JButton pion_centre;
 
+	private VueTuile VuePion;
 
 	private VuePlateau vuePlateau;
 	private LinkedList<VueTuile> vueMains;
@@ -129,7 +130,7 @@ public class VuePartie extends JComponent {
 				setPionButtonEnabled(false);
 				if(pions_restant.get(partie.getIndiceJoueur())>=1){
 				pions_restant.set(partie.getIndiceJoueur(),pions_restant.get(partie.getIndiceJoueur())-1);
-				((VueParcelle)courant).ajouterPion(0, false, couleurs.get(partie.getIndiceJoueur()));
+				((VueParcelle)VuePion).ajouterPion(0, couleurs.get(partie.getIndiceJoueur()));
 				}
 			});
 		
@@ -138,7 +139,7 @@ public class VuePartie extends JComponent {
 				setPionButtonEnabled(false);
 				if(pions_restant.get(partie.getIndiceJoueur())>=1){
 				pions_restant.set(partie.getIndiceJoueur(),pions_restant.get(partie.getIndiceJoueur())-1);
-				((VueParcelle)courant).ajouterPion(3, false, couleurs.get(partie.getIndiceJoueur()));
+				((VueParcelle)VuePion).ajouterPion(3, couleurs.get(partie.getIndiceJoueur()));
 				repaint();
 				}});
 
@@ -147,7 +148,7 @@ public class VuePartie extends JComponent {
 				setPionButtonEnabled(false);
 				if(pions_restant.get(partie.getIndiceJoueur())>=1){
 				pions_restant.set(partie.getIndiceJoueur(),pions_restant.get(partie.getIndiceJoueur())-1);
-				((VueParcelle)courant).ajouterPion(2, false, couleurs.get(partie.getIndiceJoueur()));
+				((VueParcelle)VuePion).ajouterPion(2, couleurs.get(partie.getIndiceJoueur()));
 				repaint();
 				}});
 
@@ -156,7 +157,7 @@ public class VuePartie extends JComponent {
 				setPionButtonEnabled(false);
 				if(pions_restant.get(partie.getIndiceJoueur())>=1){
 				pions_restant.set(partie.getIndiceJoueur(),pions_restant.get(partie.getIndiceJoueur())-1);
-				((VueParcelle)courant).ajouterPion(1, false, couleurs.get(partie.getIndiceJoueur()));
+				((VueParcelle)VuePion).ajouterPion(1, couleurs.get(partie.getIndiceJoueur()));
 				repaint();
 				}});
 
@@ -165,7 +166,7 @@ public class VuePartie extends JComponent {
 				setPionButtonEnabled(false);
 				if(pions_restant.get(partie.getIndiceJoueur())>=1){
 				pions_restant.set(partie.getIndiceJoueur(),pions_restant.get(partie.getIndiceJoueur())-1);
-				((VueParcelle)courant).ajouterPion(4, true, couleurs.get(partie.getIndiceJoueur()));
+				((VueParcelle)VuePion).ajouterPion(4, couleurs.get(partie.getIndiceJoueur()));
 				repaint();
 				}});
 
@@ -187,18 +188,50 @@ public class VuePartie extends JComponent {
 				pioche();
 		}
 
-		public void prePose(VueTuile v){
-			((VueParcelle)courant).deplacerPion(v);	
+		public void postPose(VueTuile v) {
+			if(partie.estFinie()){
+				System.out.println("partie terminée");
+				return;
+			}
+			VuePion = v;
+			setPionButtonEnabled(true);
+	
+
+			ActionListener taskPerformer = new ActionListener() {
+      			public void actionPerformed(ActionEvent evt) {
+          			System.out.println("finito");
+     			}
+  			};
+			
+			Timer t = new Timer(3000, taskPerformer);
+
+			t.setRepeats(false);
+			t.start();
+		
+			selectionnerTuile(vueMains.get(partie.getIndiceJoueur()));
+			courant.setTuile(partie.getJoueurCourant().getCourante());
 		}
+	
+		
 	}
 
 	private class ControleurSourisDomino extends ControleurSouris {
 		public void postDefausse() {
 			partie.prochainTour();
-			super.postPose();
+			postPose(courant);
 		}
 
-		public void prePose(VueTuile v){}
+		public void postPose(VueTuile v) {
+			if(partie.estFinie()){
+				System.out.println("partie terminée");
+				return;
+			}
+			selectionnerTuile(vueMains.get(partie.getIndiceJoueur()));
+			courant.setTuile(partie.getJoueurCourant().getCourante());
+		}
+
+
+
 	}
 
 	private abstract class ControleurSouris implements MouseListener {
@@ -206,7 +239,6 @@ public class VuePartie extends JComponent {
 
 		public void jouerTuile(VueTuile vue) {
 			vue.setTuile(courant.getTuile());
-			prePose(vue);
 			precedent.setTuile(null);
 			courant.setTuile(null);
 			courant = null;
@@ -214,7 +246,7 @@ public class VuePartie extends JComponent {
 			tourner_droite.setEnabled(false);
 			defausse.setEnabled(false);
             precedent = null;
-			postPose();
+			postPose(vue);
 		}
 
 		public void pioche(){
@@ -229,7 +261,6 @@ public class VuePartie extends JComponent {
 			tourner_droite.setEnabled(true);
 			defausse.setEnabled(true);
 			precedent = vue;
-			setPionButtonEnabled(true);
 		}
 
 		@Override
@@ -244,16 +275,9 @@ public class VuePartie extends JComponent {
 			}
 		}
 
-		public void postPose() {
-			if(partie.estFinie()){
-				System.out.println("partie terminée");
-				return;
-			}
-			selectionnerTuile(vueMains.get(partie.getIndiceJoueur()));
-			courant.setTuile(partie.getJoueurCourant().getCourante());
-		}
 
-		public abstract void prePose(VueTuile v);
+
+		public abstract void postPose(VueTuile v);
 
 		public abstract void postDefausse();
 
