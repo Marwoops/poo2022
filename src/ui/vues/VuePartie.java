@@ -37,19 +37,6 @@ public class VuePartie extends JComponent {
         vuePlateau.setBounds(20, 20, 800, 800);
         add(vuePlateau);
 
-		
-		tourner_gauche.addActionListener(
-			(ActionEvent e) -> {
-				partie.getJoueurCourant().tournerGauche();
-				repaint();
-		});
-
-		tourner_droite.addActionListener(
-			(ActionEvent e) -> {
-				partie.getJoueurCourant().tournerDroite();
-				repaint();
-		});
-
 
 		vueMains = new LinkedList<VueTuile>();
 
@@ -85,6 +72,18 @@ public class VuePartie extends JComponent {
 			vueMains.add(main4);
 		}
 
+		tourner_gauche.addActionListener(
+			(ActionEvent e) -> {
+				partie.getJoueurCourant().tournerGauche();
+				repaint();
+		});
+
+		tourner_droite.addActionListener(
+			(ActionEvent e) -> {
+				partie.getJoueurCourant().tournerDroite();
+				repaint();
+		});
+
 		defausse.addActionListener(
 			(ActionEvent e) -> {
 				partie.getJoueurCourant().defausser();
@@ -119,8 +118,6 @@ public class VuePartie extends JComponent {
 
 
 		controleurSouris.preTour(courant);
-
-
 	}
 
 	private void ajoutePion(int pos){				
@@ -182,6 +179,7 @@ public class VuePartie extends JComponent {
 	}
 
 	private class ControleurSourisCarcassonne extends ControleurSouris {
+
 		public void postDefausse() {
 			super.postDefausse();
 			partie.getJoueurCourant().pioche();
@@ -209,12 +207,11 @@ public class VuePartie extends JComponent {
 			selectionnerTuile(vueMains.get(partie.getIndiceJoueur()));
 			courant.setTuile(partie.getJoueurCourant().getCourante());
 			preTour(v);
-		}
-	
-		
+		}		
 	}
 
 	private class ControleurSourisDomino extends ControleurSouris {
+
 		public void postDefausse() {
 			super.postDefausse();
 			partie.prochainTour();
@@ -239,14 +236,26 @@ public class VuePartie extends JComponent {
 			courant.setTuile(partie.getJoueurCourant().getCourante());
 			preTour(v);
 		}
-
-
-
 	}
 
 	private abstract class ControleurSouris implements MouseListener {
 
 		public abstract void postPose(VueTuile v);
+
+		
+		public void preTour(VueTuile vue) {
+			pioche();
+			if (!partie.getJoueurCourant().estIA()) return;
+			int[] pos = partie.getJoueurCourant().peutJouer();
+			if (pos[0] == -1) {
+				partie.getJoueurCourant().defausser();
+				postDefausse();
+			} else {
+				vuePlateau.setTuile(pos[0], pos[1], partie.getJoueurCourant().getCourante());
+				partie.getJoueurCourant().poserTuile(pos[0], pos[1]);
+				jouerTuile(vue);
+			}
+		}
 		
 		public void jouerTuile(VueTuile vue) {
 			courant.setTuile(null);
@@ -269,6 +278,12 @@ public class VuePartie extends JComponent {
 			tourner_droite.setEnabled(true);
 			defausse.setEnabled(true);
 		}
+		
+		public void postDefausse() {
+			courant.setTuile(null);
+			courant = null;
+		}
+
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
@@ -280,32 +295,7 @@ public class VuePartie extends JComponent {
 				jouerTuile(vue);
 			}
 		}
-
-		public void preTour(VueTuile vue) {
-			pioche();
-
-			if (!partie.getJoueurCourant().estIA()) return;
-
-			int[] pos = partie.getJoueurCourant().peutJouer();
-			if (pos[0] == -1) {
-				partie.getJoueurCourant().defausser();
-				postDefausse();
-			} else {
-				vuePlateau.setTuile(pos[0], pos[1], partie.getJoueurCourant().getCourante());
-				partie.getJoueurCourant().poserTuile(pos[0], pos[1]);
-				jouerTuile(vue);
-			}
-		}
-
-
-
 		
-
-		public void postDefausse() {
-			courant.setTuile(null);
-			courant = null;
-		}
-
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			VueTuile vue = (VueTuile)e.getSource();
