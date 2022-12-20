@@ -4,37 +4,112 @@ import javax.swing.*;
 import java.util.LinkedList;
 
 public class VuePartie extends JComponent {
-	private Partie partie;
-	private VueTuile courant;
-    private JButton tourner_gauche;
-	private JButton tourner_droite;
-	private JButton defausse;
+	private Partie partie;	
 	private ControleurSouris controleurSouris;
 
-	private JButton pion_haut;
-	private JButton pion_droite;
-	private JButton pion_bas;
-	private JButton pion_gauche;
-	private JButton pion_centre;
-
+	private VueTuile courant;
 	private VueTuile VuePion;
-
 	private VuePlateau vuePlateau;
 	private LinkedList<VueTuile> vueMains;
 
-	private LinkedList<Color> couleurs;
-	private LinkedList<Integer> pions_restant;
+	private static JButton tourner_gauche;
+	private static JButton tourner_droite;
+	private static JButton defausse;
+	private static JButton pion_haut;
+	private static JButton pion_droite;
+	private static JButton pion_bas;
+	private static JButton pion_gauche;
+	private static JButton pion_centre;
+
+	private static Color[] couleurs_pions = {Color.BLUE,Color.RED,Color.GREEN,Color.YELLOW};
+	private static int[] pions_restant = {8,8,8,8};
 	
 	public VuePartie(Partie p) {
-		setLayout(null);
-		
+		setLayout(null);		
 		partie = p;
 		boolean estCarcassonne = (partie instanceof PartieDeCarcassonne);
-
 		courant = null;	
-
 		ControleurSouris controleurSouris = (estCarcassonne) ? new ControleurSourisCarcassonne() : new ControleurSourisDomino();
 
+		initBoutons(estCarcassonne);
+		
+        JPanel plateau = new VuePlateau(800, 800, partie.getPlateau(), controleurSouris, estCarcassonne);
+        plateau.setBounds(20, 20, 800, 800);
+        add(plateau);
+
+		vueMains = new LinkedList<VueTuile>();
+
+        VueTuile main1 = (estCarcassonne) ? new VueParcelle(partie.getJoueur(0).getCourante(), -1, -1, true, controleurSouris) :new VueDomino(partie.getJoueur(0).getCourante(), -1, -1, true, controleurSouris);
+		main1.setBounds(200, 820, 80, 86);		        
+        VueTuile main2 = (estCarcassonne) ? new VueParcelle(partie.getJoueur(1).getCourante(), -1, -1, true, controleurSouris) :new VueDomino(partie.getJoueur(1).getCourante(), -1, -1, true, controleurSouris);
+        main2.setBounds(600, 820, 80, 86);
+
+		add(main1);
+		add(main2);
+		vueMains.add(main1);
+		vueMains.add(main2);
+
+		courant = main1;
+		controleurSouris.selectionnerTuile(courant);
+
+		tourner_gauche.addActionListener(
+			(ActionEvent e) -> {
+				partie.getJoueurCourant().tournerGauche();
+				repaint();
+		});
+
+		tourner_droite.addActionListener(
+			(ActionEvent e) -> {
+				partie.getJoueurCourant().tournerDroite();
+				repaint();
+		});
+		defausse.addActionListener(
+			(ActionEvent e) -> {
+				if(partie.getJoueurCourant().defausser()){
+					courant.setTuile(null);
+					courant = null;
+					controleurSouris.postDefausse();
+				}
+		});
+
+
+		pion_haut.addActionListener(
+			(ActionEvent e) ->{
+				ajoutePion(0);
+			});
+		
+		pion_droite.addActionListener(
+			(ActionEvent e) ->{			
+				ajoutePion(3);
+				});
+
+		pion_bas.addActionListener(
+			(ActionEvent e) ->{			
+				ajoutePion(2);
+				});
+
+		pion_gauche.addActionListener(
+			(ActionEvent e) ->{			
+				ajoutePion(1);
+				});
+
+		pion_centre.addActionListener(
+			(ActionEvent e) ->{
+				ajoutePion(4);
+				});
+
+
+	}
+
+	private void ajoutePion(int pos){				
+		if(pions_restant[partie.getIndiceJoueur()]>=1){
+			pions_restant[partie.getIndiceJoueur()]--;
+			((VueParcelle)VuePion).ajouterPion(pos, couleurs_pions[partie.getIndiceJoueur()]);
+			repaint();
+		}		
+	}
+
+	private void initBoutons(boolean estCarcassonne){
 		tourner_gauche = new JButton("⟲");
 		tourner_droite = new JButton("⟳");
 		defausse = new JButton("❌");
@@ -51,20 +126,12 @@ public class VuePartie extends JComponent {
 		pion_centre = new JButton("▪");
 		pion_gauche = new JButton("←");
 		pion_bas = new JButton("↓");
-		
-		if(estCarcassonne){
-			couleurs = new LinkedList<Color>();
-			couleurs.add(Color.BLUE);
-			couleurs.add(Color.RED);
-			couleurs.add(Color.GREEN);
-			couleurs.add(Color.YELLOW);
 
-			pions_restant = new LinkedList<Integer>();
-			pions_restant.add(8);
-			pions_restant.add(8);
-			pions_restant.add(8);
-			pions_restant.add(8);
-			
+		add(tourner_gauche);
+		add(tourner_droite);
+		add(defausse);
+		
+		if(estCarcassonne){	
 
 			pion_haut.setBounds(900,400,50,50);
 			pion_droite.setBounds(950,450,50,50);
@@ -80,92 +147,6 @@ public class VuePartie extends JComponent {
 			add(pion_gauche);
 			add(pion_centre);
 		}
-
-        JPanel plateau = new VuePlateau(800, 800, partie.getPlateau(), controleurSouris, estCarcassonne);
-        plateau.setBounds(20, 20, 800, 800);
-        add(plateau);
-
-		add(tourner_gauche);
-		add(tourner_droite);
-		add(defausse);
-
-		tourner_gauche.addActionListener(
-			(ActionEvent e) -> {
-				partie.getJoueurCourant().tournerGauche();
-				repaint();
-		});
-
-		tourner_droite.addActionListener(
-			(ActionEvent e) -> {
-				partie.getJoueurCourant().tournerDroite();
-				repaint();
-		});
-
-
-		vueMains = new LinkedList<VueTuile>();
-        VueTuile main1 = (estCarcassonne) ? new VueParcelle(partie.getJoueur(0).getCourante(), -1, -1, true, controleurSouris) :new VueDomino(partie.getJoueur(0).getCourante(), -1, -1, true, controleurSouris);
-		courant = main1;
-		controleurSouris.selectionnerTuile(courant);
-        main1.setBounds(200, 820, 80, 86);
-        add(main1);
-		vueMains.add(main1);
-
-        VueTuile main2 = (estCarcassonne) ? new VueParcelle(partie.getJoueur(1).getCourante(), -1, -1, true, controleurSouris) :new VueDomino(partie.getJoueur(1).getCourante(), -1, -1, true, controleurSouris);
-        main2.setBounds(600, 820, 80, 86);
-        add(main2);
-		vueMains.add(main2);
-
-		defausse.addActionListener(
-			(ActionEvent e) -> {
-				if(partie.getJoueurCourant().defausser()){
-					courant.setTuile(null);
-					courant = null;
-					controleurSouris.postDefausse();
-				}
-		});
-
-
-		pion_haut.addActionListener(
-			(ActionEvent e) ->{
-				if(pions_restant.get(partie.getIndiceJoueur())>=1){
-				pions_restant.set(partie.getIndiceJoueur(),pions_restant.get(partie.getIndiceJoueur())-1);
-				((VueParcelle)VuePion).ajouterPion(0, couleurs.get(partie.getIndiceJoueur()));
-				repaint();
-				}
-			});
-		
-		pion_droite.addActionListener(
-			(ActionEvent e) ->{			
-				if(pions_restant.get(partie.getIndiceJoueur())>=1){
-				pions_restant.set(partie.getIndiceJoueur(),pions_restant.get(partie.getIndiceJoueur())-1);
-				((VueParcelle)VuePion).ajouterPion(3, couleurs.get(partie.getIndiceJoueur()));
-				repaint();
-				}});
-
-		pion_bas.addActionListener(
-			(ActionEvent e) ->{			
-				if(pions_restant.get(partie.getIndiceJoueur())>=1){
-				pions_restant.set(partie.getIndiceJoueur(),pions_restant.get(partie.getIndiceJoueur())-1);
-				((VueParcelle)VuePion).ajouterPion(2, couleurs.get(partie.getIndiceJoueur()));
-				repaint();
-				}});
-
-		pion_gauche.addActionListener(
-			(ActionEvent e) ->{			
-				if(pions_restant.get(partie.getIndiceJoueur())>=1){
-				pions_restant.set(partie.getIndiceJoueur(),pions_restant.get(partie.getIndiceJoueur())-1);
-				((VueParcelle)VuePion).ajouterPion(1, couleurs.get(partie.getIndiceJoueur()));
-				repaint();
-				}});
-
-		pion_centre.addActionListener(
-			(ActionEvent e) ->{
-				if(pions_restant.get(partie.getIndiceJoueur())>=1){
-				pions_restant.set(partie.getIndiceJoueur(),pions_restant.get(partie.getIndiceJoueur())-1);
-				((VueParcelle)VuePion).ajouterPion(4, couleurs.get(partie.getIndiceJoueur()));
-				repaint();
-				}});
-
 
 	}
 
