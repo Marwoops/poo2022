@@ -130,6 +130,7 @@ public class VuePartie extends JComponent {
 				if(pions_restant.get(partie.getIndiceJoueur())>=1){
 				pions_restant.set(partie.getIndiceJoueur(),pions_restant.get(partie.getIndiceJoueur())-1);
 				((VueParcelle)VuePion).ajouterPion(0, couleurs.get(partie.getIndiceJoueur()));
+				repaint();
 				}
 			});
 		
