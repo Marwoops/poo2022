@@ -31,27 +31,13 @@ public class VuePartie extends JComponent {
 		courant = null;	
 		ControleurSouris controleurSouris = (estCarcassonne) ? new ControleurSourisCarcassonne() : new ControleurSourisDomino();
 
-		initBoutons(estCarcassonne);
+		initBoutons(estCarcassonne); 
+
+        vuePlateau = new VuePlateau(800, 800, partie.getPlateau(), controleurSouris, estCarcassonne);
+        vuePlateau.setBounds(20, 20, 800, 800);
+        add(vuePlateau);
+
 		
-        JPanel plateau = new VuePlateau(800, 800, partie.getPlateau(), controleurSouris, estCarcassonne);
-        plateau.setBounds(20, 20, 800, 800);
-        add(plateau);
-
-		vueMains = new LinkedList<VueTuile>();
-
-        VueTuile main1 = (estCarcassonne) ? new VueParcelle(partie.getJoueur(0).getCourante(), -1, -1, true, controleurSouris) :new VueDomino(partie.getJoueur(0).getCourante(), -1, -1, true, controleurSouris);
-		main1.setBounds(200, 820, 80, 86);		        
-        VueTuile main2 = (estCarcassonne) ? new VueParcelle(partie.getJoueur(1).getCourante(), -1, -1, true, controleurSouris) :new VueDomino(partie.getJoueur(1).getCourante(), -1, -1, true, controleurSouris);
-        main2.setBounds(600, 820, 80, 86);
-
-		add(main1);
-		add(main2);
-		vueMains.add(main1);
-		vueMains.add(main2);
-
-		courant = main1;
-		controleurSouris.selectionnerTuile(courant);
-
 		tourner_gauche.addActionListener(
 			(ActionEvent e) -> {
 				partie.getJoueurCourant().tournerGauche();
@@ -63,13 +49,46 @@ public class VuePartie extends JComponent {
 				partie.getJoueurCourant().tournerDroite();
 				repaint();
 		});
+
+
+		vueMains = new LinkedList<VueTuile>();
+
+		VueTuile main1 = (estCarcassonne) ?
+			new VueParcelle(partie.getJoueur(0).getCourante(), -1, -1, controleurSouris)
+			: new VueDomino(partie.getJoueur(0).getCourante(), -1, -1, controleurSouris);
+        main1.setBounds(20, 820, 80, 86);
+        add(main1);
+		vueMains.add(main1);
+
+        VueTuile main2 = (estCarcassonne) ?
+			new VueParcelle(partie.getJoueur(1).getCourante(), -1, -1, controleurSouris)
+			: new VueDomino(partie.getJoueur(1).getCourante(), -1, -1, controleurSouris);
+        main2.setBounds(260, 820, 80, 86);
+        add(main2);
+		vueMains.add(main2);
+
+		if (partie.getNbJoueurs() > 2) {
+			VueTuile main3 = (estCarcassonne) ?
+				new VueParcelle(partie.getJoueur(2).getCourante(), -1, -1, controleurSouris)
+				: new VueDomino(partie.getJoueur(2).getCourante(), -1, -1, controleurSouris);
+			main3.setBounds(500, 820, 80, 86);
+			add(main3);
+			vueMains.add(main3);
+		}
+
+		if (partie.getNbJoueurs() > 3) {
+			VueTuile main4 = (estCarcassonne) ?
+				new VueParcelle(partie.getJoueur(3).getCourante(), -1, -1, controleurSouris)
+				: new VueDomino(partie.getJoueur(3).getCourante(), -1, -1, controleurSouris);
+			main4.setBounds(740, 820, 80, 86);
+			add(main4);
+			vueMains.add(main4);
+		}
+
 		defausse.addActionListener(
 			(ActionEvent e) -> {
-				if(partie.getJoueurCourant().defausser()){
-					courant.setTuile(null);
-					courant = null;
-					controleurSouris.postDefausse();
-				}
+				partie.getJoueurCourant().defausser();
+				controleurSouris.postDefausse();
 		});
 
 
@@ -97,6 +116,9 @@ public class VuePartie extends JComponent {
 			(ActionEvent e) ->{
 				ajoutePion(4);
 				});
+
+
+		controleurSouris.preTour(courant);
 
 
 	}
@@ -161,20 +183,32 @@ public class VuePartie extends JComponent {
 
 	private class ControleurSourisCarcassonne extends ControleurSouris {
 		public void postDefausse() {
-				partie.getJoueurCourant().pioche();
-				pioche();
+			super.postDefausse();
+			partie.getJoueurCourant().pioche();
+			pioche();
 		}
 
 		public void postPose(VueTuile v) {
 			if(partie.estFinie()){
-				System.out.println("partie terminée");
+				removeAll();
+				setLayout(new GridBagLayout());
+				JButton ok = new JButton("ok");
+				ok.addActionListener((ActionEvent e) -> {
+					System.exit(0);
+				});
+				add(new JLabel("La partie est terminée  "));
+				add(ok);
+				validate();
+				repaint();
 				return;
 			}
+
 			VuePion = v;
 			setPionButtonEnabled(true);
 			
 			selectionnerTuile(vueMains.get(partie.getIndiceJoueur()));
 			courant.setTuile(partie.getJoueurCourant().getCourante());
+			preTour(v);
 		}
 	
 		
@@ -182,17 +216,28 @@ public class VuePartie extends JComponent {
 
 	private class ControleurSourisDomino extends ControleurSouris {
 		public void postDefausse() {
+			super.postDefausse();
 			partie.prochainTour();
 			postPose(courant);
 		}
 
 		public void postPose(VueTuile v) {
 			if(partie.estFinie()){
-				System.out.println("partie terminée");
+				removeAll();
+				setLayout(new GridBagLayout());
+				JButton ok = new JButton("ok");
+				ok.addActionListener((ActionEvent e) -> {
+					System.exit(0);
+				});
+				add(new JLabel("La partie est terminée  "));
+				add(ok);
+				validate();
+				repaint();
 				return;
 			}
 			selectionnerTuile(vueMains.get(partie.getIndiceJoueur()));
 			courant.setTuile(partie.getJoueurCourant().getCourante());
+			preTour(v);
 		}
 
 
@@ -200,17 +245,15 @@ public class VuePartie extends JComponent {
 	}
 
 	private abstract class ControleurSouris implements MouseListener {
-		private VueTuile precedent;
 
+		public abstract void postPose(VueTuile v);
+		
 		public void jouerTuile(VueTuile vue) {
-			vue.setTuile(courant.getTuile());
-			precedent.setTuile(null);
 			courant.setTuile(null);
 			courant = null;
 			tourner_gauche.setEnabled(false);
 			tourner_droite.setEnabled(false);
 			defausse.setEnabled(false);
-            precedent = null;
 			postPose(vue);
 		}
 
@@ -225,26 +268,43 @@ public class VuePartie extends JComponent {
 			tourner_gauche.setEnabled(true);
 			tourner_droite.setEnabled(true);
 			defausse.setEnabled(true);
-			precedent = vue;
 		}
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			VueTuile vue = (VueTuile)e.getSource();
-			if (courant == null || courant.getTuile() == null) {
-				if (!vue.estSelectionnable(partie.getJoueurCourant())) return;
-				selectionnerTuile(vue);
-			} else if(partie.estPosable(vue.getPosX(),vue.getPosY(),courant.getTuile())) {
+			VueTuile vue = (VueTuile) e.getSource();
+
+			if(partie.estPosable(vue.getPosX(),vue.getPosY(),courant.getTuile())) {
 				partie.getJoueurCourant().poserTuile(vue.getPosX(),vue.getPosY());
+				vue.setTuile(courant.getTuile());
+				jouerTuile(vue);
+			}
+		}
+
+		public void preTour(VueTuile vue) {
+			pioche();
+
+			if (!partie.getJoueurCourant().estIA()) return;
+
+			int[] pos = partie.getJoueurCourant().peutJouer();
+			if (pos[0] == -1) {
+				partie.getJoueurCourant().defausser();
+				postDefausse();
+			} else {
+				vuePlateau.setTuile(pos[0], pos[1], partie.getJoueurCourant().getCourante());
+				partie.getJoueurCourant().poserTuile(pos[0], pos[1]);
 				jouerTuile(vue);
 			}
 		}
 
 
 
-		public abstract void postPose(VueTuile v);
+		
 
-		public abstract void postDefausse();
+		public void postDefausse() {
+			courant.setTuile(null);
+			courant = null;
+		}
 
 		@Override
 		public void mouseEntered(MouseEvent e) {

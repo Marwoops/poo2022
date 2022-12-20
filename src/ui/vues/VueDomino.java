@@ -8,8 +8,8 @@ public class VueDomino extends VueTuile {
 	private static Color couleur_avant = new Color(213, 242, 225);
 	private VueCase[][] grille;
 
-	public VueDomino(Tuile t, int x, int y, boolean m, MouseListener controleur) {
-		super(t, x, y, m, controleur);
+	public VueDomino(Tuile t, int x, int y, MouseListener controleur) {
+		super(t, x, y, controleur);
 		Domino d = (Domino) t;
 		int longueur =  5; // 3 valeurs + 2 espace
 
@@ -23,7 +23,6 @@ public class VueDomino extends VueTuile {
 				add(vue);
 			}
 		}
-		//updateVue();
 	}
 
 	public void updateVue() {
@@ -38,6 +37,7 @@ public class VueDomino extends VueTuile {
 			return;
 		}
 
+		setOrientation(d.getOrientation());
 		Rangee rH = (Rangee) d.getCote(0);
 		Rangee rD = (Rangee) d.getCote(1);
 		Rangee rB = (Rangee) d.getCote(2);

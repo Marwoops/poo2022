@@ -6,7 +6,7 @@ import javax.swing.*;
 
 public class VueTuile extends JPanel {
     
-    private static Border bordureSelection = BorderFactory.createLineBorder(Color.YELLOW,5);
+    private static Border bordureSelection = BorderFactory.createLineBorder(new Color(51, 255, 95),5);
     private static Border bordureBrillance = BorderFactory.createLineBorder(Color.BLACK,3);
 
     private Tuile tuile;
@@ -15,10 +15,8 @@ public class VueTuile extends JPanel {
 	private int orientation;
 	private boolean brillance;
 	private boolean selectionnee;
-	private boolean mouvable;
 
-
-    public VueTuile(Tuile t, int x, int y, boolean m, MouseListener controleur) {
+    public VueTuile(Tuile t, int x, int y, MouseListener controleur) {
 		setPreferredSize(getPreferredSize());
 		tuile = t;
 		orientation = -1;
@@ -26,7 +24,6 @@ public class VueTuile extends JPanel {
 		posY = y;
 		brillance = false;
 		selectionnee = false;
-		mouvable = m;
 		addMouseListener(controleur);
     }
 
@@ -44,10 +41,6 @@ public class VueTuile extends JPanel {
 
 	public int getOrientation() {
 		return orientation;
-	}
-
-	public boolean getMouvable() {
-		return mouvable;
 	}
 
 	public boolean estVide() {
@@ -86,10 +79,6 @@ public class VueTuile extends JPanel {
         else
             setBorder(null);
 		return true;
-	}
-
-	public boolean estSelectionnable(Joueur courant) {
-		return (mouvable && tuile != null && tuile.getJoueur() == courant);
 	}
 
 	public void setSelectionnee(boolean s) {

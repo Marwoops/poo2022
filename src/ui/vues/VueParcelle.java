@@ -32,8 +32,8 @@ public class VueParcelle extends VueTuile {
         return nouvelleIcone;
     }
 
-	public VueParcelle(Tuile t, int x, int y, boolean m, MouseListener controleur) {
-		super(t, x, y, m, controleur);
+	public VueParcelle(Tuile t, int x, int y, MouseListener controleur) {
+		super(t, x, y, controleur);
 	}
 
 	public void updateVue() {

@@ -5,18 +5,21 @@ public class Joueur {
 	private Partie partie;
 	private Tuile courante;
     private int score;
+	private boolean estIA;
 
-    public Joueur() {
+    public Joueur(Partie p, boolean estIA) {
+		partie = p;
+		this.estIA = estIA;
 		courante = null;
         score = 0;
     }
 
-	public Tuile getCourante(){
-		return courante;
+	public boolean estIA() {
+		return estIA;
 	}
 
-	public void setPartie(Partie p) {
-		partie = p;
+	public Tuile getCourante(){
+		return courante;
 	}
 
 	public void pioche() {
@@ -39,22 +42,39 @@ public class Joueur {
 		if (courante !=  null)
 			courante.tournerGauche();
 	}	
-/*
+
 	public String toString() {
 		String r = ""; 
 		r += ("Score : " + score + "\n");
-		for (int i = 0; i < main.size(); i++) {
-			r += ("Tuile : " + i + "\n");
-			r += main.get(i);
-		}
+		r += courante.toString();
 		return r;
 	}
-*/
+
 	public boolean poserTuile(int x, int y) {
 		if (partie.estPosable(x, y, courante)) {
 			partie.jouerTour(x, y, courante);
 			return true;
 		}
 		return false;
+	}
+
+	public int[] peutJouer() {
+		int[] pos = {-1,-1};
+		int hauteur = partie.getHauteur();
+		int largeur = partie.getLargeur();
+
+		for (int i = 0; i < hauteur; i++) {
+			for (int j = 0; j < largeur; j++) {
+				for (int k = 0; k < 4; k++) {
+					if (partie.estPosable(i, j, courante)) {
+						pos[0] = i;
+						pos[1] = j;
+						return pos;
+					}
+				}
+				tournerDroite();
+			}
+		}
+		return pos;
 	}
 }

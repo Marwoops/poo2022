@@ -62,7 +62,27 @@ public class DominoTextuel extends PartieDeDomino {
 		return r;
 	}
 
+	public DominoTextuel(int nbJoueurs, int nbIA) {
+		super(nbJoueurs, nbIA);
+	}
+
 	public void demanderAction() {
+		if (getJoueurCourant().estIA()) {
+			//System.out.println(getJoueurCourant().getCourante());
+			int[] pos = getJoueurCourant().peutJouer();
+
+			if (pos[0] == -1) {
+				getJoueurCourant().defausser();
+				System.out.println("\nia défausse\n");
+				prochainTour();
+			} else {
+				getJoueurCourant().poserTuile(pos[0], pos[1]);
+				System.out.println("\nia pose en " + (char)(pos[1]+ 'A') + " " + pos[0] + "\n");
+			}
+			afficherPlateau();
+			return;
+		}
+
 		System.out.println();
 		System.out.println(getJoueurCourant().getCourante());
 		Scanner sc = new Scanner(System.in);
@@ -105,7 +125,7 @@ public class DominoTextuel extends PartieDeDomino {
 	}
 
 	public static void main(String[] args) {
-		DominoTextuel jeu = new DominoTextuel();
+		DominoTextuel jeu = new DominoTextuel(2, 1);
 		jeu.afficherPlateau();
 		while (!jeu.estFinie()) {
 			jeu.afficherMain(jeu.getJoueurCourant());
