@@ -2,132 +2,127 @@ import java.util.LinkedList;
 
 public class SacDeParcelle extends Sac{
 
-	public static final Terrain champs = new Terrain(0);
-	public static final Terrain route = new Terrain(1);
-	public static final Terrain ville = new Terrain(2);
-	public static final Terrain abbaye = new Terrain(3);
-
 	public SacDeParcelle(){
 		super(constructionSac());
 	}
 
 	public static Parcelle t1() {
-		Terrain[] t = {champs, champs, route, route};
+		Terrain[] t = {new Champs(), new Champs(), new Route(), new Route()};
 		return new Parcelle(t, 1);
 	}
 
 	public static Parcelle t2() {
-		Terrain[] t = {ville, route, route, champs};
+		Terrain[] t = {new Ville(), new Route(), new Route(), new Champs()};
 		return new Parcelle(t, 2);
 	}
 
 	public static Parcelle t3() {
-		Terrain[] t = {ville, route, route, ville};
+		Terrain[] t = {new Ville(), new Route(), new Route(), new Ville()};
 		return new Parcelle(t, 3);
 	}
 
 	public static Parcelle t4() {
-		Terrain[] t = {ville, ville, route, ville};
+		Terrain[] t = {new Ville(), new Ville(), new Route(), new Ville()};
 		return new Parcelle(t, 4);
 	}
 
 	public static Parcelle t5() {
-		Terrain[] t = {ville, ville, champs, ville};
+		Terrain[] t = {new Ville(), new Ville(), new Champs(), new Ville()};
 		return new Parcelle(t, 5);
 	}
 	
 	public static Parcelle t6() {
-		Terrain[] t = {ville, route, route, ville};
+		Terrain[] t = {new Ville(), new Route(), new Route(), new Ville()};
 		return new Parcelle(t, 6);
 	}
 
 	public static Parcelle t7() {
-		Terrain[] t = {ville, route, route, route};
+		Terrain[] t = {new Ville(), new Route(), new Route(), new Route()};
 		return new Parcelle(t, 7);
 	}
 
 	public static Parcelle t8() {
-		Terrain[] t = {route, champs, route, champs};
+		Terrain[] t = {new Route(), new Champs(), new Route(), new Champs()};
 		return new Parcelle(t, 8);
 	}
 
 	public static Parcelle t9() {
-		Terrain[] t = {champs, route, route, route};
+		Terrain[] t = {new Champs(), new Route(), new Route(), new Route()};
 		return new Parcelle(t, 9);
 	}
 
 	public static Parcelle t10() {
-		Terrain[] t = {ville, champs, champs, champs};
+		Terrain[] t = {new Ville(), new Champs(), new Champs(), new Champs()};
 		return new Parcelle(t, 10);
 	}
 
 	public static Parcelle t11() {
-		Terrain[] t = {ville, ville, champs, champs};
+		Terrain[] t = {new Ville(), new Ville(), new Champs(), new Champs()};
 		return new Parcelle(t, 11);
 	}
 
 	public static Parcelle t12() {
-		Terrain[] t = {ville, ville, champs, ville};
+		Terrain[] t = {new Ville(), new Ville(), new Champs(), new Ville()};
 		return new Parcelle(t, 12);
 	}
 
 	public static Parcelle t13() {
-		Terrain[] t = {champs, champs, champs, champs};
-		return new Parcelle(t, abbaye, 13);
+		Terrain[] t = {new Champs(), new Champs(), new Champs(), new Champs()};
+		return new Parcelle(t, new Abbaye(), 13);
 	}
 
 	public static Parcelle t14() {
-		Terrain[] t = {champs, champs, route, champs};
-		return new Parcelle(t, abbaye, 14);
+		Terrain[] t = {new Champs(), new Champs(), new Route(), new Champs()};
+		return new Parcelle(t, new Abbaye(), 14);
 	}
 
 	public static Parcelle t15() {
-		Terrain[] t = {ville, champs, champs, ville};
+		Terrain[] t = {new Ville(), new Champs(), new Champs(), new Ville()};
 		return new Parcelle(t, 15);
 	}
 
 	public static Parcelle t16() {
-		Terrain[] t = {champs, ville, champs, ville};
+		Terrain[] t = {new Champs(), new Ville(), new Champs(), new Ville()};
 		return new Parcelle(t, 16);
 	}
 
 	public static Parcelle t17() {
-		Terrain[] t = {ville, route, champs, route};
+		Terrain[] t = {new Ville(), new Route(), new Champs(), new Route()};
 		return new Parcelle(t, 17);
 	}
 
 	public static Parcelle t18() {
-		Terrain[] t = {ville, champs, route, route};
+		Terrain[] t = {new Ville(), new Champs(), new Route(), new Route()};
 		return new Parcelle(t, 18);
 	}
 
 	public static Parcelle t19() {
-		Terrain[] t = {champs, ville, champs, ville};
+		Terrain[] t = {new Champs(), new Ville(), new Champs(), new Ville()};
 		return new Parcelle(t, 19);
 	}
 
 	public static Parcelle t20() {
-		Terrain[] t = {ville, ville, route, ville};
+		Terrain[] t = {new Ville(), new Ville(), new Route(), new Ville()};
 		return new Parcelle(t, 20);
 	}
 
 	public static Parcelle t21() {
-		Terrain[] t = {ville, ville, ville, ville};
+		Terrain[] t = {new Ville(), new Ville(), new Ville(), new Ville()};
 		return new Parcelle(t, 21);
 	}
 
 	public static Parcelle t22() {
-		Terrain[] t = {route, route, route, route};
+		Terrain[] t = {new Route(), new Route(), new Route(), new Route()};
 		return new Parcelle(t, 22);
 	}
 
 	public static Parcelle t23() {
-		Terrain[] t = {ville, champs, champs, ville};
+		Terrain[] t = {new Ville(), new Champs(), new Champs(), new Ville()};
 		return new Parcelle(t, 23);
 	}
 
 	public static Parcelle t24() {
-		Terrain[] t = {champs, ville, champs, ville};
+		Terrain[] t = {new Champs(), new Ville(), new Champs(), new Ville()};
 		return new Parcelle(t, 24);
 	}
 
