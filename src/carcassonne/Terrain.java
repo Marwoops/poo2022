@@ -1,4 +1,4 @@
-public abstract class Terrain extends Cote {
+public static abstract class Terrain extends Cote {
 
 	public abstract boolean estCompatible(Cote c);
 
@@ -6,19 +6,23 @@ public abstract class Terrain extends Cote {
 		public boolean estCompatible(Cote c) {
 			return c instanceof Champs;
 		}
+	}
 
 	public class Route {
 		public boolean estCompatible(Cote c) {
 			return c instanceof Route;
 		}
+	}
 
 	public class Ville {
 		public boolean estCompatible(Cote c) {
 			return c instanceof Ville;
 		}
+	}
 
 	public class Abbaye {
 		public boolean estCompatible(Cote c) {
 			return c instanceof Abbaye;
 		}
+	}
 }
