@@ -1,18 +1,24 @@
-public class Terrain extends Cote {
-    
-	// 0 : champ
-	// 1 : route
-	// 2 : ville
-	// 3 : abbaye
+public abstract class Terrain extends Cote {
 
-	private int identifiant;
+	public abstract boolean estCompatible(Cote c);
 
-	public Terrain(int id) {
-		identifiant = id;
-	}
+	public class Champs {
+		public boolean estCompatible(Cote c) {
+			return c instanceof Champs;
+		}
 
-	public boolean estCompatible(Cote c) {
-		Terrain t = (Terrain) c;
-		return identifiant == t.identifiant;
-	}
+	public class Route {
+		public boolean estCompatible(Cote c) {
+			return c instanceof Route;
+		}
+
+	public class Ville {
+		public boolean estCompatible(Cote c) {
+			return c instanceof Ville;
+		}
+
+	public class Abbaye {
+		public boolean estCompatible(Cote c) {
+			return c instanceof Abbaye;
+		}
 }
