@@ -1,15 +1,15 @@
 public class Partie {
-    
-    private Joueur[] joueurs;
+
+	private Joueur[] joueurs;
 	private Joueur joueurCourant;
 	private int indiceJoueur;
-    
-    private Sac sac;
-    private Plateau plateau;
-    
+
+	private Sac sac;
+	private Plateau plateau;
+
 	public Partie(Sac s, Plateau p, int nbJoueurs, int nbIA) {
-        sac = s;
-        plateau = p;
+		sac = s;
+		plateau = p;
 
 		joueurs = new Joueur[nbJoueurs];
 		for (int i = 0; i < nbJoueurs - nbIA; i++) {
@@ -21,15 +21,15 @@ public class Partie {
 
 		indiceJoueur = 0;
 		joueurCourant = joueurs[0];
-    }
+	}
 
 	public boolean estFinie() {
 		return sac.estVide();
 	}
 
-    public Plateau getPlateau() {
-        return plateau;
-    }
+	public Plateau getPlateau() {
+		return plateau;
+	}
 
 	public int getLargeur() {
 		return plateau.getLargeur();
@@ -86,4 +86,3 @@ public class Partie {
 		return true;
 	}
 }
-
