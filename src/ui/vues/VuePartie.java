@@ -23,6 +23,7 @@ public class VuePartie extends JComponent {
 
 	private static Color[] couleurs_pions = {Color.BLUE,Color.RED,Color.GREEN,Color.YELLOW};
 	private static int[] pions_restant = {8,8,8,8};
+	private static int[] score_domino = new int[4];
 	
 	public VuePartie(Partie p) {
 		setLayout(null);		
@@ -232,6 +233,11 @@ public class VuePartie extends JComponent {
 				repaint();
 				return;
 			}
+			if(v!=null){
+				//+3 = -1+4 pour que l'indice soit toujours positif
+				score_domino[(partie.getIndiceJoueur()+3) % partie.getNbJoueurs()]+=partie.calculScore(v.getPosX(),v.getPosY());
+			}
+			System.out.println(score_domino[0]+" | "+score_domino[1]+" | "+score_domino[2]+" | "+score_domino[3]);
 			selectionnerTuile(vueMains.get(partie.getIndiceJoueur()));
 			courant.setTuile(partie.getJoueurCourant().getCourante());
 			preTour(v);

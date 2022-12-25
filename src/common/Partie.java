@@ -85,5 +85,9 @@ public class Partie {
 		}
 		return true;
 	}
+
+	public int calculScore(int x,int y){
+		return plateau.calculScore(x,y);
+	}
 }
 
