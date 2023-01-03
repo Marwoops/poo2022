@@ -1,0 +1,25 @@
+RAPPORT :
+
+un rapport au format PDF d’au moins cinq pages rédigées expliquant les parties du
+cahier des charges qui ont été traitées, les problèmes connus, et les pistes d’extensions
+que vous n’auriez pas encore implémentées. Il devra contenir impérativement une repré-
+sentation graphique du modèle des classes (le plus simple est qu’elle soit manuscrite, puis
+scannée). Le rapport n’est en aucun cas une impression de votre code !
+
+1. représentation graphique du projet : syntaxe uml
+2. explication des parties du cahier des charges traitées
+3. problèmes connus
+4. pistes d'extension
+
+
+1.
+
+
+2.
+
+3.
+modélisation : 
+	identifier les parties communes et celles qui diffèrent entre les deux jeux, pour implémenter un maximum dans des classes communes aux deux jeux, dont hériteront des sous-classes responsables des spécificités de chaque jeu.
+choix du plateau fini/infini
+
+4.
