@@ -64,8 +64,8 @@ class Frame extends JFrame {
 			button.addActionListener((ActionEvent e) -> {
 				getContentPane().removeAll();
 				add((estCarcassonne) ?
-						new VuePartie(new PartieDeCarcassonne(nbJoueurs, Integer.parseInt(button.getText())))
-						: new VuePartie(new PartieDeDomino(nbJoueurs, Integer.parseInt(button.getText()))));
+						new VuePartieDeCarcassonne(new PartieDeCarcassonne(nbJoueurs, Integer.parseInt(button.getText())))
+						: new VuePartieDeDomino(new PartieDeDomino(nbJoueurs, Integer.parseInt(button.getText()))));
 				validate();
 				repaint();
 			});
