@@ -68,7 +68,6 @@ public class DominoTextuel extends PartieDeDomino {
 
 	public void demanderAction() {
 		if (getJoueurCourant().estIA()) {
-			//System.out.println(getJoueurCourant().getCourante());
 			int[] pos = getJoueurCourant().peutJouer();
 
 			if (pos[0] == -1) {
@@ -116,7 +115,7 @@ public class DominoTextuel extends PartieDeDomino {
 				if (estPosable(x, y, getJoueurCourant().getCourante()))
 					break;
 			} catch (Exception e) {
-				System.out.println("impossible\n");
+				System.out.println("Sélection impossible..");
 				sc.next();
 			}
 		}
@@ -125,7 +124,38 @@ public class DominoTextuel extends PartieDeDomino {
 	}
 
 	public static void main(String[] args) {
-		DominoTextuel jeu = new DominoTextuel(2, 1);
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Bienvenu.e.s dans le jeu de Domino carrés (mode texte) !");
+		System.out.println("Combien de joueurs ? (2 3 4 )");
+		int nbJoueurs = -1;
+		while (nbJoueurs < 2 || nbJoueurs > 4) {
+			try {
+				nbJoueurs = sc.nextInt();
+			} catch (Exception e) {
+				System.out.println("Sélection impossible..");
+				sc.next();
+			}
+		}
+
+		int nbIA = -1;
+		String question = "";
+		question += "Combien d'IA ? (";
+		for (int i = 0; i <= nbJoueurs; i++) {
+			question += i + " ";
+		}
+		question += ")\n";
+
+		while (nbIA < 0 || nbIA > nbJoueurs) {
+			try {
+				System.out.println(question);
+				nbIA = sc.nextInt();
+			} catch (Exception e) {
+				System.out.println("Sélection impossible..");
+				sc.next();
+			}
+		}
+
+		DominoTextuel jeu = new DominoTextuel(nbJoueurs, nbIA);
 		jeu.afficherPlateau();
 		while (!jeu.estFinie()) {
 			jeu.afficherMain(jeu.getJoueurCourant());

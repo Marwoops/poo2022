@@ -4,21 +4,21 @@ import java.awt.event.*;
 
 public class App {
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
-            var frame = new Frame();
-            frame.setTitle("POO 2022");
+	public static void main(String[] args) {
+		EventQueue.invokeLater(() -> {
+			var frame = new Frame();
+			frame.setTitle("POO 2022");
 			frame.setSize(1000, 1000);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setVisible(true);
-        });
-    }
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frame.setVisible(true);
+		});
+	}
 }
 
 class Frame extends JFrame {
 	private JPanel container;
 
-    public Frame() {
+	public Frame() {
         
 		container = new JPanel(new GridBagLayout());
 		JPanel menu = new JPanel();
@@ -40,9 +40,9 @@ class Frame extends JFrame {
 		container.add(menu);
 		add(container);
 		pack();
-   }
+	}
 
-   public void selectionNbJoueurs(boolean estCarcassonne) {
+	public void selectionNbJoueurs(boolean estCarcassonne) {
 		container.removeAll();
 		container.add(new JLabel("Nombre de joueurs : "));
 		for (int i = 2; i <= 4; i++) {
@@ -54,9 +54,9 @@ class Frame extends JFrame {
 		}
 		validate();
 		repaint();
-   }
+	}
 
-   public void selectionNbIA(boolean estCarcassonne, int nbJoueurs) {
+	public void selectionNbIA(boolean estCarcassonne, int nbJoueurs) {
 		container.removeAll();
 		container.add(new JLabel("Nombre d'IA : "));
 		for (int i = 0; i <= nbJoueurs; i++) {
@@ -73,8 +73,5 @@ class Frame extends JFrame {
 		}
 		validate();
 		repaint();
-   }
-
-
-
+	}
 }

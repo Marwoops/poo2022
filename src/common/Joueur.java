@@ -4,15 +4,15 @@ public class Joueur {
 
 	private Partie partie;
 	private Tuile courante;
-    private int score;
+	private int score;
 	private boolean estIA;
 
-    public Joueur(Partie p, boolean estIA) {
+	public Joueur(Partie p, boolean estIA) {
 		partie = p;
 		this.estIA = estIA;
 		courante = null;
-        score = 0;
-    }
+		score = 0;
+	}
 
 	public boolean estIA() {
 		return estIA;
@@ -28,7 +28,7 @@ public class Joueur {
 		if(t!=null)t.setJoueur(this);
 	}
 
-	public boolean defausser(){
+	public boolean defausser() {
 		courante = null;
 		return true;
 	}

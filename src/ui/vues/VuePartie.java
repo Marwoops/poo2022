@@ -24,7 +24,7 @@ public class VuePartie extends JComponent {
 	private static Color[] couleurs_pions = {Color.BLUE,Color.RED,Color.GREEN,Color.YELLOW};
 	private static int[] pions_restant = {8,8,8,8};
 	private static int[] score_domino = new int[4];
-	
+
 	public VuePartie(Partie p) {
 		setLayout(null);		
 		partie = p;
@@ -34,9 +34,9 @@ public class VuePartie extends JComponent {
 
 		initBoutons(estCarcassonne); 
 
-        vuePlateau = new VuePlateau(800, 800, partie.getPlateau(), controleurSouris, estCarcassonne);
-        vuePlateau.setBounds(20, 20, 800, 800);
-        add(vuePlateau);
+		vuePlateau = new VuePlateau(800, 800, partie.getPlateau(), controleurSouris, estCarcassonne);
+		vuePlateau.setBounds(20, 20, 800, 800);
+		add(vuePlateau);
 
 
 		vueMains = new LinkedList<VueTuile>();
@@ -44,15 +44,15 @@ public class VuePartie extends JComponent {
 		VueTuile main1 = (estCarcassonne) ?
 			new VueParcelle(partie.getJoueur(0).getCourante(), -1, -1, controleurSouris)
 			: new VueDomino(partie.getJoueur(0).getCourante(), -1, -1, controleurSouris);
-        main1.setBounds(20, 820, 80, 86);
-        add(main1);
+		main1.setBounds(20, 820, 80, 86);
+		add(main1);
 		vueMains.add(main1);
 
-        VueTuile main2 = (estCarcassonne) ?
+		VueTuile main2 = (estCarcassonne) ?
 			new VueParcelle(partie.getJoueur(1).getCourante(), -1, -1, controleurSouris)
 			: new VueDomino(partie.getJoueur(1).getCourante(), -1, -1, controleurSouris);
-        main2.setBounds(260, 820, 80, 86);
-        add(main2);
+		main2.setBounds(260, 820, 80, 86);
+		add(main2);
 		vueMains.add(main2);
 
 		if (partie.getNbJoueurs() > 2) {
@@ -121,15 +121,15 @@ public class VuePartie extends JComponent {
 		controleurSouris.preTour(courant);
 	}
 
-	private void ajoutePion(int pos){				
-		if(pions_restant[partie.getIndiceJoueur()]>=1){
+	private void ajoutePion(int pos) {
+		if(pions_restant[partie.getIndiceJoueur()]>=1) {
 			pions_restant[partie.getIndiceJoueur()]--;
 			((VueParcelle)VuePion).ajouterPion(pos, couleurs_pions[partie.getIndiceJoueur()]);
 			repaint();
-		}		
+		}
 	}
 
-	private void initBoutons(boolean estCarcassonne){
+	private void initBoutons(boolean estCarcassonne) {
 		tourner_gauche = new JButton("⟲");
 		tourner_droite = new JButton("⟳");
 		defausse = new JButton("❌");
@@ -150,17 +150,16 @@ public class VuePartie extends JComponent {
 		add(tourner_gauche);
 		add(tourner_droite);
 		add(defausse);
-		
-		if(estCarcassonne){	
 
+		if(estCarcassonne) {
 			pion_haut.setBounds(900,400,50,50);
 			pion_droite.setBounds(950,450,50,50);
 			pion_bas.setBounds(900,500,50,50);
 			pion_gauche.setBounds(850,450,50,50);
 			pion_centre.setBounds(900,450,50,50);
-			
+
 			setPionButtonEnabled(false);
-			
+
 			add(pion_haut);
 			add(pion_droite);
 			add(pion_bas);
@@ -170,13 +169,12 @@ public class VuePartie extends JComponent {
 
 	}
 
-	private void setPionButtonEnabled(boolean b){
+	private void setPionButtonEnabled(boolean b) {
 			pion_haut.setEnabled(b);
 			pion_droite.setEnabled(b);
 			pion_bas.setEnabled(b);
 			pion_gauche.setEnabled(b);
 			pion_centre.setEnabled(b);
-
 	}
 
 	private class ControleurSourisCarcassonne extends ControleurSouris {
@@ -204,11 +202,11 @@ public class VuePartie extends JComponent {
 
 			VuePion = v;
 			setPionButtonEnabled(true);
-			
+
 			selectionnerTuile(vueMains.get(partie.getIndiceJoueur()));
 			courant.setTuile(partie.getJoueurCourant().getCourante());
 			preTour(v);
-		}		
+		}
 	}
 
 	private class ControleurSourisDomino extends ControleurSouris {
@@ -248,7 +246,7 @@ public class VuePartie extends JComponent {
 
 		public abstract void postPose(VueTuile v);
 
-		
+
 		public void preTour(VueTuile vue) {
 			pioche();
 			if (!partie.getJoueurCourant().estIA()) return;
@@ -284,7 +282,7 @@ public class VuePartie extends JComponent {
 			tourner_droite.setEnabled(true);
 			defausse.setEnabled(true);
 		}
-		
+
 		public void postDefausse() {
 			courant.setTuile(null);
 			courant = null;
@@ -301,17 +299,18 @@ public class VuePartie extends JComponent {
 				jouerTuile(vue);
 			}
 		}
-		
+
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			VueTuile vue = (VueTuile)e.getSource();
-            vue.setBrillance(true);
+			vue.setBrillance(true);
 			vue.repaint();
 		}
+
 		@Override
 		public void mouseExited(MouseEvent e) {
-            VueTuile vue = (VueTuile)e.getSource();
-            vue.setBrillance(false);
+			VueTuile vue = (VueTuile)e.getSource();
+			vue.setBrillance(false);
 			vue.repaint();
 		}
 		@Override

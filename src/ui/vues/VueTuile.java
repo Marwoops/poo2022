@@ -6,17 +6,17 @@ import javax.swing.*;
 
 public class VueTuile extends JPanel {
     
-    private static Border bordureSelection = BorderFactory.createLineBorder(new Color(51, 255, 95),5);
-    private static Border bordureBrillance = BorderFactory.createLineBorder(Color.BLACK,3);
+	private static Border bordureSelection = BorderFactory.createLineBorder(new Color(51, 255, 95),5);
+	private static Border bordureBrillance = BorderFactory.createLineBorder(Color.BLACK,3);
 
-    private Tuile tuile;
+	private Tuile tuile;
 	private int posX;
 	private int posY;
 	private int orientation;
 	private boolean brillance;
 	private boolean selectionnee;
 
-    public VueTuile(Tuile t, int x, int y, MouseListener controleur) {
+	public VueTuile(Tuile t, int x, int y, MouseListener controleur) {
 		setPreferredSize(getPreferredSize());
 		tuile = t;
 		orientation = -1;
@@ -25,7 +25,7 @@ public class VueTuile extends JPanel {
 		brillance = false;
 		selectionnee = false;
 		addMouseListener(controleur);
-    }
+	}
 
 	public Tuile getTuile() {
 		return tuile;
@@ -54,13 +54,12 @@ public class VueTuile extends JPanel {
 		if (t == null) {
 			selectionnee = false;
 			setBorder(null);
-		}
-		else{
+		} else {
 			orientation = t.getOrientation();
 		}
 		tuile = t;
 		updateVue();
-        repaint();
+		repaint();
 		return true;
 	}
 
@@ -74,10 +73,10 @@ public class VueTuile extends JPanel {
 
 		brillance = b;
 
-        if (brillance)
-            setBorder(bordureBrillance);
-        else
-            setBorder(null);
+		if (brillance)
+			setBorder(bordureBrillance);
+		else
+			setBorder(null);
 		return true;
 	}
 
@@ -95,12 +94,12 @@ public class VueTuile extends JPanel {
 
 	public void updateVue() { }
 
-    public void paintComponent(Graphics g) {
+	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		if(doitUpdate()){
 			updateVue();
 		}
-    }
+	}
 
 	public Dimension getPreferredSize() {
 		return new Dimension(80,80);
