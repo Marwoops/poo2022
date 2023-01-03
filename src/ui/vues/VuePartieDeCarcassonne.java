@@ -118,6 +118,7 @@ public class VuePartieDeCarcassonne extends VuePartie {
 			super.postDefausse();
 			partie.getJoueurCourant().pioche();
 			pioche();
+			preTour(courant);
 		}
 
 		public void postPose(VueTuile v) {
