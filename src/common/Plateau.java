@@ -49,7 +49,7 @@ public class Plateau {
     }
 
 	public int calculScore(int x,int y){
-		if(horsLimite(x,y)){return -1;}
+		if(horsLimite(x,y)){return 0;}
 		int res = 0;
 		Domino domino = (Domino) getTuile(x,y);
 		if(getTuile(x-1,y)!=null){

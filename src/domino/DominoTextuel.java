@@ -3,6 +3,8 @@ import java.util.Scanner;
 
 public class DominoTextuel extends PartieDeDomino {
 
+	private int [] scores = {0,0,0,0};
+
 	public static void afficherLigne(Tuile[] t, int taille, int ligne) {
 		int espace = 2 * taille + 1;
 
@@ -50,8 +52,10 @@ public class DominoTextuel extends PartieDeDomino {
 	public void afficherPlateau() {
 		Plateau p = getPlateau();
 		System.out.println(constructionHaut(3, p.getLargeur()));
-		for (int i = 0; i < p.getHauteur(); i++)
+		for (int i = 0; i < p.getHauteur(); i++){
 			afficherLigne(p.getPlat()[i], 3, i);
+		}
+		System.out.println("Scores : "+scores[0]+" | "+scores[1]+" | "+scores[2]+" | "+scores[3]);
 	}
 
 	public static String constructionHaut(int taille, int n) {
@@ -78,6 +82,7 @@ public class DominoTextuel extends PartieDeDomino {
 				getJoueurCourant().poserTuile(pos[0], pos[1]);
 				System.out.println("\nia pose en " + (char)(pos[1]+ 'A') + " " + pos[0] + "\n");
 			}
+			scores[(getIndiceJoueur()+3)%getNbJoueurs()]+=calculScore(pos[0],pos[1]);
 			afficherPlateau();
 			return;
 		}
@@ -120,6 +125,7 @@ public class DominoTextuel extends PartieDeDomino {
 			}
 		}
 		getJoueurCourant().poserTuile(x,y);
+		scores[(getIndiceJoueur()+3)%getNbJoueurs()]+=calculScore(x, y);
 		afficherPlateau();
 	}
 
