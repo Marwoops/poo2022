@@ -43,6 +43,13 @@ public class VuePartieDeDomino extends VuePartie {
 			postPose(courant);
 		}
 
+		public void calculScore(int x, int y){
+			score_domino[(partie.getIndiceJoueur()+3) % partie.getNbJoueurs()]+=partie.calculScore(x,y);
+			System.out.println(score_domino[0]+" | "+score_domino[1]+" | "+score_domino[2]+" | "+score_domino[3]);
+
+
+		}
+
 		public void postPose(VueTuile v) {
 			if(partie.estFinie()){
 				removeAll();
@@ -57,11 +64,6 @@ public class VuePartieDeDomino extends VuePartie {
 				repaint();
 				return;
 			}
-			if(v!=null){
-				//+3 = -1+4 pour que l'indice soit toujours positif
-				score_domino[(partie.getIndiceJoueur()+3) % partie.getNbJoueurs()]+=partie.calculScore(v.getPosX(),v.getPosY());
-			}
-			System.out.println(score_domino[0]+" | "+score_domino[1]+" | "+score_domino[2]+" | "+score_domino[3]);
 			selectionnerTuile(vueMains.get(partie.getIndiceJoueur()));
 			courant.setTuile(partie.getJoueurCourant().getCourante());
 			preTour(v);

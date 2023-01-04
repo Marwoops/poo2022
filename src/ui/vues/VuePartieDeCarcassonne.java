@@ -121,6 +121,10 @@ public class VuePartieDeCarcassonne extends VuePartie {
 			preTour(courant);
 		}
 
+		public void calculScore(int x, int y){
+
+		}
+
 		public void postPose(VueTuile v) {
 			if(partie.estFinie()){
 				removeAll();

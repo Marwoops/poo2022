@@ -102,6 +102,8 @@ public abstract class VuePartie extends JComponent {
 
 		public abstract void postPose(VueTuile v);
 
+		public abstract void calculScore(int x, int y);
+
 		public void preTour(VueTuile vue) {
 			pioche();
 			if (!partie.getJoueurCourant().estIA()) return;
@@ -112,6 +114,7 @@ public abstract class VuePartie extends JComponent {
 			} else {
 				vuePlateau.setTuile(pos[0], pos[1], partie.getJoueurCourant().getCourante());
 				partie.getJoueurCourant().poserTuile(pos[0], pos[1]);
+				calculScore(pos[0], pos[1]);
 				jouerTuile(vue);
 			}
 		}
@@ -151,6 +154,7 @@ public abstract class VuePartie extends JComponent {
 			if(partie.estPosable(vue.getPosX(),vue.getPosY(),courant.getTuile())) {
 				partie.getJoueurCourant().poserTuile(vue.getPosX(),vue.getPosY());
 				vue.setTuile(courant.getTuile());
+				calculScore(vue.getPosX(),vue.getPosY());
 				jouerTuile(vue);
 			}
 		}
