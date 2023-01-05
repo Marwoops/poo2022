@@ -54,12 +54,9 @@ public class Joueur {
 		return r;
 	}
 
-	public boolean poserTuile(int x, int y) {
-		if (partie.estPosable(x, y, courante)) {
+	public void poserTuile(int x, int y) {
+		if (partie.estPosable(x, y, courante))
 			partie.jouerTour(x, y, courante);
-			return true;
-		}
-		return false;
 	}
 
 	public int[] peutJouer() {

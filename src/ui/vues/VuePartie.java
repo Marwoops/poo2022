@@ -19,7 +19,6 @@ public abstract class VuePartie extends JComponent {
 
 	private static Color[] couleurs_pions = {Color.BLUE,Color.RED,Color.GREEN,Color.YELLOW};
 	private static int[] pions_restant = {8,8,8,8};
-	private static int[] score_domino = new int[4];
 
 	public VuePartie(Partie p) {
 		setLayout(null);		
@@ -100,13 +99,11 @@ public abstract class VuePartie extends JComponent {
 
 	public abstract class ControleurSouris implements MouseListener {
 
-		public abstract void postPose(VueTuile v);
-
-		public abstract void calculScore(int x, int y);
-
 		public void preTour(VueTuile vue) {
 			pioche();
+
 			if (!partie.getJoueurCourant().estIA()) return;
+
 			int[] pos = partie.getJoueurCourant().peutJouer();
 			if (pos[0] == -1) {
 				partie.getJoueurCourant().defausser();
@@ -114,7 +111,6 @@ public abstract class VuePartie extends JComponent {
 			} else {
 				vuePlateau.setTuile(pos[0], pos[1], partie.getJoueurCourant().getCourante());
 				partie.getJoueurCourant().poserTuile(pos[0], pos[1]);
-				calculScore(pos[0], pos[1]);
 				jouerTuile(vue);
 			}
 		}
@@ -146,6 +142,7 @@ public abstract class VuePartie extends JComponent {
 			courant = null;
 		}
 
+		public abstract void postPose(VueTuile v);
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
@@ -154,7 +151,6 @@ public abstract class VuePartie extends JComponent {
 			if(partie.estPosable(vue.getPosX(),vue.getPosY(),courant.getTuile())) {
 				partie.getJoueurCourant().poserTuile(vue.getPosX(),vue.getPosY());
 				vue.setTuile(courant.getTuile());
-				calculScore(vue.getPosX(),vue.getPosY());
 				jouerTuile(vue);
 			}
 		}
