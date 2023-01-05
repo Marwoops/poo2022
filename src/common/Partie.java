@@ -70,6 +70,10 @@ public class Partie {
 		return plateau.estPosable(x, y, t);
 	}
 
+	public boolean estSelectionnable(int x, int y) {
+		return plateau.estSelectionnable(x, y);
+	}
+
 	public void jouerTour(int x, int y, Tuile t) {
 		plateau.setTuile(x, y, t);
 		joueurCourant.ajouterScore(calculScore(x, y));
