@@ -77,4 +77,8 @@ public class Joueur {
 		}
 		return pos;
 	}
+
+	public void ajouterScore(int x) {
+		score += x;
+	}
 }
