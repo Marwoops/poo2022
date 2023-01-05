@@ -52,18 +52,6 @@ public class Plateau {
 		if(horsLimite(x,y)){return 0;}
 		int res = 0;
 		Domino domino = (Domino) getTuile(x,y);
-		if(getTuile(x-1,y)!=null){
-			res+=((Rangee) domino.getCote(0)).score();
-		}
-		if(getTuile(x,y+1)!=null){
-			res+=((Rangee) domino.getCote(1)).score();
-		}
-		if(getTuile(x+1, y)!=null){
-			res+=((Rangee) domino.getCote(2)).score();
-		}
-		if(getTuile(x, y-1)!=null){
-			res+=((Rangee) domino.getCote(3)).score();
-		}		
 		return res;
 	}
 }
