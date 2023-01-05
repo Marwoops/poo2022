@@ -9,7 +9,6 @@ public abstract class VuePartie extends JComponent {
 	public ControleurSouris controleurSouris;
 
 	public VueTuile courant;
-	public VueTuile VuePion;
 	public VuePlateau vuePlateau;
 	public LinkedList<VueTuile> vueMains;
 
@@ -156,8 +155,10 @@ public abstract class VuePartie extends JComponent {
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			VueTuile vue = (VueTuile)e.getSource();
-			vue.setBrillance(true);
-			vue.repaint();
+			if (partie.estSelectionnable(vue.getPosX(), vue.getPosY())) {
+				vue.setBrillance(true);
+				vue.repaint();
+			}
 		}
 
 		@Override
