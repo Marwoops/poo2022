@@ -39,14 +39,14 @@ public class Plateau {
 			&& t.estCompatible(2, bas) && t.estCompatible(3, gauche);
 	}
 
-    public void setTuile(int x, int y, Tuile t) {
-        if (!horsLimite(x, y))
-            plat[x][y] = t;
-    }
+	public void setTuile(int x, int y, Tuile t) {
+		if (!horsLimite(x, y))
+			plat[x][y] = t;
+	}
 
-    public boolean horsLimite(int x, int y) {
-        return (x >= hauteur || x < 0 || y < 0 || y >= largeur);
-    }
+	public boolean horsLimite(int x, int y) {
+		return (x >= hauteur || x < 0 || y < 0 || y >= largeur);
+	}
 
 	public int calculScore(int x,int y){
 		if(horsLimite(x,y)){return 0;}
