@@ -119,7 +119,7 @@ public class SacDeDomino extends Sac {
 	}
 
 	public static Domino t21() {
-		Rangee[] t = {r10, r10, r10, r10};
+		Rangee[] t = {r10, r3, r10, r3};
 		return new Domino(t);
 	}
 
