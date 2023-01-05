@@ -72,6 +72,8 @@ public class Partie {
 
 	public void jouerTour(int x, int y, Tuile t) {
 		plateau.setTuile(x, y, t);
+		joueurCourant.ajouterScore(calculScore(x, y));
+		System.out.println(joueurCourant.getScore());
 		prochainTour();
 	}
 
@@ -86,7 +88,7 @@ public class Partie {
 		return true;
 	}
 
-	public int calculScore(int x,int y){
-		return plateau.calculScore(x,y);
+	public int calculScore(int x,int y) {
+		return 0;
 	}
 }
