@@ -20,8 +20,7 @@ public class Domino extends Tuile {
 
 		for (int i = 0; i < n; i++) {
 			haut += rH.getPoint(i) + "  ";
-			centre = rG.getPoint(n-1-i) + "      " + rD.getPoint(i) + "\n";
-			//centre += rG.getPoint(n-1-i) + " ".repeat(espace) + rD.getPoint(i) + "\n";
+			centre += rG.getPoint(n-1-i) + " ".repeat(espace) + rD.getPoint(i) + "\n";
 			bas += rB.getPoint(n-1-i) + "  ";
 		}
 
