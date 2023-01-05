@@ -77,7 +77,6 @@ public class Partie {
 	public void jouerTour(int x, int y, Tuile t) {
 		plateau.setTuile(x, y, t);
 		joueurCourant.ajouterScore(calculScore(x, y));
-		System.out.println(joueurCourant.getScore());
 		prochainTour();
 	}
 

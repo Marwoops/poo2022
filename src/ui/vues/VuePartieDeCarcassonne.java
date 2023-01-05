@@ -16,6 +16,9 @@ public class VuePartieDeCarcassonne extends VuePartie {
 	private static Color[] couleurs_pions = {Color.BLUE,Color.RED,Color.GREEN,Color.YELLOW};
 	private int[] pions_restant = {8,8,8,8};
 
+	private VueTuile VuePion;
+
+
 	public VuePartieDeCarcassonne(PartieDeCarcassonne p) {
 		super(p);
 		controleurSouris = new ControleurSourisCarcassonne();
