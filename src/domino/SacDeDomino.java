@@ -12,7 +12,7 @@ public class SacDeDomino extends Sac {
 	public static final Rangee r7 = new Rangee(2,1,2);
 	public static final Rangee r8 = new Rangee(1,3,2);
 	public static final Rangee r9 = new Rangee(2,4,4);
-	public static final Rangee r10 = new Rangee(4,4,2);
+	public static final Rangee r10 = new Rangee(2,3,2);
 
 	public SacDeDomino() {
 		super(constructionSac());
