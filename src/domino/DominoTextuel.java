@@ -3,6 +3,8 @@ import java.util.Scanner;
 
 public class DominoTextuel extends PartieDeDomino {
 
+	private Scanner sc;
+
 	public static void afficherLigne(Tuile[] t, int taille, int ligne) {
 		int espace = 2 * taille + 1;
 
@@ -75,6 +77,7 @@ public class DominoTextuel extends PartieDeDomino {
 
 	public DominoTextuel(int nbJoueurs, int nbIA) {
 		super(nbJoueurs, nbIA);
+		sc = new Scanner(System.in);
 	}
 
 	public void demanderAction() {
@@ -97,7 +100,7 @@ public class DominoTextuel extends PartieDeDomino {
 
 		System.out.println();
 		System.out.println(getJoueurCourant().getCourante());
-		Scanner sc = new Scanner(System.in);
+
 		System.out.println("(z) poser la tuile");
 		System.out.println("(d) tourner à doite");
 		System.out.println("(q) tourner à gauche");
@@ -116,7 +119,6 @@ public class DominoTextuel extends PartieDeDomino {
 	}
 
 	public void placerTuile() {
-		Scanner sc = new Scanner(System.in);
 		int x;
 		int y;
 		while(true) {
@@ -138,6 +140,7 @@ public class DominoTextuel extends PartieDeDomino {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
+
 		System.out.println("Bienvenu.e.s dans le jeu de Domino carrés (mode texte) !");
 		System.out.println("Combien de joueurs ? (2 3 4)");
 		int nbJoueurs = -1;
@@ -152,9 +155,9 @@ public class DominoTextuel extends PartieDeDomino {
 
 		int nbIA = -1;
 		String question = "";
-		question += "Combien d'IA ? (";
-		for (int i = 0; i <= nbJoueurs; i++) {
-			question += i + " ";
+		question += "Combien d'IA ? (0";
+		for (int i = 1; i <= nbJoueurs; i++) {
+			question += " " + i;
 		}
 		question += ")";
 
@@ -174,6 +177,12 @@ public class DominoTextuel extends PartieDeDomino {
 			jeu.afficherMain(jeu.getJoueurCourant());
 			jeu.demanderAction();
 		}
-		System.out.println("c'est FINI BRAVO");
+		System.out.println("La partie est terminée !");
+		jeu.afficherScores();
 	}
 }
+
+
+// BACKUP
+// nous avons remarqué que les pc du script étaient sur java 10 et non sur java 11 comme indiqué dans les consignes
+// par précaution pour la soutenance, il suffira de décommenter le code ci-dessous pour une version compatible avec java 10
