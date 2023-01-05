@@ -13,12 +13,9 @@ public abstract class VuePartie extends JComponent {
 	public VuePlateau vuePlateau;
 	public LinkedList<VueTuile> vueMains;
 
-	public JButton tourner_gauche;
-	public JButton tourner_droite;
-	public JButton defausse;
-
-	private static Color[] couleurs_pions = {Color.BLUE,Color.RED,Color.GREEN,Color.YELLOW};
-	private static int[] pions_restant = {8,8,8,8};
+	private JButton tourner_gauche;
+	private JButton tourner_droite;
+	private JButton defausse;
 
 	public VuePartie(Partie p) {
 		setLayout(null);		
@@ -92,6 +89,7 @@ public abstract class VuePartie extends JComponent {
 				partie.getJoueurCourant().defausser();
 				controleurSouris.postDefausse();
 		});
+
 		add(tourner_gauche);
 		add(tourner_droite);
 		add(defausse);

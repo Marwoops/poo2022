@@ -30,10 +30,6 @@ public class VuePartieDeCarcassonne extends VuePartie {
 		pion_gauche = new JButton("←");
 		pion_bas = new JButton("↓");
 
-		add(tourner_gauche);
-		add(tourner_droite);
-		add(defausse);
-
 		pion_haut.setBounds(900,400,50,50);
 		pion_droite.setBounds(950,450,50,50);
 		pion_bas.setBounds(900,500,50,50);
