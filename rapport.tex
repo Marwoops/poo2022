@@ -1,0 +1,151 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\graphicspath{ {./images/} }
+
+\title{Projet de POO 2022}
+\author{Marwan AZIZI, Ilian CRAGUE }
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+  \item Représentation du projet
+  \item Parties du cahier des charges traitées
+  \item Problèmes rencontrés
+  \item Pistes d'amélioration
+\end{enumerate}
+
+\section{Représentation du projet}
+
+\subsection{Représentation des fichiers}
+
+Le code constituant notre projet est divisé entre 4 répertoires :
+\begin{itemize}
+    \item Common/ : contenant tous les fichiers responsables des parties du modèle communes aux deux jeux
+    \begin{itemize}
+        \item Cote.java
+        \item Joueur.java 
+        \item Partie.java
+        \item Plateau.java
+        \item Sac.java
+        \item Tuile.java
+    \end{itemize}    
+    \item Carcarssonne/ : contenant tous les fichiers responsables des parties du modèle spécifiques au Carcassonne
+    \begin{itemize}        
+        \item Parcelle.java
+        \item Abbaye.java
+        \item Champs.java
+        \item Route.java
+        \item Ville.java
+        \item PartieDeCarcassonne.java        
+        \item SacDeParcelle.java
+        \item Terrain.java        
+    \end{itemize}
+    \item Domino/ : contenant tous les fichiers reponsables des parties du modèle spécifiques au Domino
+    \begin{itemize}
+        \item Domino.java
+        \item DominoTextuel.java
+        \item PartieDeDomino.java
+        \item Rangee.java
+        \item SacDeDomino.java
+    \end{itemize}
+    \item UI/ : contenant les fichiers responsables des vues ainsi que les icones pour le carcassonne et le fichier App, pour lancer le jeu 
+    \begin{itemize}
+        \item App.java
+        \item icons/
+        \item vues/
+        \begin{itemize}        
+        \item VueDomino.java
+        \item VueParcelle.java
+        \item VuePartie.java
+        \item VuePartieDeCarcassonne.java
+        \item VuePartieDeDomino.java
+        \item VuePlateau.java
+        \item VueTuile.java
+    \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+Ce découpage nous permet d'ordonner le code et nous a aidé à garder un travail propre tout au long de la période de développement. On peut y noter la séparation du modèle et de la vue, indispensable pour un projet de cet ampleur, ou encore la séparation des fichiers responsables des deux jeux.
+
+\subsection{Représentation graphique du projet}
+Dans la manière dont nous avons développé notre projet, les fichiers peuvent être liés par deux différentes relations : une relation d'héritage ou bien une relation modèle/vue. 
+
+Par exemple, nous voyons sur le graphique suivant que les classes Partie, Tuile, Sac et Cote, communes aux deux jeux, sont héritées chacune par une classe implémentant les spécificitées liées à chaque mode de jeu. Nous voyons aussi que les différents fichiers associés aux Parties, aux Tuiles ou au Plateau sont en lien avec un fichier responsable de la représentation de leur vue. Ce graphique montre de plus que la classe Joueur est commune aux deux jeux : du point de vue du joueur, jouer au Carcassonne ou au Domino revient donc à effectuer les mêmes actions.
+
+\begin{figure}[t]
+\centerline{\includegraphics[scale=0.1]{images/global.png}}
+\end{figure}
+	
+
+
+
+
+
+
+
+\section{Parties traitées}
+Nous avons traité tout le contenu du cahier des charges minimal :
+\begin{enumerate}
+    \item Un environnement de jeu, réalisant l’accueil de l’utilisateur, et permettant de procéder au paramétrage du jeu :
+    \begin{enumerate}
+        \item choisir le jeu (dominos ou Carcassonne) ;
+        \item choisir le nombre de joueurs ;
+        \item choisir le nombre d'IA ;
+    \end{enumerate}
+    \item L'implementation complète du Domino, géré graphiquement par awt et swing
+    \item L'implementation partielle du Carcassonne : gestion de la pose de tuiles tournables, de la première jusqu'à ce que le sac soit vide, ainsi que de la pose de 8 pions par joueurs. géré graphiquement par awt et swing.
+    \item Une version texte du Domino, jouable dans le terminal
+\end{enumerate}
+
+\section{Problèmes connus}
+
+\subsection{modélisation} 
+
+\begin{itemize}
+  \item  identifier les parties communes et celles qui diffèrent entre les deux jeux, pour implémenter un maximum dans des classes communes aux deux jeux, dont hériteront des sous-classes responsables des spécificités de chaque jeu.
+  \item choix du plateau fini/infini : plateau infini est fidèle au fonctionnement du jeu irl mais pose des soucis, notamment au niveau de l'affichage. plateau fini n'est pas parfaitement fidèle au jeu mais le nombre de pièces étant limité n'enlève pas grand chose au gameplay
+\end{itemize}
+
+\subsection{implémentation}
+
+Lors de la phase de développement, la pose des pions a été un soucis : il a d'abord fallu choisir comment représenter ces derniers, ainsi que du système à adopter pour permettre à l'utilisateur de poser un pion sur la dernière tuile posée. Nos IA posant leur tuile dès que le joueur a posé la sienne, on aurait pu faire en sorte que cette action soit suivie de l'apparition d'une fenetre pop-up nous demandant si l'on souhaitait poser un pion. 
+
+    
+\begin{wrapfigure}{r}{0.25\textwidth} 
+    \centering
+    \includegraphics[width=0.25\textwidth]{images/pave_pions.png}
+\end{wrapfigure}
+
+En premier lieu nous avons choisi de placer le pion avant la pose de la tuile : la tuile apparaissant dans la main, il devenait possible d'y apposer un pion. Cette méthode nous a posé de nombreux soucis, premièrement car le pion était simplement un rond présent au même endroit que la tuile, il fallait donc le déplacer quand on plaçait la tuile ou qu'on la tournait, le supprimer quand la tuile était défaussée. Nous en avons finalement décidé autrement : nous avons implémenté un pavé directionnel, utilisable dès qu'un joueur a posé une tuile, jusqu'à qu'un autre joueur en ait posé une. Il permet de poser un pion sur la dernière tuile placée par un joueur, à l'endroit correspondant. Une fois la méthode choisie, il a été compliqué de coordonner la vue et le modèle.
+
+
+
+
+\section{Pistes d'amélioration}
+
+\subsection{implémenter les fonctionnalité avancées proposées}
+
+\begin{itemize}
+    \item terminer à 100\% le Carcassonne, en mettant en place les contraintes de placement des pions, ainsi que le calcul final du score.
+    \item mettre en place la possibilité de sauvergarder une partie
+    \item améliorer les IA, qui pour l'instant placent leur tuile au premier endroit où elles le peuvent. 
+    \item changer les tuiles carrées par des tuiles haxagonales
+
+\end{itemize}
+
+\subsection{implémenter des fonctionnalités avancées auxquelles on a pensé}
+
+\begin{itemize}
+\item rendre le tout plus joli, les menus ainsi que les jeux, par exemple en mettant des textures adaptées à chaque jeu : un fond d'écran, des skin pour les boutons.
+    \item faire plusieurs niveaux de difficultés pour les IA, sélectionnables au début de la partie par le joueur.
+    \item faire une version en ligne, pour jouer avec des amis à distance.
+\end{itemize}
+    
+
+
+\end{document}
