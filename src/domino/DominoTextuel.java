@@ -3,8 +3,6 @@ import java.util.Scanner;
 
 public class DominoTextuel extends PartieDeDomino {
 
-	private int [] scores = {0,0,0,0};
-
 	public static void afficherLigne(Tuile[] t, int taille, int ligne) {
 		int espace = 2 * taille + 1;
 
@@ -49,13 +47,22 @@ public class DominoTextuel extends PartieDeDomino {
 		System.out.println(joueur.getCourante());
 	}
 
+	public void afficherScores() {
+		String res = "";
+		res += "Scores : |";
+
+		for (int i = 0; i < getNbJoueurs(); i++) {
+			res += " " + getJoueur(i).getScore() + " |";
+		}
+		System.out.println(res);
+	}
+
 	public void afficherPlateau() {
 		Plateau p = getPlateau();
 		System.out.println(constructionHaut(3, p.getLargeur()));
 		for (int i = 0; i < p.getHauteur(); i++){
 			afficherLigne(p.getPlat()[i], 3, i);
 		}
-		System.out.println("Scores : "+scores[0]+" | "+scores[1]+" | "+scores[2]+" | "+scores[3]);
 	}
 
 	public static String constructionHaut(int taille, int n) {
@@ -82,7 +89,8 @@ public class DominoTextuel extends PartieDeDomino {
 				getJoueurCourant().poserTuile(pos[0], pos[1]);
 				System.out.println("\nia pose en " + (char)(pos[1]+ 'A') + " " + pos[0] + "\n");
 			}
-			scores[(getIndiceJoueur()+3)%getNbJoueurs()]+=calculScore(pos[0],pos[1]);
+
+			afficherScores();
 			afficherPlateau();
 			return;
 		}
@@ -125,14 +133,13 @@ public class DominoTextuel extends PartieDeDomino {
 			}
 		}
 		getJoueurCourant().poserTuile(x,y);
-		scores[(getIndiceJoueur()+3)%getNbJoueurs()]+=calculScore(x, y);
 		afficherPlateau();
 	}
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Bienvenu.e.s dans le jeu de Domino carrés (mode texte) !");
-		System.out.println("Combien de joueurs ? (2 3 4 )");
+		System.out.println("Combien de joueurs ? (2 3 4)");
 		int nbJoueurs = -1;
 		while (nbJoueurs < 2 || nbJoueurs > 4) {
 			try {
@@ -149,7 +156,7 @@ public class DominoTextuel extends PartieDeDomino {
 		for (int i = 0; i <= nbJoueurs; i++) {
 			question += i + " ";
 		}
-		question += ")\n";
+		question += ")";
 
 		while (nbIA < 0 || nbIA > nbJoueurs) {
 			try {
