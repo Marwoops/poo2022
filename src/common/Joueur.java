@@ -28,6 +28,10 @@ public class Joueur {
 		if(t!=null)t.setJoueur(this);
 	}
 
+	public int getScore() {
+		return score;
+	}
+
 	public boolean defausser() {
 		courante = null;
 		return true;
