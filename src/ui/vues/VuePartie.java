@@ -121,7 +121,7 @@ public abstract class VuePartie extends JComponent {
 			postPose(vue);
 		}
 
-		public void pioche(){
+		public void pioche() {
 			selectionnerTuile(vueMains.get(partie.getIndiceJoueur()));
 			courant.setTuile(partie.getJoueurCourant().getCourante());
 		}
