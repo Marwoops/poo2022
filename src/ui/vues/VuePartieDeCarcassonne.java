@@ -16,6 +16,8 @@ public class VuePartieDeCarcassonne extends VuePartie {
 	private static Color[] couleurs_pions = {Color.BLUE,Color.RED,Color.GREEN,Color.YELLOW};
 	private int[] pions_restant = {8,8,8,8};
 
+	private boolean pion_deja_pose = false;
+
 	private VueTuile VuePion;
 
 
@@ -97,7 +99,10 @@ public class VuePartieDeCarcassonne extends VuePartie {
 
 	private void ajoutePion(int pos) {
 		if(pions_restant[partie.getIndiceJoueur()]>=1) {
+			if(!pion_deja_pose){
 			pions_restant[partie.getIndiceJoueur()]--;
+			}
+			pion_deja_pose = true;
 			((VueParcelle)VuePion).ajouterPion(pos, couleurs_pions[partie.getIndiceJoueur()]);
 			repaint();
 		}
@@ -136,7 +141,7 @@ public class VuePartieDeCarcassonne extends VuePartie {
 		public void postPose(VueTuile v) {
 			VuePion = v;
 			setPionButtonEnabled(true);
-
+			pion_deja_pose = false;
 			selectionnerTuile(vueMains.get(partie.getIndiceJoueur()));
 			courant.setTuile(partie.getJoueurCourant().getCourante());
 			preTour(v);
