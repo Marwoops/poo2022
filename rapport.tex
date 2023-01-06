@@ -6,7 +6,7 @@
 \graphicspath{ {./images/} }
 
 \title{Projet de POO 2022}
-\author{Marwan AZIZI, Ilian CRAGUE }
+\author{Marwan NZIZI, Ilian CRAGUE }
 
 \begin{document}
 
@@ -25,38 +25,38 @@
 
 Le code constituant notre projet est divisé entre 4 répertoires :
 \begin{itemize}
-    \item Common/ : contenant tous les fichiers responsables des parties du modèle communes aux deux jeux
+    \item common/: contenant tous les fichiers responsables des parties du modèle communes aux deux jeux
     \begin{itemize}
-        \item Cote.java
-        \item Joueur.java 
-        \item Partie.java
-        \item Plateau.java
-        \item Sac.java
-        \item Tuile.java
+        \item Cote.java: le côté d'une tuile
+        \item Joueur.java: un joueur avec sa main, son score, et si c'est une IA
+        \item Partie.java: un plateau, une liste de joueurs et les méthodes déroulant le jeu
+        \item Plateau.java: un tableau à deux dimensions de tuiles
+        \item Sac.java: une pile de tuiles qui agit comme une pioche
+        \item Tuile.java: un tableau de côtés
     \end{itemize}    
-    \item Carcarssonne/ : contenant tous les fichiers responsables des parties du modèle spécifiques au Carcassonne
+    \item carcarssonne/: contenant tous les fichiers responsables des parties du modèle spécifiques au Carcassonne
     \begin{itemize}        
-        \item Parcelle.java
+        \item Parcelle.java: étend Tuile
         \item Abbaye.java
         \item Champs.java
         \item Route.java
         \item Ville.java
-        \item PartieDeCarcassonne.java        
-        \item SacDeParcelle.java
-        \item Terrain.java        
+        \item PartieDeCarcassonne.java: étend Partie
+        \item SacDeParcelle.java: étend Sac
+        \item Terrain.java: étend Cote
     \end{itemize}
-    \item Domino/ : contenant tous les fichiers reponsables des parties du modèle spécifiques au Domino
+    \item domino/ : contenant tous les fichiers reponsables des parties du modèle spécifiques au Domino Carré
     \begin{itemize}
-        \item Domino.java
-        \item DominoTextuel.java
-        \item PartieDeDomino.java
-        \item Rangee.java
-        \item SacDeDomino.java
+        \item Domino.java: étend Tuile
+        \item DominoTextuel.java: contient toutes les méthodes nécéssaires à une partie console
+        \item PartieDeDomino.java: étend Partie
+        \item Rangee.java: étend Cote
+        \item SacDeDomino.java: étend Sac
     \end{itemize}
-    \item UI/ : contenant les fichiers responsables des vues ainsi que les icones pour le carcassonne et le fichier App, pour lancer le jeu 
+    \item ui/: contenant les fichiers responsables des vues ainsi que les icones pour le Carcassonne, calqués sur le modèle, ainsi que le fichier App, pour lancer les jeux graphiquement
     \begin{itemize}
         \item App.java
-        \item icons/
+        \item icons/: les 24 tuiles de Carcassonne
         \item vues/
         \begin{itemize}        
         \item VueDomino.java
@@ -70,12 +70,13 @@ Le code constituant notre projet est divisé entre 4 répertoires :
     \end{itemize}
 \end{itemize}
 
-Ce découpage nous permet d'ordonner le code et nous a aidé à garder un travail propre tout au long de la période de développement. On peut y noter la séparation du modèle et de la vue, indispensable pour un projet de cet ampleur, ou encore la séparation des fichiers responsables des deux jeux.
+On remarque un découpage structuré. common/ contient et mutualise les fonctionnalités communes. carcassonne/ et domino/ proposent chacun une implémentation indépendante de manière complètement analogue: les deux jeux ont été pensés de la même manière et sont réalisés identiquement.\\
+Ce découpage nous permet d'ordonner le code et nous a aidé à garder un travail propre tout au long de la période de développement. On peut y noter l'architecture Model-view, où la vue est uniquement chargée d'afficher le modèle, sans intéferer dans ses décisions.
 
 \subsection{Représentation graphique du projet}
 Dans la manière dont nous avons développé notre projet, les fichiers peuvent être liés par deux différentes relations : une relation d'héritage ou bien une relation modèle/vue. 
 
-Par exemple, nous voyons sur le graphique suivant que les classes Partie, Tuile, Sac et Cote, communes aux deux jeux, sont héritées chacune par une classe implémentant les spécificitées liées à chaque mode de jeu. Nous voyons aussi que les différents fichiers associés aux Parties, aux Tuiles ou au Plateau sont en lien avec un fichier responsable de la représentation de leur vue. Ce graphique montre de plus que la classe Joueur est commune aux deux jeux : du point de vue du joueur, jouer au Carcassonne ou au Domino revient donc à effectuer les mêmes actions.
+Par exemple, nous voyons sur le graphique suivant que les classes Partie, Tuile, Sac et Cote, communes aux deux jeux, sont héritées chacune par une classe implémentant les spécificités liées à chaque mode de jeu. Nous voyons aussi que les différents fichiers associés aux Parties, aux Tuiles ou au Plateau sont en lien avec un fichier responsable de la représentation de leur vue. Ce graphique montre de plus que la classe Joueur est commune aux deux jeux : du point de vue du joueur, jouer au Carcassonne ou au Domino revient donc à effectuer les mêmes actions.
 
 \begin{figure}[t]
 \centerline{\includegraphics[scale=0.1]{images/global.png}}
@@ -97,9 +98,9 @@ Nous avons traité tout le contenu du cahier des charges minimal :
         \item choisir le nombre de joueurs ;
         \item choisir le nombre d'IA ;
     \end{enumerate}
-    \item L'implementation complète du Domino, géré graphiquement par awt et swing
+    \item L'implementation complète du Domino, géré graphiquement par awt et swing.
     \item L'implementation partielle du Carcassonne : gestion de la pose de tuiles tournables, de la première jusqu'à ce que le sac soit vide, ainsi que de la pose de 8 pions par joueurs. géré graphiquement par awt et swing.
-    \item Une version texte du Domino, jouable dans le terminal
+    \item Une version texte du Domino, jouable dans le terminal.
 \end{enumerate}
 
 \section{Problèmes connus}
@@ -108,7 +109,11 @@ Nous avons traité tout le contenu du cahier des charges minimal :
 
 \begin{itemize}
   \item  identifier les parties communes et celles qui diffèrent entre les deux jeux, pour implémenter un maximum dans des classes communes aux deux jeux, dont hériteront des sous-classes responsables des spécificités de chaque jeu.
-  \item choix du plateau fini/infini : plateau infini est fidèle au fonctionnement du jeu irl mais pose des soucis, notamment au niveau de l'affichage. plateau fini n'est pas parfaitement fidèle au jeu mais le nombre de pièces étant limité n'enlève pas grand chose au gameplay
+  \item choix du plateau fini/infini : plateau infini est fidèle au fonctionnement du jeu dans la vraie vie mais pose des soucis, notamment au niveau de l'affichage dans la console. Nous avons choisi de garder une implémentation uniforme peu importe la façon dont le jeu est affiche. Un plateau fini n'est pas parfaitement fidèle au jeu mais le nombre de pièces étant limité n'enlève pas grand chose au gameplay.
+  \item choix du nom des variables et méthodes ainsi que de l'implémentation de certaines fonctionnalités. Sur un long développement (plusieurs mois) il est très difficile de rester constant dans son approche, d'où des implémentations et des noms pas toujours très cohérents entre eux.
+  \item l'abus de setBounds. L'interface principale du jeu n'utilise pas de layout. Nous voulions que les cases soient toujours de la même dimension pour rester adaptées à leur icône. Cela s'est fait au dépend d'une interface non responsive qui marche uniquement sur des écrans standards.
+  \item la gestion des pions dans la vue. En effet, les pions rélèvent du fonctionnement du jeu, et donc du modèle, puisqu'ils servent au calcul des points et dépendent de certaines règles relatives à la partie. Pourtant, ils sont gérés dans la vue et sont complètement absents du modèle.
+  \item pas d'utilisation de package. On se limite aux restrictions public / private.
 \end{itemize}
 
 \subsection{implémentation}
@@ -121,7 +126,9 @@ Lors de la phase de développement, la pose des pions a été un soucis : il a d
     \includegraphics[width=0.25\textwidth]{images/pave_pions.png}
 \end{wrapfigure}
 
-En premier lieu nous avons choisi de placer le pion avant la pose de la tuile : la tuile apparaissant dans la main, il devenait possible d'y apposer un pion. Cette méthode nous a posé de nombreux soucis, premièrement car le pion était simplement un rond présent au même endroit que la tuile, il fallait donc le déplacer quand on plaçait la tuile ou qu'on la tournait, le supprimer quand la tuile était défaussée. Nous en avons finalement décidé autrement : nous avons implémenté un pavé directionnel, utilisable dès qu'un joueur a posé une tuile, jusqu'à qu'un autre joueur en ait posé une. Il permet de poser un pion sur la dernière tuile placée par un joueur, à l'endroit correspondant. Une fois la méthode choisie, il a été compliqué de coordonner la vue et le modèle.
+En premier lieu nous avons choisi de placer le pion avant la pose de la tuile : la tuile apparaissant dans la main, il devenait possible d'y apposer un pion. Cette méthode nous a posé de nombreux soucis, premièrement car le pion était simplement un rond présent au même endroit que la tuile, il fallait donc le déplacer quand on plaçait la tuile ou qu'on la tournait, le supprimer quand la tuile était défaussée. Nous en avons finalement décidé autrement : nous avons implémenté un pavé directionnel, utilisable dès qu'un joueur a posé une tuile, jusqu'à qu'un autre joueur en ait posé une. Il permet de poser un pion sur la dernière tuile placée par un joueur, à l'endroit correspondant. Une fois la méthode choisie, il a été compliqué de coordonner la vue et le modèle.\\
+
+Une partie de notre réflexion s'est aussi portée sur "comment faire fonctionner les jeux avec leurs propres règles en conservant le maximum de parties communes ?". Une première approche a été de travailler dans VuePartie avec un booléen "estCarcassonne" qui indique le jeu actuel. Cette approche, à peine pire qu'utiliser instanceof sur la partie actuelle, a vite été abandonnée au profit d'un strategy desgin pattern. VuePartie et son contrôleur ont alors été séparés en classes selon le jeu qu'elles implémentent. Ce refactor a été profond et couteux, mais à grandement améliorer la clarté du code et son extensionnabilité.
 
 
 
@@ -131,21 +138,21 @@ En premier lieu nous avons choisi de placer le pion avant la pose de la tuile : 
 \subsection{implémenter les fonctionnalité avancées proposées}
 
 \begin{itemize}
-    \item terminer à 100\% le Carcassonne, en mettant en place les contraintes de placement des pions, ainsi que le calcul final du score.
-    \item mettre en place la possibilité de sauvergarder une partie
-    \item améliorer les IA, qui pour l'instant placent leur tuile au premier endroit où elles le peuvent. 
-    \item changer les tuiles carrées par des tuiles haxagonales
-
+    \item terminer à 100\% le Carcassonne, en mettant en place les contraintes de placement des pions, ainsi que le calcul final du score. Il faudrait ajouter les pions au modèle, puis parcourir les tuiles récursivement pour calculer le score.
+    \item mettre en place la possibilité de sauvergarder une partie, en implémentant l'interface Serializable
+    \item améliorer les IA, qui pour l'instant placent leur tuile au premier endroit où elles le peuvent. Elles pouraient parcourir le plateau de différentes directions, pour mieux répartir les tuiles. Aussi, et surtout, elles pourraient prendre en compte le score, voire même les tuiles déjà piochées et défaussées pour optimiser le placement.
+    \item changer les tuiles carrées par des tuiles hexagonales. Les tuiles sont assez générales, elles peuvent avoir autant de côtés qu'on veut. Pour autant changer la forme des tuiles demanderait de changer le plateau. Il faudrait revoir la façon dont on choisit les voisins (pour déterminer la compatibilité) et toutes les méthodes relatives à l'affichage. 
 \end{itemize}
 
 \subsection{implémenter des fonctionnalités avancées auxquelles on a pensé}
 
 \begin{itemize}
-\item rendre le tout plus joli, les menus ainsi que les jeux, par exemple en mettant des textures adaptées à chaque jeu : un fond d'écran, des skin pour les boutons.
-    \item faire plusieurs niveaux de difficultés pour les IA, sélectionnables au début de la partie par le joueur.
+\item rendre le tout plus joli, les menus ainsi que les jeux, par exemple en mettant des textures adaptées à chaque jeu : un fond d'écran, des skins pour les boutons.
+    \item faire plusieurs niveaux de difficultés pour les IA, selon les principes évoqués ci-dessus,  sélectionnables au début de la partie par le joueur.
     \item faire une version en ligne, pour jouer avec des amis à distance.
 \end{itemize}
     
 
 
 \end{document}
+
