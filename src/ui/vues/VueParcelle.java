@@ -43,7 +43,7 @@ public class VueParcelle extends VueTuile {
 				setOrientation(getTuile().getOrientation());
 				icone = genererIcone(img, getOrientation());
 			} catch(IOException e) {
-
+				System.out.println("Erreur lors du chargement de l'icône.. vérifiez que vous êtes bien dans le dossier build.");
 			}
 		} else {
 			icone = null;
