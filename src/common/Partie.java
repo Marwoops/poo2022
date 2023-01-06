@@ -61,7 +61,12 @@ public class Partie {
 	}
 
 	public void prochainTour() {
-		indiceJoueur = (indiceJoueur+1) % joueurs.length;
+		for (int i = indiceJoueur + 1; i < indiceJoueur + 1 + joueurs.length; i++) {
+			if (!joueurs[i % joueurs.length].getAbandon()) {
+				indiceJoueur = i % joueurs.length;
+				break;
+			}
+		}
 		joueurCourant = joueurs[indiceJoueur];
 		joueurCourant.pioche();
 	}

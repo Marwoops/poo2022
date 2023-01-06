@@ -6,11 +6,11 @@ public class Joueur {
 	private Tuile courante;
 	private int score;
 	private boolean estIA;
+	private boolean abandon;
 
 	public Joueur(Partie p, boolean estIA) {
 		partie = p;
 		this.estIA = estIA;
-		courante = null;
 		score = 0;
 	}
 
@@ -20,6 +20,10 @@ public class Joueur {
 
 	public Tuile getCourante(){
 		return courante;
+	}
+
+	public boolean getAbandon() {
+		return abandon;
 	}
 
 	public void pioche() {
@@ -32,9 +36,8 @@ public class Joueur {
 		return score;
 	}
 
-	public boolean defausser() {
+	public void defausser() {
 		courante = null;
-		return true;
 	}
 
 	public void tournerDroite() {
@@ -93,5 +96,9 @@ public class Joueur {
 
 	public void ajouterScore(int x) {
 		score += x;
+	}
+
+	public void abandonner() {
+		abandon = true;
 	}
 }
