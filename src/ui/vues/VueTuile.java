@@ -5,9 +5,10 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class VueTuile extends JPanel {
-    
-	private static Border bordureSelection = BorderFactory.createLineBorder(new Color(51, 255, 95),5);
+
 	private static Border bordureBrillance = BorderFactory.createLineBorder(Color.BLACK,3);
+
+	private Border bordureSelection;
 
 	private Tuile tuile;
 	private int posX;
@@ -15,6 +16,7 @@ public class VueTuile extends JPanel {
 	private int orientation;
 	private boolean brillance;
 	private boolean selectionnee;
+	private Joueur joueur;
 
 	public VueTuile(Tuile t, int x, int y, MouseListener controleur) {
 		setPreferredSize(getPreferredSize());
@@ -43,6 +45,10 @@ public class VueTuile extends JPanel {
 		return orientation;
 	}
 
+	public Color getCouleur() {
+		return joueur.getCouleur();
+	}
+
 	public boolean estVide() {
 		return tuile == null;
 	}
@@ -65,6 +71,11 @@ public class VueTuile extends JPanel {
 
 	public void setOrientation(int i) {
 		orientation = i;
+	}
+
+	public void setJoueur(Joueur j) {
+		joueur = j;
+		bordureSelection = BorderFactory.createLineBorder(joueur.getCouleur(),5);
 	}
 
 	public boolean setBrillance(boolean b) {

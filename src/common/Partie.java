@@ -1,8 +1,13 @@
+import java.awt.Color;
+
 public class Partie {
+
+	private static Color[] couleurs = {Color.BLUE,Color.RED,Color.GREEN,Color.YELLOW};
 
 	private Joueur[] joueurs;
 	private Joueur joueurCourant;
 	private int indiceJoueur;
+	private int nbJoueursRestants;
 
 	private Sac sac;
 	private Plateau plateau;
@@ -21,10 +26,14 @@ public class Partie {
 
 		indiceJoueur = 0;
 		joueurCourant = joueurs[0];
+		nbJoueursRestants = joueurs.length;
+
+		for (int i = 0; i < joueurs.length; i++)
+			joueurs[i].setCouleur(couleurs[i]);
 	}
 
 	public boolean estFinie() {
-		return sac.estVide();
+		return sac.estVide() || nbJoueursRestants == 0;
 	}
 
 	public Plateau getPlateau() {
@@ -55,6 +64,10 @@ public class Partie {
 		return joueurs.length;
 	}
 
+	public int getNbJoueursRestants() {
+		return nbJoueursRestants;
+	}
+
 	public Tuile pioche() {
 		if(sac.estVide()){return null;}
 		return sac.pioche();
@@ -69,6 +82,11 @@ public class Partie {
 		}
 		joueurCourant = joueurs[indiceJoueur];
 		joueurCourant.pioche();
+	}
+
+	public void abandon() {
+		nbJoueursRestants--;
+		prochainTour();
 	}
 
 	public boolean estPosable(int x, int y, Tuile t) {

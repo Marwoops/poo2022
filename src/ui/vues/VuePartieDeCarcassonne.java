@@ -13,12 +13,11 @@ public class VuePartieDeCarcassonne extends VuePartie {
 	private JButton pion_gauche;
 	private JButton pion_centre;
 
-	private static Color[] couleurs_pions = {Color.BLUE,Color.RED,Color.GREEN,Color.YELLOW};
 	private int[] pions_restants = {8,8,8,8};
 
 	private boolean pion_deja_pose = false;
 
-	private VueTuile VuePion;
+	private VueTuile vuePion;
 
 
 	public VuePartieDeCarcassonne(PartieDeCarcassonne p) {
@@ -103,7 +102,7 @@ public class VuePartieDeCarcassonne extends VuePartie {
 			pions_restants[partie.getIndiceJoueur()]--;
 			}
 			pion_deja_pose = true;
-			((VueParcelle)VuePion).ajouterPion(pos, couleurs_pions[partie.getIndiceJoueur()]);
+			((VueParcelle)vuePion).ajouterPion(pos, vuePion.getCouleur());
 			repaint();
 		}
 	}
@@ -119,12 +118,15 @@ public class VuePartieDeCarcassonne extends VuePartie {
 	public void finDePartie(){
 		removeAll();
 		setLayout(new GridBagLayout());
+
 		JButton ok = new JButton("ok");
 		ok.addActionListener((ActionEvent e) -> {
 			System.exit(0);
 		});
+
 		add(new JLabel("La partie est terminée  "));
 		add(ok);
+
 		validate();
 		repaint();
 	}
@@ -139,7 +141,7 @@ public class VuePartieDeCarcassonne extends VuePartie {
 		}
 
 		public void postPose(VueTuile v) {
-			VuePion = v;
+			vuePion = v;
 			setPionButtonEnabled(true);
 			pion_deja_pose = false;
 			selectionnerTuile(vueMains.get(partie.getIndiceJoueur()));

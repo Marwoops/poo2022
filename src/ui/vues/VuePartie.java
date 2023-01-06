@@ -15,6 +15,7 @@ public abstract class VuePartie extends JComponent {
 	private JButton tourner_gauche;
 	private JButton tourner_droite;
 	private JButton defausse;
+	private JButton abandon;
 
 	public VuePartie(Partie p) {
 		setLayout(null);		
@@ -28,18 +29,22 @@ public abstract class VuePartie extends JComponent {
 
 	public void afficherMains() {
 		vueMains.get(0).setBounds(20, 820, 80, 86);
+		vueMains.get(0).setJoueur(partie.getJoueur(0));
 		add(vueMains.get(0));
 
 		vueMains.get(1).setBounds(260, 820, 80, 86);
+		vueMains.get(1).setJoueur(partie.getJoueur(1));
 		add(vueMains.get(1));
 
 		if (vueMains.size() > 2) {
 			vueMains.get(2).setBounds(500, 820, 80, 86);
+			vueMains.get(2).setJoueur(partie.getJoueur(2));
 			add(vueMains.get(2));
 		}
 
 		if (vueMains.size() > 3) {
 			vueMains.get(3).setBounds(740, 820, 80, 86);
+			vueMains.get(3).setJoueur(partie.getJoueur(3));
 			add(vueMains.get(3));
 		}
 	}
@@ -64,12 +69,17 @@ public abstract class VuePartie extends JComponent {
 		tourner_gauche = new JButton("⟲");
 		tourner_droite = new JButton("⟳");
 		defausse = new JButton("❌");
+		abandon = new JButton("🚫");
+
 		tourner_gauche.setBounds(900,50,50,50);
 		tourner_droite.setBounds(900,110,50,50);
 		defausse.setBounds(900,170,50,50);
+		abandon.setBounds(900, 230, 50, 50);
+
 		tourner_gauche.setEnabled(false);
 		tourner_droite.setEnabled(false);
 		defausse.setEnabled(false);
+		abandon.setEnabled(true);
 
 		tourner_gauche.addActionListener(
 			(ActionEvent e) -> {
@@ -91,9 +101,17 @@ public abstract class VuePartie extends JComponent {
 				controleurSouris.postDefausse();
 		});
 
+		abandon.addActionListener(
+			(ActionEvent e) -> {
+				partie.getJoueurCourant().abandonner();
+				courant.setTuile(null);
+				controleurSouris.preTour(null);
+		});
+
 		add(tourner_gauche);
 		add(tourner_droite);
 		add(defausse);
+		add(abandon);
 	}
 
 	public abstract void finDePartie();
@@ -155,6 +173,7 @@ public abstract class VuePartie extends JComponent {
 			VueTuile vue = (VueTuile) e.getSource();
 
 			if(partie.estPosable(vue.getPosX(),vue.getPosY(),courant.getTuile())) {
+				vue.setJoueur(partie.getJoueurCourant());
 				partie.getJoueurCourant().poserTuile(vue.getPosX(),vue.getPosY());
 				vue.setTuile(courant.getTuile());
 				jouerTuile(vue);

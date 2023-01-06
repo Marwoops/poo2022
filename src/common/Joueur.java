@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.awt.Color;
 
 public class Joueur {
 
@@ -7,6 +8,7 @@ public class Joueur {
 	private int score;
 	private boolean estIA;
 	private boolean abandon;
+	private Color couleur;
 
 	public Joueur(Partie p, boolean estIA) {
 		partie = p;
@@ -26,6 +28,10 @@ public class Joueur {
 		return abandon;
 	}
 
+	public void setCouleur(Color c) {
+		couleur = c;
+	}
+
 	public void pioche() {
 		Tuile t = partie.pioche();
 		courante = t;
@@ -34,6 +40,10 @@ public class Joueur {
 
 	public int getScore() {
 		return score;
+	}
+
+	public Color getCouleur() {
+		return couleur;
 	}
 
 	public void defausser() {
@@ -100,5 +110,6 @@ public class Joueur {
 
 	public void abandonner() {
 		abandon = true;
+		partie.abandon();
 	}
 }
