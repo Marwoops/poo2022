@@ -134,11 +134,6 @@ public class VuePartieDeCarcassonne extends VuePartie {
 		}
 
 		public void postPose(VueTuile v) {
-			if(partie.estFinie()){
-				finDePartie();
-				return;
-			}
-
 			VuePion = v;
 			setPionButtonEnabled(true);
 

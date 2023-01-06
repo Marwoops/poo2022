@@ -81,10 +81,6 @@ public class VuePartieDeDomino extends VuePartie {
 		}
 
 		public void postPose(VueTuile v) {
-			if(partie.estFinie()){
-				finDePartie();
-				return;
-			}
 			selectionnerTuile(vueMains.get(partie.getIndiceJoueur()));
 			courant.setTuile(partie.getJoueurCourant().getCourante());
 			preTour(v);
