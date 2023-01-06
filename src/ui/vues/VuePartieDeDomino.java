@@ -45,6 +45,7 @@ public class VuePartieDeDomino extends VuePartie {
 		ok.addActionListener((ActionEvent e) -> {
 			System.exit(0);
 		});
+
 		partie_finie.add(new JLabel("La partie est terminée  "));
 		partie_finie.add(ok);
 		fin.add(partie_finie);
@@ -56,22 +57,12 @@ public class VuePartieDeDomino extends VuePartie {
 		score.add(new JLabel("Score : "));
 		scores.add(score);
 
-		JPanel score1 = new JPanel(new GridBagLayout());
-		score1.add(new JLabel("Joueur 1 : "+partie.getJoueur(0).getScore()));
-		scores.add(score1);
-		JPanel score2 = new JPanel(new GridBagLayout());
-		score2.add(new JLabel("Joueur 2 : "+partie.getJoueur(1).getScore()));
-		scores.add(score2);
-		if(partie.getNbJoueurs()>2){
-JPanel score3 = new JPanel(new GridBagLayout());
-		score3.add(new JLabel("Joueur 3 : "+partie.getJoueur(2).getScore()));
-		scores.add(score3);
+		for (int i = 0; i < partie.getNbJoueurs(); i++) {
+			JPanel scoreJoueur = new JPanel(new GridBagLayout());
+			scoreJoueur.add(new JLabel("Joueur " + (i+1) + " : " +partie.getJoueur(i).getScore()));
+			scores.add(scoreJoueur);
 		}
-		if(partie.getNbJoueurs()>3){
-JPanel score4 = new JPanel(new GridBagLayout());
-		score4.add(new JLabel("Joueur 4 : "+partie.getJoueur(3).getScore()));
-		scores.add(score4);
-		}
+
 		fin.add(scores);
 
 		
