@@ -111,6 +111,19 @@ public class VuePartieDeCarcassonne extends VuePartie {
 			pion_centre.setEnabled(b);
 	}
 
+	public void finDePartie(){
+		removeAll();
+		setLayout(new GridBagLayout());
+		JButton ok = new JButton("ok");
+		ok.addActionListener((ActionEvent e) -> {
+			System.exit(0);
+		});
+		add(new JLabel("La partie est terminée  "));
+		add(ok);
+		validate();
+		repaint();
+	}
+
 	private class ControleurSourisCarcassonne extends ControleurSouris {
 
 		public void postDefausse() {
@@ -122,16 +135,7 @@ public class VuePartieDeCarcassonne extends VuePartie {
 
 		public void postPose(VueTuile v) {
 			if(partie.estFinie()){
-				removeAll();
-				setLayout(new GridBagLayout());
-				JButton ok = new JButton("ok");
-				ok.addActionListener((ActionEvent e) -> {
-					System.exit(0);
-				});
-				add(new JLabel("La partie est terminée  "));
-				add(ok);
-				validate();
-				repaint();
+				finDePartie();
 				return;
 			}
 

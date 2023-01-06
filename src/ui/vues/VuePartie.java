@@ -94,9 +94,15 @@ public abstract class VuePartie extends JComponent {
 		add(defausse);
 	}
 
+	public abstract void finDePartie();
+
 	public abstract class ControleurSouris implements MouseListener {
 
 		public void preTour(VueTuile vue) {
+			if(partie.estFinie()){
+				finDePartie();
+				return;
+			}
 			pioche();
 
 			if (!partie.getJoueurCourant().estIA()) return;
@@ -138,6 +144,7 @@ public abstract class VuePartie extends JComponent {
 			courant.setTuile(null);
 			courant = null;
 		}
+
 
 		public abstract void postPose(VueTuile v);
 

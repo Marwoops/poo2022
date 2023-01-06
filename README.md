@@ -4,7 +4,7 @@ Un jeu de Carcassonne et de Domino Carrés dans le cadre du projet de POO.
 
 ## Compiler
 
-On utilise javac. **Créer un dossier build à la racine du projet.**
+On utilise javac. **Vérifiez la présence d'un dossier build à la racine du projet, s'il n'existe pas, créez le.**
 Pour compiler (depuis `build`):
 
 ```bash
