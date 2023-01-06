@@ -106,6 +106,7 @@ public class DominoTextuel extends PartieDeDomino {
 		System.out.println("(q) tourner à gauche");
 		System.out.println("(c) afficher le plateau");
 		System.out.println("(x) défausser");
+		System.out.println("(v) abandonner");
 
 		String s = sc.next();
 		switch(s) {
@@ -114,6 +115,7 @@ public class DominoTextuel extends PartieDeDomino {
 			case "q" : getJoueurCourant().tournerGauche(); demanderAction(); break;
 			case "c" : afficherPlateau(); demanderAction(); break;
 			case "x" : getJoueurCourant().defausser(); prochainTour(); demanderAction(); break;
+			case "v" : getJoueurCourant().abandonner(); demanderAction(); break;
 			default: demanderAction();
 		}
 	}
