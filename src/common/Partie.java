@@ -2,7 +2,7 @@ import java.awt.Color;
 
 public class Partie {
 
-	private static Color[] couleurs = {Color.BLUE,Color.RED,Color.GREEN,Color.YELLOW};
+	private static Color[] couleurs = {new Color(33, 112, 145), new Color(145, 33, 50), new Color(16, 235, 75), new Color(224, 217, 2)};
 
 	private Joueur[] joueurs;
 	private Joueur joueurCourant;

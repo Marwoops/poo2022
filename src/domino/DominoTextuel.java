@@ -54,7 +54,10 @@ public class DominoTextuel extends PartieDeDomino {
 		res += "SCORES\n";
 
 		for (int i = 0; i < getNbJoueurs(); i++) {
-			res += "Joueur " + (i+1) + " : " + getJoueur(i).getScore() + "\n";
+			res += "Joueur " + (i+1) + " : " + getJoueur(i).getScore();
+			if (getJoueur(i).getAbandon())
+				res += " (abandon)";
+			res += "\n";
 		}
 		System.out.println(res);
 	}
@@ -115,7 +118,7 @@ public class DominoTextuel extends PartieDeDomino {
 			case "q" : getJoueurCourant().tournerGauche(); demanderAction(); break;
 			case "c" : afficherPlateau(); demanderAction(); break;
 			case "x" : getJoueurCourant().defausser(); prochainTour(); demanderAction(); break;
-			case "v" : getJoueurCourant().abandonner(); demanderAction(); break;
+			case "v" : getJoueurCourant().abandonner(); afficherPlateau(); return;
 			default: demanderAction();
 		}
 	}
@@ -179,7 +182,7 @@ public class DominoTextuel extends PartieDeDomino {
 			jeu.afficherMain(jeu.getJoueurCourant());
 			jeu.demanderAction();
 		}
-		System.out.println("La partie est terminée !");
+		System.out.println("La partie est terminée !\n");
 		jeu.afficherScores();
 	}
 }
