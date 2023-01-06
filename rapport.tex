@@ -80,7 +80,7 @@ Par exemple, nous voyons sur le graphique suivant que les classes Partie, Tuile,
 
 \begin{figure}[t]
 \centerline{\includegraphics[scale=0.1]{images/global.png}}
-\end{figure}
+\end{figre}
 	
 
 
@@ -135,6 +135,9 @@ Une partie de notre réflexion s'est aussi portée sur "comment faire fonctionne
 
 \section{Pistes d'amélioration}
 
+Pendant les différentes phases de test que nous avons eu, lors de l'apparition d'erreurs pendant l'exécution, nous avons remarqué que la pile d'appels de fonctions était très longue. Après analyse, nous avons déduit que cela était dû à notre gestion lors du tour des IA : à chaque tour d'une IA, un appel aux fonctions preTour et postDefausse/postPose était ajouté à  la pile d'appels. Un axe d'amélioration serait de n'avoir que des fonctions qui se terminent, pour ne pas risquer de stackoverflow.
+\\
+
 \subsection{implémenter les fonctionnalités avancées proposées}
 
 \begin{itemize}
@@ -155,4 +158,5 @@ Une partie de notre réflexion s'est aussi portée sur "comment faire fonctionne
 
 
 \end{document}
+u
 
