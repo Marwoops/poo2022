@@ -69,7 +69,7 @@ public abstract class VuePartie extends JComponent {
 		tourner_gauche = new JButton("⟲");
 		tourner_droite = new JButton("⟳");
 		defausse = new JButton("❌");
-		abandon = new JButton("🚫");
+		abandon = new JButton("⚑");
 
 		tourner_gauche.setBounds(900,50,50,50);
 		tourner_droite.setBounds(900,110,50,50);
