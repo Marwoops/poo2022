@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 public class VueParcelle extends VueTuile {
 
 	private static String cheminIcone = "../src/ui/icons/";
-	private static int [][] positions_pion = {{40,10},{10,40},{40,70},{70,40},{40,40}};
+	private static int [][] positions_pion = {{40,10},{10,40},{40,70},{70,40},{40,40}}; // positions reposant sur des tuiles 80x80
 	private BufferedImage icone;
 
 	private boolean pion = false;

@@ -10,8 +10,7 @@ public class Parcelle extends Tuile {
 	}
 
 	public Parcelle(Terrain[] t, int i) {
-		super(t);
-		id = i;
+		this(t, null, i);
 	}
 
 	public int getId() {

@@ -47,13 +47,6 @@ public class Joueur {
 			courante.tournerGauche();
 	}	
 
-	public String toString() {
-		String r = ""; 
-		r += ("Score : " + score + "\n");
-		r += courante.toString();
-		return r;
-	}
-
 	public void poserTuile(int x, int y) {
 		if (partie.estPosable(x, y, courante))
 			partie.jouerTour(x, y, courante);
