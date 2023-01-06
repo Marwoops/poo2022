@@ -59,13 +59,16 @@ public class VuePartieDeDomino extends VuePartie {
 
 		for (int i = 0; i < partie.getNbJoueurs(); i++) {
 			JPanel scoreJoueur = new JPanel(new GridBagLayout());
-			scoreJoueur.add(new JLabel("Joueur " + (i+1) + " : " +partie.getJoueur(i).getScore()));
+
+			String abandon = (partie.getJoueur(i).getAbandon()) ? " (abandon)" : "";
+			JLabel label = new JLabel("Joueur " + (i+1) + " : " + partie.getJoueur(i).getScore() + abandon);
+			label.setForeground(partie.getJoueur(i).getCouleur());
+
+			scoreJoueur.add(label);
 			scores.add(scoreJoueur);
 		}
 
 		fin.add(scores);
-
-		
 		add(fin);
 
 		validate();

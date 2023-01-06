@@ -1,8 +1,13 @@
+import java.awt.Color;
+
 public class Partie {
+
+	private static Color[] couleurs = {new Color(33, 112, 145), new Color(145, 33, 50), new Color(16, 235, 75), new Color(224, 217, 2)};
 
 	private Joueur[] joueurs;
 	private Joueur joueurCourant;
 	private int indiceJoueur;
+	private int nbJoueursRestants;
 
 	private Sac sac;
 	private Plateau plateau;
@@ -21,10 +26,14 @@ public class Partie {
 
 		indiceJoueur = 0;
 		joueurCourant = joueurs[0];
+		nbJoueursRestants = joueurs.length;
+
+		for (int i = 0; i < joueurs.length; i++)
+			joueurs[i].setCouleur(couleurs[i]);
 	}
 
 	public boolean estFinie() {
-		return sac.estVide();
+		return sac.estVide() || nbJoueursRestants == 0;
 	}
 
 	public Plateau getPlateau() {
@@ -55,15 +64,29 @@ public class Partie {
 		return joueurs.length;
 	}
 
+	public int getNbJoueursRestants() {
+		return nbJoueursRestants;
+	}
+
 	public Tuile pioche() {
 		if(sac.estVide()){return null;}
 		return sac.pioche();
 	}
 
 	public void prochainTour() {
-		indiceJoueur = (indiceJoueur+1) % joueurs.length;
+		for (int i = indiceJoueur + 1; i < indiceJoueur + 1 + joueurs.length; i++) {
+			if (!joueurs[i % joueurs.length].getAbandon()) {
+				indiceJoueur = i % joueurs.length;
+				break;
+			}
+		}
 		joueurCourant = joueurs[indiceJoueur];
 		joueurCourant.pioche();
+	}
+
+	public void abandon() {
+		nbJoueursRestants--;
+		prochainTour();
 	}
 
 	public boolean estPosable(int x, int y, Tuile t) {
