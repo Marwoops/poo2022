@@ -14,7 +14,7 @@ public class VuePartieDeCarcassonne extends VuePartie {
 	private JButton pion_centre;
 
 	private static Color[] couleurs_pions = {Color.BLUE,Color.RED,Color.GREEN,Color.YELLOW};
-	private int[] pions_restant = {8,8,8,8};
+	private int[] pions_restants = {8,8,8,8};
 
 	private boolean pion_deja_pose = false;
 
@@ -98,9 +98,9 @@ public class VuePartieDeCarcassonne extends VuePartie {
 	}
 
 	private void ajoutePion(int pos) {
-		if(pions_restant[partie.getIndiceJoueur()]>=1) {
+		if(pions_restants[partie.getIndiceJoueur()]>=1) {
 			if(!pion_deja_pose){
-			pions_restant[partie.getIndiceJoueur()]--;
+			pions_restants[partie.getIndiceJoueur()]--;
 			}
 			pion_deja_pose = true;
 			((VueParcelle)VuePion).ajouterPion(pos, couleurs_pions[partie.getIndiceJoueur()]);
