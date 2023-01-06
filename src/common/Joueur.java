@@ -72,6 +72,10 @@ public class Joueur {
 		return pos;
 	}
 
+	public boolean peutDefausser(){
+		return peutJouer()[0]==-1;
+	}
+
 	public void ajouterScore(int x) {
 		score += x;
 	}

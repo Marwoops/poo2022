@@ -85,8 +85,10 @@ public abstract class VuePartie extends JComponent {
 
 		defausse.addActionListener(
 			(ActionEvent e) -> {
-				partie.getJoueurCourant().defausser();
-				controleurSouris.postDefausse();
+				if(partie.getJoueurCourant().peutDefausser()){
+					partie.getJoueurCourant().defausser();
+					controleurSouris.postDefausse();
+				}
 		});
 
 		add(tourner_gauche);

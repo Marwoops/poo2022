@@ -80,17 +80,6 @@ public class Partie {
 		prochainTour();
 	}
 
-	public boolean estDefaussable(Tuile t){
-		for(int x = 0; x < getLargeur(); x++){
-			for(int y = 0;y < getHauteur(); y++){
-				if(estPosable(x,y,t)){
-					return false;
-				}
-			}
-		}
-		return true;
-	}
-
 	public int calculScore(int x,int y) {
 		return 0;
 	}
