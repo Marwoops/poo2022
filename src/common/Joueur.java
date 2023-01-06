@@ -65,15 +65,30 @@ public class Joueur {
 						pos[1] = j;
 						return pos;
 					}
+					tournerDroite();
 				}
-				tournerDroite();
 			}
 		}
 		return pos;
 	}
 
-	public boolean peutDefausser(){
-		return peutJouer()[0]==-1;
+	public boolean peutDefausser() {
+		boolean peut = true;
+
+		for (int i = 0; i < partie.getHauteur(); i++) {
+			for (int j = 0; j < partie.getLargeur(); j++) {
+				for (int k = 0; k < 4; k++) {
+					if (partie.estPosable(i, j, courante)) {
+						peut = false;
+					}
+					tournerDroite();
+				}
+				if (!peut)
+					return false;
+			}
+		}
+
+		return true;
 	}
 
 	public void ajouterScore(int x) {
